@@ -1,0 +1,45 @@
+body {
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+  color: #333;
+}
+
+.container {
+  max-width: 1920px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  gap: 4rem;
+  padding: 0 16.2rem;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  .about-us {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9.6rem;
+
+    &-text {
+      &-title {
+        font-size: 4.5rem;
+        margin-bottom: 1.25rem;
+      }
+
+      &-description {
+        font-size: 2.5rem;
+        text-align: center;
+      }
+    }
+
+    &-img {
+      width: 75rem;
+      height: 49.5rem;
+    }
+  }
+}
