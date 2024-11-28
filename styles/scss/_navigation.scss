@@ -1,0 +1,46 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10rem;
+
+  &-logo {
+    font-size: 4rem;
+    font-weight: 800;
+
+    a {
+      color: $main_color;
+    }
+  }
+
+  &-nav {
+    &-list {
+      display: flex;
+      gap: 2rem;
+
+      &-el {
+        font-size: 2.5rem;
+        font-weight: 600;
+
+        a {
+          &:link,
+          &:visited {
+            display: inline-block;
+            color: $secondary_color;
+            text-decoration: none;
+            padding: 1.5rem;
+          }
+        }
+
+        .special {
+          &:link,
+          &:visited {
+            background-color: $main_color;
+            color: #fff;
+            border-radius: 10px;
+          }
+        }
+      }
+    }
+  }
+}

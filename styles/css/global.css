@@ -140,4 +140,37 @@ table {
 
 html {
   font-size: 62.5%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10rem;
+}
+.header-logo {
+  font-size: 4rem;
+  font-weight: 800;
+}
+.header-logo a {
+  color: #F93B1D;
+}
+.header-nav-list {
+  display: flex;
+  gap: 2rem;
+}
+.header-nav-list-el {
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+.header-nav-list-el a:link, .header-nav-list-el a:visited {
+  display: inline-block;
+  color: #333;
+  text-decoration: none;
+  padding: 1.5rem;
+}
+.header-nav-list-el .special:link, .header-nav-list-el .special:visited {
+  background-color: #F93B1D;
+  color: #fff;
+  border-radius: 10px;
 }/*# sourceMappingURL=global.css.map */
