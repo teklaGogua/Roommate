@@ -1,0 +1,59 @@
+.footer {
+  background-color: #141418;
+
+  &-main {
+    padding: 4rem 6.4rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+
+    &-col {
+      &-heading {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 3rem;
+      }
+
+      &-list {
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+        gap: 2.4rem;
+
+        &-link {
+          &:link,
+          &:visited {
+            text-decoration: none;
+            font-size: 1.6rem;
+            color: $secondary_gray;
+            transition: all 0.3s;
+          }
+
+          &:hover,
+          &:active {
+            color: $secondary_color;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+
+  &-additional {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    border-top: $secondary_gray solid 1px;
+
+    &-txt {
+      font-size: 2rem;
+      color: $secondary_gray;
+    }
+  }
+}
+
+
+
+
