@@ -3,6 +3,7 @@
   justify-content: space-between;
   align-items: center;
   height: 10rem;
+  padding: 0 16.2rem;
 
   &-logo {
     font-size: 4rem;
@@ -33,6 +34,8 @@
         }
 
         .special {
+          transition: all 0.3s;
+          
           &:link,
           &:visited {
             background-color: $main_color;

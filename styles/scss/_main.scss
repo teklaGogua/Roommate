@@ -2,7 +2,7 @@ body {
   display: flex;
   justify-content: center;
   overflow-x: hidden;
-  color: #333;
+  color: $secondary_color;
   font-family: Arial, sans-serif;
 }
 
@@ -12,13 +12,13 @@ body {
   flex-direction: column;
   min-height: 100vh;
   gap: 4rem;
-  padding: 0 16.2rem;
 }
 
 .main {
   display: flex;
   flex-direction: column;
   gap: 10rem;
+  padding: 0 16.2rem;
 
   .about-us {
     display: flex;
@@ -59,6 +59,7 @@ body {
 
         &-el {
           border-radius: 6px;
+          transition: all 0.3s;
 
           &:hover {
             background-color: $secondary_gray;
@@ -131,7 +132,7 @@ body {
 
                 input {
                   padding: 1rem 1rem;
-                  border: 1px solid #808A93; 
+                  border: 1px solid #808a93;
                   border-radius: 6px;
                   color: $secondary_color;
                   font-size: 1.8rem;
@@ -141,7 +142,7 @@ body {
                 p {
                   font-size: 1.8rem;
                   font-weight: 400;
-                  color: #2D3648;
+                  color: #2d3648;
                   margin: 0.8rem 0 -0.4rem 0.8rem;
                 }
               }
@@ -156,6 +157,7 @@ body {
               border-radius: 8px;
               text-align: center;
               cursor: pointer;
+              transition: all 0.3s;
 
               &:hover {
                 background-color: $darker_main_color;

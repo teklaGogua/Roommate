@@ -173,6 +173,7 @@ html {
   justify-content: space-between;
   align-items: center;
   height: 10rem;
+  padding: 0 16.2rem;
 }
 .header-logo {
   font-size: 4rem;
@@ -194,6 +195,9 @@ html {
   color: #333;
   text-decoration: none;
   padding: 1.5rem;
+}
+.header-nav-list-el .special {
+  transition: all 0.3s;
 }
 .header-nav-list-el .special:link, .header-nav-list-el .special:visited {
   background-color: #f93b1d;
@@ -218,13 +222,13 @@ body {
   flex-direction: column;
   min-height: 100vh;
   gap: 4rem;
-  padding: 0 16.2rem;
 }
 
 .main {
   display: flex;
   flex-direction: column;
   gap: 10rem;
+  padding: 0 16.2rem;
 }
 .main .about-us {
   display: flex;
@@ -250,6 +254,7 @@ body {
 }
 .main .offers-filtration-box-el {
   border-radius: 6px;
+  transition: all 0.3s;
 }
 .main .offers-filtration-box-el:hover {
   background-color: #f3f3f3;
@@ -315,7 +320,7 @@ body {
 }
 .main .offers-filtration-box-el-dropdown-list-row input {
   padding: 1rem 1rem;
-  border: 1px solid #808A93;
+  border: 1px solid #808a93;
   border-radius: 6px;
   color: #333;
   font-size: 1.8rem;
@@ -324,7 +329,7 @@ body {
 .main .offers-filtration-box-el-dropdown-list-row p {
   font-size: 1.8rem;
   font-weight: 400;
-  color: #2D3648;
+  color: #2d3648;
   margin: 0.8rem 0 -0.4rem 0.8rem;
 }
 .main .offers-filtration-box-el-dropdown-btn {
@@ -336,6 +341,7 @@ body {
   border-radius: 8px;
   text-align: center;
   cursor: pointer;
+  transition: all 0.3s;
 }
 .main .offers-filtration-box-el-dropdown-btn:hover {
   background-color: #DF3014;
@@ -383,4 +389,47 @@ body {
   width: 2.4rem;
   height: 2.4rem;
   margin-right: 1rem;
+}
+
+.footer {
+  background-color: #141418;
+}
+.footer-main {
+  padding: 4rem 6.4rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3rem;
+}
+.footer-main-col-heading {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 3rem;
+}
+.footer-main-col-list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  gap: 2.4rem;
+}
+.footer-main-col-list-link:link, .footer-main-col-list-link:visited {
+  text-decoration: none;
+  font-size: 1.6rem;
+  color: #f3f3f3;
+  transition: all 0.3s;
+}
+.footer-main-col-list-link:hover, .footer-main-col-list-link:active {
+  color: #333;
+  font-weight: 500;
+}
+.footer-additional {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  border-top: #f3f3f3 solid 1px;
+}
+.footer-additional-txt {
+  font-size: 2rem;
+  color: #f3f3f3;
 }/*# sourceMappingURL=global.css.map */
