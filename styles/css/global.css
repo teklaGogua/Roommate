@@ -142,6 +142,32 @@ html {
   font-size: 62.5%;
 }
 
+.main .offers-filtration-title, .main .about-us-text-title {
+  font-size: 3.8rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+}
+
+.active {
+  display: inline !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.active-dropdown {
+  display: flex !important;
+}
+
+.grid-col--2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-col--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -153,7 +179,7 @@ html {
   font-weight: 800;
 }
 .header-logo a {
-  color: #F93B1D;
+  color: #f93b1d;
 }
 .header-nav-list {
   display: flex;
@@ -170,9 +196,12 @@ html {
   padding: 1.5rem;
 }
 .header-nav-list-el .special:link, .header-nav-list-el .special:visited {
-  background-color: #F93B1D;
+  background-color: #f93b1d;
   color: #fff;
   border-radius: 10px;
+}
+.header-nav-list-el .special:hover {
+  background-color: #DF3014;
 }
 
 body {
@@ -180,6 +209,7 @@ body {
   justify-content: center;
   overflow-x: hidden;
   color: #333;
+  font-family: Arial, sans-serif;
 }
 
 .container {
@@ -194,7 +224,7 @@ body {
 .main {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 10rem;
 }
 .main .about-us {
   display: flex;
@@ -202,15 +232,155 @@ body {
   justify-content: center;
   gap: 9.6rem;
 }
-.main .about-us-text-title {
-  font-size: 4.5rem;
-  margin-bottom: 1.25rem;
-}
 .main .about-us-text-description {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   text-align: center;
 }
 .main .about-us-img {
   width: 75rem;
   height: 49.5rem;
+}
+.main .offers-filtration-box {
+  display: inline-flex;
+  gap: 4rem;
+  margin-top: 2rem;
+  border: solid 2px #f3f3f3;
+  border-radius: 10px;
+  padding: 1.4rem;
+}
+.main .offers-filtration-box-el {
+  border-radius: 6px;
+}
+.main .offers-filtration-box-el:hover {
+  background-color: #f3f3f3;
+}
+.main .offers-filtration-box-el-btn {
+  padding: 2rem 1.4rem;
+  cursor: pointer;
+}
+.main .offers-filtration-box-el-btn button {
+  all: unset;
+  font-weight: 500;
+  font-size: 2.2rem;
+  text-align: center;
+  line-height: 1.92rem;
+  margin-right: 0.5rem;
+}
+.main .offers-filtration-box-el-btn img {
+  width: 2rem;
+  height: 1.4rem;
+  display: none;
+}
+.main .offers-filtration-box-el-dropdown {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #f3f3f3;
+  margin-top: 4.2rem;
+  margin-left: -1.5rem;
+  padding: 2rem;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  z-index: 999;
+}
+.main .offers-filtration-box-el-dropdown-title {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #021526;
+}
+.main .offers-filtration-box-el-dropdown-list {
+  display: grid;
+  -moz-column-gap: 5rem;
+       column-gap: 5rem;
+  margin: 2.4rem 0 3.2rem 0;
+}
+.main .offers-filtration-box-el-dropdown-list-row {
+  display: flex;
+  align-items: center;
+}
+.main .offers-filtration-box-el-dropdown-list-row img {
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+}
+.main .offers-filtration-box-el-dropdown-list-row .marked-icon {
+  display: none;
+}
+.main .offers-filtration-box-el-dropdown-list-row a {
+  padding: 0.8rem;
+  font-size: 1.8rem;
+  color: #333;
+  text-decoration: none;
+}
+.main .offers-filtration-box-el-dropdown-list-row input {
+  padding: 1rem 1rem;
+  border: 1px solid #808A93;
+  border-radius: 6px;
+  color: #333;
+  font-size: 1.8rem;
+  margin-bottom: 2.4rem;
+}
+.main .offers-filtration-box-el-dropdown-list-row p {
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: #2D3648;
+  margin: 0.8rem 0 -0.4rem 0.8rem;
+}
+.main .offers-filtration-box-el-dropdown-btn {
+  background-color: #f93b1d;
+  color: white;
+  font-size: 1.8rem;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+}
+.main .offers-filtration-box-el-dropdown-btn:hover {
+  background-color: #DF3014;
+}
+.main .offers-apartments {
+  display: flex;
+  gap: 2rem;
+  margin-top: 3.2rem;
+}
+.main .offers-apartments-card {
+  border: 1px solid #f3f3f3;
+  border-radius: 14px;
+  overflow: hidden;
+  max-width: 32rem;
+}
+.main .offers-apartments-card-img {
+  width: 100%;
+  height: auto;
+}
+.main .offers-apartments-card-text {
+  padding: 1.6rem;
+}
+.main .offers-apartments-card-text-price {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #021526;
+}
+.main .offers-apartments-card-text-address {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: rgba(2, 21, 38, 0.7019607843);
+  margin: 0.6rem 0 2rem 0;
+}
+.main .offers-apartments-card-text-info {
+  display: flex;
+  justify-content: space-between;
+}
+.main .offers-apartments-card-text-info-item {
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+  color: rgba(2, 21, 38, 0.7019607843);
+}
+.main .offers-apartments-card-text-info-item img {
+  width: 2.4rem;
+  height: 2.4rem;
+  margin-right: 1rem;
 }/*# sourceMappingURL=global.css.map */
