@@ -24,6 +24,8 @@
         font-weight: 600;
 
         a {
+          transition: all 0.3s;
+
           &:link,
           &:visited {
             display: inline-block;
@@ -31,11 +33,13 @@
             text-decoration: none;
             padding: 1.5rem;
           }
+
+          &:hover {
+            color: $main_color;
+          }
         }
 
         .special {
-          transition: all 0.3s;
-          
           &:link,
           &:visited {
             background-color: $main_color;
@@ -44,7 +48,7 @@
           }
 
           &:hover {
-            background-color: #DF3014;
+            background-color: #df3014;
           }
         }
       }

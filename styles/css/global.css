@@ -190,14 +190,17 @@ html {
   font-size: 2.5rem;
   font-weight: 600;
 }
+.header-nav-list-el a {
+  transition: all 0.3s;
+}
 .header-nav-list-el a:link, .header-nav-list-el a:visited {
   display: inline-block;
   color: #333;
   text-decoration: none;
   padding: 1.5rem;
 }
-.header-nav-list-el .special {
-  transition: all 0.3s;
+.header-nav-list-el a:hover {
+  color: #f93b1d;
 }
 .header-nav-list-el .special:link, .header-nav-list-el .special:visited {
   background-color: #f93b1d;
@@ -205,7 +208,7 @@ html {
   border-radius: 10px;
 }
 .header-nav-list-el .special:hover {
-  background-color: #DF3014;
+  background-color: #df3014;
 }
 
 body {
@@ -356,6 +359,11 @@ body {
   border-radius: 14px;
   overflow: hidden;
   max-width: 32rem;
+  transition: all 0.3s;
+}
+.main .offers-apartments-card:hover {
+  transform: translateY(-1.2rem);
+  box-shadow: 0 3.2rem 6.4rem rgba(0, 0, 0, 0.06);
 }
 .main .offers-apartments-card-img {
   width: 100%;
