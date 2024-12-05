@@ -178,7 +178,13 @@ body {
         border-radius: 14px;
         overflow: hidden;
         max-width: 32rem;
-
+        transition: all 0.3s;
+        
+        &:hover {
+          transform: translateY(-1.2rem);
+          box-shadow: 0 3.2rem 6.4rem rgba(0, 0, 0, 0.06);
+        }
+        
         &-img {
           width: 100%;
           height: auto;
