@@ -3,6 +3,7 @@ body {
   justify-content: center;
   overflow-x: hidden;
   color: #333;
+  font-family: Arial, sans-serif;
 }
 
 .container {
@@ -17,7 +18,7 @@ body {
 .main {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 10rem;
 
   .about-us {
     display: flex;
@@ -27,12 +28,11 @@ body {
 
     &-text {
       &-title {
-        font-size: 4.5rem;
-        margin-bottom: 1.25rem;
+        @extend %main-title-style;
       }
 
       &-description {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
         text-align: center;
       }
     }
@@ -40,6 +40,183 @@ body {
     &-img {
       width: 75rem;
       height: 49.5rem;
+    }
+  }
+
+  .offers {
+    &-filtration {
+      &-title {
+        @extend %main-title-style;
+      }
+
+      &-box {
+        display: inline-flex;
+        gap: 4rem;
+        margin-top: 2rem;
+        border: solid 2px $secondary_gray;
+        border-radius: 10px;
+        padding: 1.4rem;
+
+        &-el {
+          border-radius: 6px;
+
+          &:hover {
+            background-color: $secondary_gray;
+          }
+
+          &-btn {
+            padding: 2rem 1.4rem;
+            cursor: pointer;
+
+            button {
+              all: unset;
+              font-weight: 500;
+              font-size: 2.2rem;
+              text-align: center;
+              line-height: 1.92rem;
+              margin-right: 0.5rem;
+            }
+
+            img {
+              width: 2rem;
+              height: 1.4rem;
+              display: none;
+            }
+          }
+
+          &-dropdown {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            background-color: white;
+            border: 1px solid $secondary_gray;
+            margin-top: 4.2rem;
+            margin-left: -1.5rem;
+            padding: 2rem;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            z-index: 999;
+
+            &-title {
+              font-size: 2rem;
+              font-weight: 500;
+              color: $subtitle_color;
+            }
+
+            &-list {
+              display: grid;
+              column-gap: 5rem;
+              margin: 2.4rem 0 3.2rem 0;
+
+              &-row {
+                display: flex;
+                align-items: center;
+
+                img {
+                  width: 2rem;
+                  height: 2rem;
+                  cursor: pointer;
+                }
+
+                .marked-icon {
+                  display: none;
+                }
+
+                a {
+                  padding: 0.8rem;
+                  font-size: 1.8rem;
+                  color: $secondary_color;
+                  text-decoration: none;
+                }
+
+                input {
+                  padding: 1rem 1rem;
+                  border: 1px solid #808A93; 
+                  border-radius: 6px;
+                  color: $secondary_color;
+                  font-size: 1.8rem;
+                  margin-bottom: 2.4rem;
+                }
+
+                p {
+                  font-size: 1.8rem;
+                  font-weight: 400;
+                  color: #2D3648;
+                  margin: 0.8rem 0 -0.4rem 0.8rem;
+                }
+              }
+            }
+
+            &-btn {
+              background-color: $main_color;
+              color: white;
+              font-size: 1.8rem;
+              padding: 1rem 2rem;
+              border: none;
+              border-radius: 8px;
+              text-align: center;
+              cursor: pointer;
+
+              &:hover {
+                background-color: $darker_main_color;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &-apartments {
+      display: flex;
+      gap: 2rem;
+      margin-top: 3.2rem;
+
+      &-card {
+        border: 1px solid $secondary_gray;
+        border-radius: 14px;
+        overflow: hidden;
+        max-width: 32rem;
+
+        &-img {
+          width: 100%;
+          height: auto;
+        }
+
+        &-text {
+          padding: 1.6rem;
+
+          &-price {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: $subtitle_color;
+          }
+
+          &-address {
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: $subtext_color;
+            margin: 0.6rem 0 2rem 0;
+          }
+
+          &-info {
+            display: flex;
+            justify-content: space-between;
+
+            &-item {
+              display: flex;
+              align-items: center;
+              font-size: 1.6rem;
+              color: $subtext_color;
+
+              img {
+                width: 2.4rem;
+                height: 2.4rem;
+                margin-right: 1rem;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

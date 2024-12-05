@@ -1,2 +1,32 @@
-$main_color: #F93B1D;
+$main_color: #f93b1d;
+$darker_main_color: #DF3014;
 $secondary_color: #333;
+$secondary_gray: #f3f3f3;
+$subtitle_color: #021526;
+$subtext_color: #021526b3;
+
+%main-title-style {
+  font-size: 3.8rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+}
+
+.active {
+  display: inline !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.active-dropdown {
+  display: flex !important;
+}
+
+.grid-col--2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-col--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
