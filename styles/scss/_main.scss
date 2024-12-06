@@ -150,7 +150,7 @@ body {
 
             &-btn {
               background-color: $main_color;
-              color: white;
+              color: #fff;
               font-size: 1.8rem;
               padding: 1rem 2rem;
               border: none;
@@ -179,12 +179,12 @@ body {
         overflow: hidden;
         max-width: 32rem;
         transition: all 0.3s;
-        
+
         &:hover {
           transform: translateY(-1.2rem);
           box-shadow: 0 3.2rem 6.4rem rgba(0, 0, 0, 0.06);
         }
-        
+
         &-img {
           width: 100%;
           height: auto;
@@ -225,6 +225,70 @@ body {
           }
         }
       }
+    }
+  }
+
+  .registration {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
+    border-radius: 11px;
+    background-image: linear-gradient(
+      to right bottom,
+      $darker_main_color,
+      $main_color
+    );
+    overflow: hidden;
+
+    &-box {
+      color: $secondary_gray;
+      padding: 4.8rem 6.4rem 6.4rem 6.4rem;
+
+      &-heading {
+        @extend %main-title-style;
+        margin-bottom: 3.2rem;
+      }
+
+      &-text {
+        font-size: 1.8rem;
+        line-height: 1.8;
+        margin-bottom: 4.8rem;
+      }
+
+      &-btn {
+        display: flex;
+        justify-content: center;
+        gap: 5rem;
+
+        button {
+          background-color: $secondary_gray;
+          color: $main_color;
+          font-size: 1.8rem;
+          padding: 1.5rem 10rem;
+          border: none;
+          border-radius: 8px;
+          text-align: center;
+          cursor: pointer;
+          transition: all 0.3s;
+
+          &:hover {
+            background-color: rgba($secondary_gray, 0.35);
+            color: $secondary_gray;
+            transform: scale(1.1);
+          }
+        }
+      }
+    }
+
+    &-img {
+      background-image: linear-gradient(
+          to right bottom,
+          rgba($main_color, 0.2),
+          rgba($darker_main_color, 0.2)
+        ),
+        url("../../images/main-page/about-us-img.jpg");
+      background-size: cover;
+      background-position: center;
     }
   }
 }

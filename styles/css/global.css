@@ -142,7 +142,7 @@ html {
   font-size: 62.5%;
 }
 
-.main .offers-filtration-title, .main .about-us-text-title {
+.main .registration-box-heading, .main .offers-filtration-title, .main .about-us-text-title {
   font-size: 3.8rem;
   font-weight: 600;
   margin-bottom: 1.25rem;
@@ -337,7 +337,7 @@ body {
 }
 .main .offers-filtration-box-el-dropdown-btn {
   background-color: #f93b1d;
-  color: white;
+  color: #fff;
   font-size: 1.8rem;
   padding: 1rem 2rem;
   border: none;
@@ -397,6 +397,52 @@ body {
   width: 2.4rem;
   height: 2.4rem;
   margin-right: 1rem;
+}
+.main .registration {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
+  border-radius: 11px;
+  background-image: linear-gradient(to right bottom, #DF3014, #f93b1d);
+  overflow: hidden;
+}
+.main .registration-box {
+  color: #f3f3f3;
+  padding: 4.8rem 6.4rem 6.4rem 6.4rem;
+}
+.main .registration-box-heading {
+  margin-bottom: 3.2rem;
+}
+.main .registration-box-text {
+  font-size: 1.8rem;
+  line-height: 1.8;
+  margin-bottom: 4.8rem;
+}
+.main .registration-box-btn {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+}
+.main .registration-box-btn button {
+  background-color: #f3f3f3;
+  color: #f93b1d;
+  font-size: 1.8rem;
+  padding: 1.5rem 10rem;
+  border: none;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.main .registration-box-btn button:hover {
+  background-color: rgba(243, 243, 243, 0.35);
+  color: #f3f3f3;
+  transform: scale(1.1);
+}
+.main .registration-img {
+  background-image: linear-gradient(to right bottom, rgba(249, 59, 29, 0.2), rgba(223, 48, 20, 0.2)), url("../../images/main-page/about-us-img.jpg");
+  background-size: cover;
+  background-position: center;
 }
 
 .footer {
