@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up - Step 2</title>
+    <link rel="stylesheet" href="styles_2.css" />
+  </head>
+  <body>
+    <div class="form-container">
+      <form
+        class="form-box"
+        action="submit_form.php"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <h2>Create an Account - Step 2</h2>
+
+        <!-- Profile Picture -->
+        <label for="profile-pic">Profile Picture</label>
+        <input
+          type="file"
+          id="profile-pic"
+          name="profile-pic"
+          accept="image/*"
+        />
+
+        <!-- Age -->
+        <label for="age">Age</label>
+        <input
+          type="number"
+          id="age"
+          name="age"
+          placeholder="Enter your age"
+          required
+          min="18"
+        />
+
+        <!-- Nationality -->
+        <label for="nationality">Nationality</label>
+        <input
+          type="text"
+          id="nationality"
+          name="nationality"
+          placeholder="Enter your nationality"
+        />
+
+        <!-- Gender -->
+        <label for="gender">Gender</label>
+        <select id="gender" name="gender" required>
+          <option value="">Select your gender</option>
+          <option value="Male">My genda?</option>
+          <option value="Female">Im a mekanik</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <!-- Bio -->
+        <label for="bio">Bio</label>
+        <textarea
+          id="bio"
+          name="bio"
+          placeholder="Tell us about yourself"
+          rows="4"
+        ></textarea>
+
+        <!-- Submit Button -->
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>
