@@ -35,8 +35,8 @@ filterButtons.forEach((btn) => {
 
     // Closes the dropdown when clicking outside (except dropdown list)
     const closeOnOutsideClick = (e) => {
-      e.preventDefault();
-      
+      // e.preventDefault();
+
       const excludedElements = document.querySelectorAll(
         ".offers-filtration-box-el-dropdown"
       );
@@ -78,7 +78,7 @@ const allLinks = document.querySelectorAll("a:link");
 
 allLinks.forEach(function (link) {
   link.addEventListener("click", function (e) {
-    e.preventDefault();
+    // e.preventDefault();
     const href = link.getAttribute("href");
 
     // Scroll back to top
