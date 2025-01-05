@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up - Step 1</title>
+    <link rel="stylesheet" href="styles_2.css" />
+  </head>
+  <body>
+    <div class="form-container">
+      <form>
+        <h2>Create an Account - Step 1</h2>
+
+        <!-- Name -->
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Enter your name"
+          required
+        />
+
+        <!-- Email -->
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+        />
+
+        <!-- Mobile -->
+        <label for="mobile">Mobile</label>
+        <input
+          type="tel"
+          id="mobile"
+          name="mobile"
+          placeholder="Enter your mobile number"
+          required
+        />
+
+        <!-- Password -->
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+          required
+        />
+        <script>
+          function navigateToPage() {
+            window.location.href = "4.html";
+          }
+        </script>
+
+        <!-- Submit Button -->
+        <button onclick="navigateToPage()">Go to Another Page</button>
+      </form>
+    </div>
+  </body>
+</html>
