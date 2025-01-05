@@ -423,7 +423,7 @@ body {
   justify-content: center;
   gap: 5rem;
 }
-.main .registration-box-btn button {
+.main .registration-box-btn a {
   background-color: #f3f3f3;
   color: #f93b1d;
   font-size: 1.8rem;
@@ -434,7 +434,7 @@ body {
   cursor: pointer;
   transition: all 0.3s;
 }
-.main .registration-box-btn button:hover {
+.main .registration-box-btn a:hover {
   background-color: rgba(243, 243, 243, 0.35);
   color: #f3f3f3;
   transform: scale(1.1);
@@ -486,4 +486,77 @@ body {
 .footer-additional-txt {
   font-size: 2rem;
   color: #f3f3f3;
+}
+
+.body_log_in {
+  width: 77.34rem;
+  font-family: Arial, sans-serif;
+  margin: 0 auto;
+  padding: 0 auto;
+  background-color: #3067a2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.body_log_in .container {
+  margin-right: 2.7rem;
+  background: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.1);
+  padding: 6rem;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+.body_log_in .signup-text {
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+.body_log_in .signup-text a {
+  color: #007bff;
+  text-decoration: none;
+}
+.body_log_in .signup-text a:hover {
+  text-decoration: underline;
+}
+.body_log_in .form-box h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #333333;
+}
+.body_log_in .form-box .instructions {
+  font-size: 0.875rem;
+  color: #777777;
+  margin-bottom: 1.5rem;
+  margin-top: 1rem;
+}
+.body_log_in .form-box label {
+  display: block;
+  font-size: 0.875rem;
+  text-align: left;
+  margin-bottom: 0.3rem;
+  color: #555555;
+}
+.body_log_in .form-box .pass {
+  margin-top: 1rem;
+}
+.body_log_in .form-box input {
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  width: 100%;
+  border: 0.1rem solid #ccc;
+  font-size: 1rem;
+  outline: none;
+}
+.body_log_in button {
+  border-radius: 0.625rem;
+  padding: 1rem;
+  background-color: #f93b1d;
+  border: none;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+.body_log_in button:hover {
+  background-color: #df3014;
 }/*# sourceMappingURL=global.css.map */
