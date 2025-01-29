@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="form-container">
-      <form>
+      <form id="signupForm1">
         <h2>Create an Account - Step 1</h2>
 
         <!-- Name -->
@@ -50,15 +50,12 @@
           placeholder="Enter your password"
           required
         />
-        <script>
-          function navigateToPage() {
-            window.location.href = "sign_up2.html";
-          }
-        </script>
 
         <!-- Submit Button -->
-        <button onclick="navigateToPage()">Go to Another Page</button>
+        <button type="submit">Go to Another Page</button>
       </form>
+
+      <script src="../js/signup1.js"></script>
     </div>
   </body>
 </html>
