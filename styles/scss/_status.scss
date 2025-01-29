@@ -1,0 +1,28 @@
+.login-status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 3rem 0;
+  font-size: 2.2rem;
+  background-color: $darker_main_color;
+  color: #fff;
+
+  &-btn {
+    display: none;
+    background-color: #fff;
+    color: $main_color;
+    font-size: 1.8rem;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: $main_color;
+      color: #fff;
+    }
+  }
+}

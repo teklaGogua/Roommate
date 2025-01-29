@@ -35,7 +35,7 @@ filterButtons.forEach((btn) => {
 
     // Closes the dropdown when clicking outside (except dropdown list)
     const closeOnOutsideClick = (e) => {
-      // e.preventDefault();
+      e.preventDefault();
 
       const excludedElements = document.querySelectorAll(
         ".offers-filtration-box-el-dropdown"
@@ -78,7 +78,7 @@ const allLinks = document.querySelectorAll("a:link");
 
 allLinks.forEach(function (link) {
   link.addEventListener("click", function (e) {
-    // e.preventDefault();
+    e.preventDefault();
     const href = link.getAttribute("href");
 
     // Scroll back to top
@@ -95,3 +95,52 @@ allLinks.forEach(function (link) {
     }
   });
 });
+
+// Display log in and sign up pages
+document.querySelector(".loginBtn").addEventListener("click", function () {
+  window.location.href = "pages/log_in.html";
+});
+
+document.querySelector(".signUpBtn").addEventListener("click", function () {
+  window.location.href = "pages/sign_up1.html";
+});
+
+///////////////////////////////////////////////////////////
+function checkLoginStatus() {
+  const jwt = localStorage.getItem("jwt");
+  const loginStatus = document.querySelector(".login-status-info");
+  const loginBtn = document.querySelector(".login-status-btn");
+  if (jwt) {
+    // Verify JWT is still valid
+    fetch("http://94.137.160.8:13001/rpc/get_user_info", {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          loginStatus.innerText = "You are logged in";
+          loginBtn.textContent = "LOG OUT";
+          loginBtn.classList.add("active");
+        } else {
+          // JWT expired or invalid
+          localStorage.removeItem("jwt");
+          loginStatus.innerText = "You are not logged in";
+        }
+      })
+      .catch(() => {
+        localStorage.removeItem("jwt");
+        loginStatus.innerText = "You are not logged in";
+      });
+  } else {
+    loginStatus.innerText = "You are not logged in";
+  }
+}
+
+function logout() {
+  localStorage.removeItem("jwt");
+  window.location.reload();
+}
+
+// Run on page load
+document.addEventListener("DOMContentLoaded", checkLoginStatus);

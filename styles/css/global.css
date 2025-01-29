@@ -350,7 +350,8 @@ body {
   background-color: #DF3014;
 }
 .main .offers-apartments {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 2rem;
   margin-top: 3.2rem;
 }
@@ -488,75 +489,29 @@ body {
   color: #f3f3f3;
 }
 
-.body_log_in {
-  width: 77.34rem;
-  font-family: Arial, sans-serif;
-  margin: 0 auto;
-  padding: 0 auto;
-  background-color: #3067a2;
+.login-status {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  gap: 2rem;
+  padding: 3rem 0;
+  font-size: 2.2rem;
+  background-color: #DF3014;
+  color: #fff;
 }
-.body_log_in .container {
-  margin-right: 2.7rem;
-  background: #ffffff;
-  box-shadow: rgba(0, 0, 0, 0.1);
-  padding: 6rem;
-  border-radius: 0.5rem;
-  text-align: center;
-}
-.body_log_in .signup-text {
-  margin-bottom: 1rem;
-  font-size: 0.875rem;
-}
-.body_log_in .signup-text a {
-  color: #007bff;
-  text-decoration: none;
-}
-.body_log_in .signup-text a:hover {
-  text-decoration: underline;
-}
-.body_log_in .form-box h2 {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-  color: #333333;
-}
-.body_log_in .form-box .instructions {
-  font-size: 0.875rem;
-  color: #777777;
-  margin-bottom: 1.5rem;
-  margin-top: 1rem;
-}
-.body_log_in .form-box label {
-  display: block;
-  font-size: 0.875rem;
-  text-align: left;
-  margin-bottom: 0.3rem;
-  color: #555555;
-}
-.body_log_in .form-box .pass {
-  margin-top: 1rem;
-}
-.body_log_in .form-box input {
-  border-radius: 0.5rem;
-  padding: 0.75rem;
-  width: 100%;
-  border: 0.1rem solid #ccc;
-  font-size: 1rem;
-  outline: none;
-}
-.body_log_in button {
-  border-radius: 0.625rem;
-  padding: 1rem;
-  background-color: #f93b1d;
+.login-status-btn {
+  display: none;
+  background-color: #fff;
+  color: #f93b1d;
+  font-size: 1.8rem;
+  padding: 1rem 2rem;
   border: none;
+  border-radius: 8px;
+  text-align: center;
   cursor: pointer;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-  color: white;
+  transition: all 0.3s;
 }
-.body_log_in button:hover {
-  background-color: #df3014;
+.login-status-btn:hover {
+  background-color: #f93b1d;
+  color: #fff;
 }/*# sourceMappingURL=global.css.map */
