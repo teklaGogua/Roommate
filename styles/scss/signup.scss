@@ -1,3 +1,10 @@
+$main_color: #f93b1d;
+$darker_main_color: #DF3014;
+$secondary_color: #333;
+$secondary_gray: #f3f3f3;
+$subtitle_color: #021526;
+$subtext_color: #021526b3;
+
 body {
   width: 123.75rem;
   font-family: Arial, sans-serif;
@@ -22,7 +29,7 @@ body {
 h2 {
   font-size: 1.5rem;
   margin-bottom: 1.25rem;
-  color: #021526;
+  color: $subtitle_color;
 }
 
 label {
@@ -30,7 +37,7 @@ label {
   margin-top: 0.625rem;
   font-weight: bold;
   text-align: left;
-  color: #333;
+  color: $secondary_color;
 }
 
 input,
@@ -43,30 +50,30 @@ textarea {
   border-radius: 0.5rem;
   font-size: 0.875rem;
   box-sizing: border-box;
-  background-color: #f3f3f3;
-  color: #333;
-}
-input:focus,
-select:focus,
-textarea:focus {
-  border-color: #021526;
-  box-shadow: 0 0 0.1875rem rgba(2, 21, 38, 0.5);
-  outline: none;
+  background-color: $secondary_gray;
+  color: $secondary_color;
+  
+  &:focus {
+    border-color: $subtitle_color;
+    box-shadow: 0 0 0.1875rem rgba($subtitle_color, 0.5);
+    outline: none;
+  }
 }
 
 button {
   width: 100%;
   padding: 0.75rem;
   margin-top: 1.25rem;
-  background-color: #f93b1d;
+  background-color: $main_color;
   color: white;
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
   font-size: 1rem;
-}
-button:hover {
-  background-color: #DF3014;
+
+  &:hover {
+    background-color: $darker_main_color;
+  }
 }
 
 textarea {
@@ -75,25 +82,28 @@ textarea {
 
 .terms {
   font-size: 0.75rem;
-  color: rgba(2, 21, 38, 0.7019607843);
+  color: $subtext_color;
   margin-top: 0.9375rem;
-}
-.terms a {
-  color: #021526;
-  text-decoration: none;
-}
-.terms a:hover {
-  text-decoration: underline;
+  
+  a {
+    color: $subtitle_color;
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
-input[type=file] {
+input[type="file"] {
   padding: 0.3125rem;
   margin-top: 0.625rem;
-  background-color: #f3f3f3;
+  background-color: $secondary_gray;
   border: 0.0625rem solid #ccc;
 }
 
 select {
   background-color: white;
-  color: #333;
-}/*# sourceMappingURL=signup.css.map */
+  color: $secondary_color;
+}
+
