@@ -45,6 +45,12 @@ body {
 
   .offers {
     &-filtration {
+      .box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
       &-title {
         @extend %main-title-style;
       }
@@ -166,11 +172,41 @@ body {
           }
         }
       }
+
+      .btn-add-listing {
+        display: inline-flex;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 2rem;
+        padding: 2rem 4rem;
+        background-color: $main_color;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 2.2rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: $darker_main_color;
+          transform: translateY(-0.2rem);
+          box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-icon {
+          font-size: 2rem;
+          font-weight: bold;
+        }
+
+        .btn-text {
+          font-weight: 500;
+        }
+      }
     }
 
     &-apartments {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
       gap: 2rem;
       margin-top: 3.2rem;
 
@@ -179,6 +215,7 @@ body {
         border-radius: 14px;
         overflow: hidden;
         max-width: 32rem;
+        margin-top: 2rem;
         transition: all 0.3s;
 
         &:hover {
@@ -225,6 +262,53 @@ body {
             }
           }
         }
+      }
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      padding: 2rem;
+
+      &-btn,
+      &-numbers-btn,
+      .page-number {
+        padding: 1rem 1.5rem;
+        margin: 0.5rem;
+        border: none;
+        border-radius: 5px;
+        background-color: $secondary_gray;
+        color: $secondary_color;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1.8rem;
+
+        &:disabled {
+          background-color: #ccc;
+          color: #888;
+          cursor: not-allowed;
+        }
+
+        &:not(:disabled):hover,
+        &.active {
+          background-color: $main_color;
+          color: white;
+          transform: translateY(-0.2px);
+          box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.2); // 4px 8px
+        }
+
+        &.active {
+          background-color: $darker_main_color;
+          transform: scale(1.1);
+        }
+      }
+
+      .ellipsis {
+        padding: 1rem;
+        color: $subtext_color;
+        font-size: 2rem;
       }
     }
   }
