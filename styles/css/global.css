@@ -247,6 +247,11 @@ body {
   width: 75rem;
   height: 49.5rem;
 }
+.main .offers-filtration .box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .main .offers-filtration-box {
   display: inline-flex;
   gap: 4rem;
@@ -349,9 +354,35 @@ body {
 .main .offers-filtration-box-el-dropdown-btn:hover {
   background-color: #DF3014;
 }
+.main .offers-filtration .btn-add-listing {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding: 2rem 4rem;
+  background-color: #f93b1d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 2.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.main .offers-filtration .btn-add-listing:hover {
+  background-color: #DF3014;
+  transform: translateY(-0.2rem);
+  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.2);
+}
+.main .offers-filtration .btn-add-listing .btn-icon {
+  font-size: 2rem;
+  font-weight: bold;
+}
+.main .offers-filtration .btn-add-listing .btn-text {
+  font-weight: 500;
+}
 .main .offers-apartments {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 2rem;
   margin-top: 3.2rem;
 }
@@ -360,6 +391,7 @@ body {
   border-radius: 14px;
   overflow: hidden;
   max-width: 32rem;
+  margin-top: 2rem;
   transition: all 0.3s;
 }
 .main .offers-apartments-card:hover {
@@ -398,6 +430,49 @@ body {
   width: 2.4rem;
   height: 2.4rem;
   margin-right: 1rem;
+}
+.main .offers .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+.main .offers .pagination-btn, .main .offers .pagination-numbers-btn,
+.main .offers .pagination .page-number {
+  padding: 1rem 1.5rem;
+  margin: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #f3f3f3;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.8rem;
+}
+.main .offers .pagination-btn:disabled, .main .offers .pagination-numbers-btn:disabled,
+.main .offers .pagination .page-number:disabled {
+  background-color: #ccc;
+  color: #888;
+  cursor: not-allowed;
+}
+.main .offers .pagination-btn:not(:disabled):hover, .main .offers .pagination-btn.active, .main .offers .pagination-numbers-btn:not(:disabled):hover, .main .offers .pagination-numbers-btn.active,
+.main .offers .pagination .page-number:not(:disabled):hover,
+.main .offers .pagination .page-number.active {
+  background-color: #f93b1d;
+  color: white;
+  transform: translateY(-0.2px);
+  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.2);
+}
+.main .offers .pagination-btn.active, .main .offers .pagination-numbers-btn.active,
+.main .offers .pagination .page-number.active {
+  background-color: #DF3014;
+  transform: scale(1.1);
+}
+.main .offers .pagination .ellipsis {
+  padding: 1rem;
+  color: rgba(2, 21, 38, 0.7019607843);
+  font-size: 2rem;
 }
 .main .registration {
   display: grid;

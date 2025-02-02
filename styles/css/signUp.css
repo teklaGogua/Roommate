@@ -1,5 +1,25 @@
+.active {
+  display: inline !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.active-dropdown {
+  display: flex !important;
+}
+
+.grid-col--2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-col--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
 body {
-  width: 123.75rem;
+  background-image: url("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSb-XKq1C7ZsNopcJCRc_pnoy_u5cPIjSW9PlfDh5E49IO8FRq_");
   font-family: Arial, sans-serif;
   background-color: white;
   display: flex;
@@ -10,7 +30,6 @@ body {
 }
 
 .form-container {
-  margin-right: 27%;
   background-color: #fff;
   padding: 1.875rem;
   border-radius: 0.625rem;
