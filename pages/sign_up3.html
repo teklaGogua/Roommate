@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-image: url("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSb-XKq1C7ZsNopcJCRc_pnoy_u5cPIjSW9PlfDh5E49IO8FRq_");
+      }
+      h2 {
+        text-align: center;
+        color: #f93b1d;
+      }
+      .form-container {
+        align-items: center;
+        margin: auto;
+        justify-content: center;
+        width: 30.2rem;
+        padding: 1.5rem;
+        border: 0.1rem solid #ccc;
+        border-radius: 1rem;
+        background-color: #fff;
+        box-shadow: black;
+        gap: 1rem;
+      }
+      #info {
+        max-width: 30.5rem;
+      }
+      .button-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+      }
+
+      input[type="text"],
+      select,
+      textarea {
+        width: 100%;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        border: 0.1rem solid #ccc;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+      }
+      .button {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        background-color: #f93b1d;
+        color: #fff;
+        text-align: center;
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        margin-top: 1rem;
+      }
+
+      .button:hover {
+        background-color: #df3014;
+      }
+    </style>
+  </head>
+  <body>
+    <form class="form-container">
+      <h2>My Habits</h2>
+      <hr />
+      <!-- Smoking -->
+      <div class="info">
+        <select id="smoking" name="info" required>
+          <option value="">Do you smoke?</option>
+          <option value="Smoker">yes, I am smoker</option>
+          <option value="Non-Smoker">No, I do not smoke</option>
+        </select>
+
+        <!-- Pets -->
+        <select id="pets" name="info" required>
+          <option value="">Do you own pets?</option>
+          <option value="Yes">Yes, I own pets</option>
+          <option value="No">No, I do not own pets</option>
+        </select>
+
+        <!-- Party Habits -->
+        <select id="party_habits" name="info" required>
+          <option value="">Do you party?</option>
+          <option value="Frequently">Yes, I party Frequently</option>
+          <option value="Occasionally">Yes I party, but occasionally</option>
+          <option value="Never">No, I never party</option>
+        </select>
+
+        <!-- Food Preferences -->
+        <select id="food_preference" name="info" required>
+          <option value="">
+            Do you follow a vegetarian, vegan, or non-vegetarian diet?
+          </option>
+          <option value="Vegetarian">I am vegetarian</option>
+          <option value="Non-Vegetarian">I am non-vegetarian</option>
+          <option value="Vegan">I am vegan</option>
+        </select>
+      </div>
+      <div class="button-container">
+        <button type="submit" class="button">Submit</button>
+      </div>
+    </form>
+
+    <script src="../js/signup.js"></script>
+  </body>
+</html>

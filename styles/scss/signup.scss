@@ -1,12 +1,7 @@
-$main_color: #f93b1d;
-$darker_main_color: #DF3014;
-$secondary_color: #333;
-$secondary_gray: #f3f3f3;
-$subtitle_color: #021526;
-$subtext_color: #021526b3;
+@import "./_variables";
 
 body {
-  width: 123.75rem;
+  background-image: url("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSb-XKq1C7ZsNopcJCRc_pnoy_u5cPIjSW9PlfDh5E49IO8FRq_");
   font-family: Arial, sans-serif;
   background-color: white;
   display: flex;
@@ -17,7 +12,6 @@ body {
 }
 
 .form-container {
-  margin-right: 27%;
   background-color: #fff;
   padding: 1.875rem;
   border-radius: 0.625rem;
@@ -52,7 +46,7 @@ textarea {
   box-sizing: border-box;
   background-color: $secondary_gray;
   color: $secondary_color;
-  
+
   &:focus {
     border-color: $subtitle_color;
     box-shadow: 0 0 0.1875rem rgba($subtitle_color, 0.5);
@@ -84,11 +78,11 @@ textarea {
   font-size: 0.75rem;
   color: $subtext_color;
   margin-top: 0.9375rem;
-  
+
   a {
     color: $subtitle_color;
     text-decoration: none;
-    
+
     &:hover {
       text-decoration: underline;
     }
@@ -106,4 +100,3 @@ select {
   background-color: white;
   color: $secondary_color;
 }
-

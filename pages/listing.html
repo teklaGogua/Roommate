@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listing Form</title>
+    <style>
+      :root {
+        font-size: 0.625rem;
+      }
+      body {
+        line-height: 1.6;
+        background-image: url("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSb-XKq1C7ZsNopcJCRc_pnoy_u5cPIjSW9PlfDh5E49IO8FRq_");
+      }
+
+      .form-container {
+        max-width: 60rem;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: #fff;
+        border-radius: 0.5rem;
+        box-shadow: black;
+      }
+
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        color: #f93b1d;
+      }
+      h2 {
+        color: #f93b1d;
+      }
+      .flat {
+        display: flex;
+        gap: 1rem;
+      }
+      label {
+        font-size: 1.6rem;
+        margin-bottom: 0.5rem;
+        display: block;
+      }
+
+      input[type="text"],
+      select,
+      textarea {
+        font-size: large;
+        width: 100%;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        border: 0.1rem solid #ccc;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+      }
+      input[type="number"] {
+        font-size: large;
+        width: 100%;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        border: 0.1rem solid #ccc;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+      }
+      .button {
+        display: inline-block;
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        background-color: #f93b1d;
+        color: #fff;
+        text-align: center;
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+      }
+
+      .button:hover {
+        background-color: #df3014;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <h1>Add List</h1>
+
+      <form id="listing-form">
+        <h2>Location</h2>
+
+        <!-- General Information -->
+        <label for="city">City*</label>
+        <select id="region" name="region" required>
+          <option value="">Choose City</option>
+          <option value="tbilisi">Tbilisi</option>
+          <option value="batumi">Batumi</option>
+          <option value="qutaisi">Kutaisi</option>
+          <option value="rustavi">Rustavi</option>
+          <option value="gori">Gori</option>
+          <option value="poti">Poti</option>
+          <option value="zugdidi">Zugdidi</option>
+          <option value="marneuli">Marneuli</option>
+          <option value="akhmeta">Akhmeta</option>
+          <option value="telavi">Telavi</option>
+          <option value="kobuleti">Kobuleti</option>
+          <option value="senaki">Senaki</option>
+        </select>
+
+        <label for="category">Category*</label>
+        <select id="category" name="category" required>
+          <option value="">Choose Category</option>
+          <option value="private">Private House</option>
+          <option value="flat">Flat</option>
+        </select>
+
+        <label for="address">Adrdress*</label>
+        <input
+          type="text"
+          id="address"
+          name="address"
+          placeholder="Address"
+          required
+        />
+
+        <!--Flat Description -->
+        <h2>Flat Details</h2>
+
+        <div class="flat">
+          <label for="price">Price* </label>
+          <input
+            type="number"
+            id="price"
+            name="price"
+            placeholder="Flat Price"
+            required
+          />
+          <!-- Bedroom Number -->
+          <label for="bedroom">Bedroom* </label>
+          <input
+            type="number"
+            id="bedrooom"
+            name="bedroom"
+            placeholder="Bedroom"
+            required
+          />
+          <!-- Area -->
+          <label for="Area">Area*</label>
+          <input
+            type="number"
+            id="area"
+            name="area"
+            placeholder="Area"
+            required
+          />
+        </div>
+        <!-- Description -->
+        <label for="description">Description*</label>
+        <textarea
+          id="description"
+          name="description"
+          rows="5"
+          placeholder="Description"
+          required
+        ></textarea>
+
+        <!--Preferences-->
+        <h2>Preferences</h2>
+        <!--Smoking-->
+        <!-- Smoking -->
+        <select id="preferences" name="preferences" required>
+          <option value="">Smoking</option>
+          <option value="smoker">Smoker</option>
+          <option value="non-smoker">Non-Smoker</option>
+        </select>
+
+        <!-- Pets -->
+        <select id="preferences" name="preferences" required>
+          <option value="">Pets</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+
+        <!-- Party Habits -->
+        <select id="preferences" name="preferences" required>
+          <option value="">Party Habits</option>
+          <option value="occasionally">Occasionally</option>
+          <option value="frequently">Frequently</option>
+          <option value="never">Never</option>
+        </select>
+
+        <!-- Food Preferences -->
+        <select id="preferences" name="preferences" required>
+          <option value="">Food Preferences</option>
+          <option value="vegetarian">Vegetarian</option>
+          <option value="non-vegetarian">Non-Vegetarian</option>
+          <option value="vegan">Vegan</option>
+        </select>
+        <!-- Roommate Gender -->
+        <select id="preferences" name="preferences" required>
+          <option value="">Roommate Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="no_preference">No Preference</option>
+        </select>
+
+        <label for="file">Upload File*</label>
+        <input type="file" id="file" name="file" required />
+
+        <!-- Submit Button -->
+        <button type="submit" class="button">Add</button>
+      </form>
+    </div>
+
+    <script src="../js/listing.js"></script>
+  </body>
+</html>
