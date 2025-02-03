@@ -120,10 +120,15 @@ function checkLoginStatus() {
     })
       .then((response) => {
         if (response.ok) {
-          loginStatus.innerText = "You are logged in - Profile -";
-          loginBtn.textContent = "LOG OUT";
-          loginBtn.classList.add("active");
-          addListingBtn.classList.toggle("hidden");
+          response.json().then((userData) => {
+            sessionStorage.setItem("userData", JSON.stringify(userData));
+            console.log(userData);
+
+            loginStatus.innerText = "You are logged in - Profile -";
+            loginBtn.textContent = "LOG OUT";
+            loginBtn.classList.add("active");
+            addListingBtn.classList.toggle("hidden");
+          });
         } else {
           // JWT expired or invalid
           localStorage.removeItem("jwt");
