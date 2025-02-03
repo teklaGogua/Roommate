@@ -120,7 +120,7 @@ function checkLoginStatus() {
     })
       .then((response) => {
         if (response.ok) {
-          loginStatus.innerText = "You are logged in";
+          loginStatus.innerText = "You are logged in - Profile -";
           loginBtn.textContent = "LOG OUT";
           loginBtn.classList.add("active");
           addListingBtn.classList.toggle("hidden");
@@ -137,6 +137,10 @@ function checkLoginStatus() {
   } else {
     loginStatus.innerText = "You are not logged in";
   }
+
+  loginStatus.addEventListener("click", () => {
+    window.location.href = "pages/profile.html";
+  });
 }
 
 function logout() {
@@ -215,7 +219,7 @@ function displayApartments(pageNumber) {
 
   let cardsHTML = "";
   pageApartments.forEach((apartment) => {
-    cardsHTML += `<div class="offers-apartments-card">
+    cardsHTML += `<div onclick="displayCard()" class="offers-apartments-card">
             <img class="offers-apartments-card-img" src="${apartment.thumbnail}" alt="Property" />
             <div class="offers-apartments-card-text">
                 <h3 class="offers-apartments-card-text-price">80 000 $</h3>
@@ -240,6 +244,11 @@ function displayApartments(pageNumber) {
 
   offersContainer.innerHTML = cardsHTML;
   updatePaginationState();
+}
+
+// After clicking card display one with more info on diffrent page
+function displayCard() {
+  window.location.href = "pages/card.html";
 }
 
 // Event Listeners
