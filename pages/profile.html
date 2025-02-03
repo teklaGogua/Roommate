@@ -84,7 +84,7 @@
       }
 
       .button-container {
-        text-align: center; 
+        text-align: center;
       }
     </style>
   </head>
@@ -105,19 +105,19 @@
 
       <div class="row">
         <p class="label">Name</p>
-        <p>John Doe</p>
+        <p id="name"></p>
       </div>
       <div class="row">
         <p class="label">Age</p>
-        <p>25</p>
+        <p id="age"></p>
       </div>
       <div class="row">
         <p class="label">Nationality</p>
-        <p>American</p>
+        <p id="nationality"></p>
       </div>
       <div class="row">
         <p class="label">Gender</p>
-        <p>Male</p>
+        <p id="gender"></p>
       </div>
 
       <h2>Account Information</h2>
@@ -125,24 +125,39 @@
 
       <div class="row">
         <p class="label">Email</p>
-        <p>johndoe@example.com</p>
+        <p id="email"></p>
       </div>
       <div class="row">
         <p class="label">Mobile</p>
-        <p>+1 234 567 890</p>
+        <p id="mobile"></p>
       </div>
       <div class="row">
         <p class="label">Password</p>
-        <p>********</p>
+        <p id="password"></p>
       </div>
       <div class="row">
         <p class="label">Bio</p>
-        <p>Software engineer and tech enthusiast.</p>
+        <p id="bio"></p>
       </div>
 
       <div class="button-container">
         <button type="button" class="button">Change</button>
       </div>
     </div>
+
+    <script>
+      // Fetch user data from session storage
+      const userData = JSON.parse(sessionStorage.getItem("userData"));
+
+      // Populate the profile page with user data
+      document.getElementById("name").textContent = userData.name;
+      document.getElementById("age").textContent = userData.age;
+      document.getElementById("nationality").textContent = userData.nationality;
+      document.getElementById("gender").textContent = userData.gender;
+      document.getElementById("email").textContent = userData.email;
+      document.getElementById("mobile").textContent = userData.telephone;
+      document.getElementById("password").textContent = "********";
+      document.getElementById("bio").textContent = userData.bio;
+    </script>
   </body>
 </html>
