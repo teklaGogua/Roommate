@@ -86,35 +86,35 @@
         <h2>Location</h2>
 
         <!-- General Information -->
-        <label for="city">City*</label>
-        <select id="region" name="region" required>
+        <label for="listing_city">City*</label>
+        <select id="listing_city" name="listing_city" required>
           <option value="">Choose City</option>
-          <option value="tbilisi">Tbilisi</option>
-          <option value="batumi">Batumi</option>
-          <option value="qutaisi">Kutaisi</option>
-          <option value="rustavi">Rustavi</option>
-          <option value="gori">Gori</option>
-          <option value="poti">Poti</option>
-          <option value="zugdidi">Zugdidi</option>
-          <option value="marneuli">Marneuli</option>
-          <option value="akhmeta">Akhmeta</option>
-          <option value="telavi">Telavi</option>
-          <option value="kobuleti">Kobuleti</option>
-          <option value="senaki">Senaki</option>
+          <option value="Tbilisi">Tbilisi</option>
+          <option value="Batumi">Batumi</option>
+          <option value="Qutaisi">Kutaisi</option>
+          <option value="Rustavi">Rustavi</option>
+          <option value="Gori">Gori</option>
+          <option value="Poti">Poti</option>
+          <option value="Zugdidi">Zugdidi</option>
+          <option value="Marneuli">Marneuli</option>
+          <option value="Akhmeta">Akhmeta</option>
+          <option value="Telavi">Telavi</option>
+          <option value="Kobuleti">Kobuleti</option>
+          <option value="Senaki">Senaki</option>
         </select>
 
-        <label for="category">Category*</label>
-        <select id="category" name="category" required>
+        <label for="listing_cat">Category*</label>
+        <select id="listing_cat" name="listing_cat" required>
           <option value="">Choose Category</option>
-          <option value="private">Private House</option>
-          <option value="flat">Flat</option>
+          <option value="Apartment">Apartment</option>
+          <option value="House">House</option>
         </select>
 
-        <label for="address">Adrdress*</label>
+        <label for="listing_address">Adrdress*</label>
         <input
           type="text"
-          id="address"
-          name="address"
+          id="listing_address"
+          name="listing_address"
           placeholder="Address"
           required
         />
@@ -123,38 +123,38 @@
         <h2>Flat Details</h2>
 
         <div class="flat">
-          <label for="price">Price* </label>
+          <label for="listing_price">Price* </label>
           <input
             type="number"
-            id="price"
-            name="price"
+            id="listing_price"
+            name="listing_price"
             placeholder="Flat Price"
             required
           />
           <!-- Bedroom Number -->
-          <label for="bedroom">Bedroom* </label>
+          <label for="listing_bedroom_count">Bedroom* </label>
           <input
             type="number"
-            id="bedrooom"
-            name="bedroom"
+            id="listing_bedroom_count"
+            name="listing_bedroom_count"
             placeholder="Bedroom"
             required
           />
           <!-- Area -->
-          <label for="Area">Area*</label>
+          <label for="listing_area">Area*</label>
           <input
             type="number"
-            id="area"
-            name="area"
+            id="listing_area"
+            name="listing_area"
             placeholder="Area"
             required
           />
         </div>
         <!-- Description -->
-        <label for="description">Description*</label>
+        <label for="listing_description">Description*</label>
         <textarea
-          id="description"
-          name="description"
+          id="listing_description"
+          name="listing_description"
           rows="5"
           placeholder="Description"
           required
@@ -162,42 +162,45 @@
 
         <!--Preferences-->
         <h2>Preferences</h2>
-        <!--Smoking-->
+
         <!-- Smoking -->
-        <select id="preferences" name="preferences" required>
+        <select id="smoking" name="smoking" required>
           <option value="">Smoking</option>
-          <option value="smoker">Smoker</option>
-          <option value="non-smoker">Non-Smoker</option>
+          <option value="Smoker">Smoker</option>
+          <option value="Non-Smoker">Non-Smoker</option>
+          <option value="No_preference">No Preference</option>
         </select>
 
         <!-- Pets -->
-        <select id="preferences" name="preferences" required>
+        <select id="pets" name="pets" required>
           <option value="">Pets</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
         </select>
 
         <!-- Party Habits -->
-        <select id="preferences" name="preferences" required>
+        <select id="party_habits" name="party_habits" required>
           <option value="">Party Habits</option>
-          <option value="occasionally">Occasionally</option>
-          <option value="frequently">Frequently</option>
-          <option value="never">Never</option>
+          <option value="Occasionally">Occasionally</option>
+          <option value="Frequently">Frequently</option>
+          <option value="Never">Never</option>
+          <option value="No_preference">No Preference</option>
         </select>
 
         <!-- Food Preferences -->
-        <select id="preferences" name="preferences" required>
+        <select id="food_preference" name="food_preference" required>
           <option value="">Food Preferences</option>
-          <option value="vegetarian">Vegetarian</option>
-          <option value="non-vegetarian">Non-Vegetarian</option>
-          <option value="vegan">Vegan</option>
+          <option value="Vegetarian">Vegetarian</option>
+          <option value="Non-Vegetarian">Non-Vegetarian</option>
+          <option value="Vegan">Vegan</option>
+          <option value="No_preference">No Preference</option>
         </select>
         <!-- Roommate Gender -->
-        <select id="preferences" name="preferences" required>
-          <option value="">Roommate Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="no_preference">No Preference</option>
+        <select id="roommate_gender" name="preferences" required>
+          <option value="">Roommate gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="No_preference">No Preference</option>
         </select>
 
         <label for="file">Upload File*</label>
