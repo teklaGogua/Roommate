@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, innitial-scale=1" />
+  <style>
+    body {
+      display: flex;
+      gap: 4rem;
+    }
+    h1 {
+      margin-top: 4rem;
+      color: #f93b1d;
+    }
+    h2 {
+      color: #f93b1d;
+    }
+    .info {
+      display: flex;
+      flex-direction: column;
+    }
+    .img {
+      margin-left: 5%;
+      margin-top: 3%;
+      width: 30%;
+      height: 30%;
+    }
+    .button {
+      top: 3%;
+      left: 3%;
+      position: absolute;
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      font-size: 1rem;
+      background-color: #f93b1d;
+      color: #fff;
+      text-align: center;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+    .button:hover {
+      background-color: #df3014;
+    }
+    .container {
+      margin: auto;
+      width: 80%;
+      padding: 1.5rem;
+      border: 0.1rem solid #ccc;
+      border-radius: 1rem;
+      background-color: #fff;
+      box-shadow: black;
+      display: flex;
+      gap: 1rem;
+    }
+    .author {
+      width: 50%;
+      padding: 1.5rem;
+      border: 0.1rem solid #ccc;
+      border-radius: 1rem;
+      background-color: #fff;
+      box-shadow: black;
+      display: flex;
+      gap: 1rem;
+    }
+    .author_info {
+      display: flex;
+      flex-direction: column;
+      gap: 0rem;
+      margin-top: -1rem;
+    }
+    .row {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+    }
+
+    .row h1,
+    .row h2,
+    .row .label {
+      min-width: 3rem;
+      color: #f93b1d;
+      font-weight: bold;
+    }
+
+    .row p {
+      margin: 0;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <button type="submit" class="button">Back</button>
+  <div class="container">
+    <img
+      class="img"
+      src="https://img.a.transfermarkt.technology/portrait/big/8198-1694609670.jpg?lm=1"
+      alt="flat-pic"
+    />
+    <div class="info">
+      <div class="info">
+        <div class="row">
+          <h1>Price</h1>
+          <p>$500,000</p>
+        </div>
+
+        <div class="row">
+          <h2>Address</h2>
+          <p>123 Main Street, NY</p>
+        </div>
+
+        <div class="row">
+          <h2>Area</h2>
+          <p>1500 sqft</p>
+        </div>
+
+        <div class="row">
+          <h2>Bedroom</h2>
+          <p>3 Bedrooms</p>
+        </div>
+        <p>
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book. It has survived not only
+          five centuries, but also the leap into electronic typesetting,
+          remaining essentially unchanged.
+        </p>
+        <div class="author">
+          <img
+            class="profile-pic"
+            src="https://via.placeholder.com/150"
+            alt="profile-pic"
+          />
+          <div class="author_info">
+            <div class="row">
+              <p class="label">Name</p>
+              <p>Gia Suramelashvili</p>
+            </div>
+            <div class="row">
+              <p class="label">Email</p>
+              <p>tugapatio@example.com</p>
+            </div>
+            <div class="row">
+              <p class="label">Phone</p>
+              <p>+1 234 567 890</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
