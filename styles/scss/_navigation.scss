@@ -4,6 +4,13 @@
   align-items: center;
   height: 10rem;
   padding: 0 16.2rem;
+  border-bottom: 2px solid $main_color;
+
+  &-left {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+  }
 
   &-logo {
     font-size: 4rem;
@@ -11,6 +18,29 @@
 
     a {
       color: $main_color;
+      text-decoration: none;
+    }
+  }
+
+  .user-profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    border: 2px $main_color solid;
+    border-radius: 10px;
+    cursor: pointer;
+
+    &-avatar {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+    }
+
+    &-name {
+      font-size: 2rem;
+      color: $darker_main_color;
+      padding: 0.5rem 1rem;
     }
   }
 
@@ -29,7 +59,7 @@
           &:link,
           &:visited {
             display: inline-block;
-            color: $secondary_color;
+            color: #2a2a2a;
             text-decoration: none;
             padding: 1.5rem;
           }
@@ -45,10 +75,11 @@
             background-color: $main_color;
             color: #fff;
             border-radius: 10px;
+            padding: 1.5rem;
           }
 
           &:hover {
-            background-color: #df3014;
+            background-color: $darker_main_color;
           }
         }
       }
