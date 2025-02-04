@@ -21,7 +21,6 @@ document
       if (!response.ok) {
         throw new Error("Login failed");
       }
-
       const data = await response.json();
 
       // Store JWT token

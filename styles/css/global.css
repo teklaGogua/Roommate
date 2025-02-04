@@ -174,6 +174,12 @@ html {
   align-items: center;
   height: 10rem;
   padding: 0 16.2rem;
+  border-bottom: 2px solid #f93b1d;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
 }
 .header-logo {
   font-size: 4rem;
@@ -181,6 +187,26 @@ html {
 }
 .header-logo a {
   color: #f93b1d;
+  text-decoration: none;
+}
+.header .user-profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  border: 2px #f93b1d solid;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.header .user-profile-avatar {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+}
+.header .user-profile-name {
+  font-size: 2rem;
+  color: #DF3014;
+  padding: 0.5rem 1rem;
 }
 .header-nav-list {
   display: flex;
@@ -195,7 +221,7 @@ html {
 }
 .header-nav-list-el a:link, .header-nav-list-el a:visited {
   display: inline-block;
-  color: #333;
+  color: #2a2a2a;
   text-decoration: none;
   padding: 1.5rem;
 }
@@ -206,9 +232,10 @@ html {
   background-color: #f93b1d;
   color: #fff;
   border-radius: 10px;
+  padding: 1.5rem;
 }
 .header-nav-list-el .special:hover {
-  background-color: #df3014;
+  background-color: #DF3014;
 }
 
 body {
@@ -251,6 +278,58 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.main .offers-filtration-text {
+  font-size: 2.2rem;
+  line-height: 3rem;
+  margin: 2rem 5rem;
+}
+.main .offers-filtration .carousel {
+  position: relative;
+  width: 100rem;
+  height: 45rem;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  margin-bottom: 4rem;
+}
+.main .offers-filtration .carousel-inner {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+.main .offers-filtration .carousel-item {
+  min-width: 100%;
+  height: 100%;
+}
+.main .offers-filtration .carousel-item img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.main .offers-filtration .carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  font-size: 2.4rem;
+  transition: background-color 0.3s ease;
+}
+.main .offers-filtration .carousel-control:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.main .offers-filtration .carousel-control.prev {
+  left: 1rem;
+}
+.main .offers-filtration .carousel-control.next {
+  right: 1rem;
 }
 .main .offers-filtration-box {
   display: inline-flex;
@@ -431,6 +510,9 @@ body {
   height: 2.4rem;
   margin-right: 1rem;
 }
+.main .offers .appartment-func {
+  margin-top: 8rem;
+}
 .main .offers .pagination {
   display: flex;
   justify-content: center;
@@ -562,31 +644,4 @@ body {
 .footer-additional-txt {
   font-size: 2rem;
   color: #f3f3f3;
-}
-
-.login-status {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-  padding: 3rem 0;
-  font-size: 2.2rem;
-  background-color: #DF3014;
-  color: #fff;
-}
-.login-status-btn {
-  display: none;
-  background-color: #fff;
-  color: #f93b1d;
-  font-size: 1.8rem;
-  padding: 1rem 2rem;
-  border: none;
-  border-radius: 8px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.login-status-btn:hover {
-  background-color: #f93b1d;
-  color: #fff;
 }/*# sourceMappingURL=global.css.map */

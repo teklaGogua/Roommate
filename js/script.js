@@ -109,8 +109,13 @@ document.querySelector(".signUpBtn").addEventListener("click", function () {
 ///////////////////////////////////////////////////////////
 function checkLoginStatus() {
   const jwt = localStorage.getItem("jwt");
-  const loginStatus = document.querySelector(".login-status-info");
-  const loginBtn = document.querySelector(".login-status-btn");
+
+  const profileBtn = document.querySelector(".user-profile");
+  const profileName = document.querySelector(".user-profile-name");
+  const registratioBtn = document.getElementById("registrationBtn");
+  const registratio = document.getElementById("registration");
+  const offers = document.querySelector(".appartment-func");
+
   if (jwt) {
     // Verify JWT is still valid
     fetch("http://94.137.160.8:13001/rpc/get_user_info", {
@@ -122,35 +127,30 @@ function checkLoginStatus() {
         if (response.ok) {
           response.json().then((userData) => {
             sessionStorage.setItem("userData", JSON.stringify(userData));
-            console.log(userData);
 
-            loginStatus.innerText = "You are logged in - Profile -";
-            loginBtn.textContent = "LOG OUT";
-            loginBtn.classList.add("active");
-            addListingBtn.classList.toggle("hidden");
+            registratioBtn.classList.add("hidden");
+            registratio.classList.add("hidden");
+            profileBtn.classList.remove("hidden");
+            profileName.textContent = userData.name;
+            offers.classList.remove("hidden");
           });
         } else {
           // JWT expired or invalid
           localStorage.removeItem("jwt");
-          loginStatus.innerText = "You are not logged in";
         }
       })
       .catch(() => {
         localStorage.removeItem("jwt");
-        loginStatus.innerText = "You are not logged in";
       });
   } else {
-    loginStatus.innerText = "You are not logged in";
+    profileBtn.classList.add("hidden");
+    registratioBtn.classList.remove("hidden");
+    registratio.classList.remove("hidden");
   }
 
-  loginStatus.addEventListener("click", () => {
+  profileBtn.addEventListener("click", () => {
     window.location.href = "pages/profile.html";
   });
-}
-
-function logout() {
-  localStorage.removeItem("jwt");
-  window.location.reload();
 }
 
 // Run on page load
@@ -169,7 +169,7 @@ const offersContainer = document.querySelector(".offers-apartments");
 const paginationNumbers = document.querySelector(".pagination-numbers");
 const prevButton = document.querySelector(".pagination-btn.prev");
 const nextButton = document.querySelector(".pagination-btn.next");
-const itemsPerPage = 5;
+const itemsPerPage = 10;
 let currentPage = 1;
 let totalPages = 0;
 let allApartments = [];
@@ -296,3 +296,28 @@ fetch(apiUrl)
     console.error("Error:", error);
     offersContainer.innerHTML = `<p class="error">Error loading apartments: ${error.message}</p>`;
   });
+
+// CAROUSEL
+const carouselInner = document.querySelector(".carousel-inner");
+const prevButtonCar = document.querySelector(".carousel-control.prev");
+const nextButtonCar = document.querySelector(".carousel-control.next");
+const totalItems = document.querySelectorAll(".carousel-item").length;
+let currentIndex = 0;
+
+// Function to update the carousel position
+function updateCarousel() {
+  const offset = -currentIndex * 100;
+  carouselInner.style.transform = `translateX(${offset}%)`;
+}
+
+// Event listener for the "Next" button
+nextButtonCar.addEventListener("click", () => {
+  currentIndex = (currentIndex + 1) % totalItems;
+  updateCarousel();
+});
+
+// Event listener for the "Previous" button
+prevButtonCar.addEventListener("click", () => {
+  currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+  updateCarousel();
+});
