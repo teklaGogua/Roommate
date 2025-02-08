@@ -1,5 +1,5 @@
 $main_color: #f93b1d;
-$darker_main_color: #DF3014;
+$darker_main_color: #df3014;
 $secondary_color: #333;
 $secondary_gray: #f3f3f3;
 $subtitle_color: #021526;
@@ -17,6 +17,10 @@ $subtext_color: #021526b3;
 
 .hidden {
   display: none !important;
+}
+
+.error {
+  font-size: 2.1rem;
 }
 
 .active-dropdown {

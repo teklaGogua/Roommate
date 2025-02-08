@@ -156,6 +156,10 @@ html {
   display: none !important;
 }
 
+.error {
+  font-size: 2.1rem;
+}
+
 .active-dropdown {
   display: flex !important;
 }
@@ -205,7 +209,7 @@ html {
 }
 .header .user-profile-name {
   font-size: 2rem;
-  color: #DF3014;
+  color: #df3014;
   padding: 0.5rem 1rem;
 }
 .header-nav-list {
@@ -235,7 +239,7 @@ html {
   padding: 1.5rem;
 }
 .header-nav-list-el .special:hover {
-  background-color: #DF3014;
+  background-color: #df3014;
 }
 
 body {
@@ -431,7 +435,7 @@ body {
   transition: all 0.3s;
 }
 .main .offers-filtration-box-el-dropdown-btn:hover {
-  background-color: #DF3014;
+  background-color: #df3014;
 }
 .main .offers-filtration .btn-add-listing {
   display: inline-flex;
@@ -448,7 +452,7 @@ body {
   transition: all 0.3s ease;
 }
 .main .offers-filtration .btn-add-listing:hover {
-  background-color: #DF3014;
+  background-color: #df3014;
   transform: translateY(-0.2rem);
   box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.2);
 }
@@ -548,7 +552,7 @@ body {
 }
 .main .offers .pagination-btn.active, .main .offers .pagination-numbers-btn.active,
 .main .offers .pagination .page-number.active {
-  background-color: #DF3014;
+  background-color: #df3014;
   transform: scale(1.1);
 }
 .main .offers .pagination .ellipsis {
@@ -561,7 +565,7 @@ body {
   grid-template-columns: 2fr 1fr;
   box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
   border-radius: 11px;
-  background-image: linear-gradient(to right bottom, #DF3014, #f93b1d);
+  background-image: linear-gradient(to right bottom, #df3014, #f93b1d);
   overflow: hidden;
 }
 .main .registration-box {

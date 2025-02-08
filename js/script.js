@@ -74,6 +74,43 @@ clickBox.forEach((btn) =>
   })
 );
 
+// "Filter" button's functionality
+const filterSubmitButtons = document.querySelectorAll(
+  ".offers-filtration-box-el-dropdown-btn"
+);
+filterSubmitButtons.forEach((filterBtn) => {
+  filterBtn.addEventListener("click", () => {
+    let filterArr = [];
+    let serachTxt = "";
+
+    // Find all marked icons within the active dropdown
+    const markedIcons = filterBtn
+      .closest(".offers-filtration-box-el-dropdown")
+      .querySelectorAll(".marked-icon.active");
+
+    // Log the <p> elements next to the marked icons
+    markedIcons.forEach((icon) => {
+      const pElement = icon
+        .closest(".offers-filtration-box-el-dropdown-list-row")
+        .querySelector("a");
+
+      if (pElement) {
+        let el = pElement.textContent === "3+" ? -1 : pElement.textContent;
+
+        filterArr.push(!Number(el) ? el : parseInt(el));
+      }
+    });
+
+    if (typeof filterArr[0] === "number") {
+      serachTxt = "search_bedrooms";
+    } else if (typeof filterArr[0] === "string") {
+      serachTxt = "search_city";
+    }
+
+    displayListings(serachTxt, filterArr);
+  });
+});
+
 // Smooth scrolling animation
 const allLinks = document.querySelectorAll("a:link");
 
@@ -133,6 +170,8 @@ function checkLoginStatus() {
             profileBtn.classList.remove("hidden");
             profileName.textContent = userData.name;
             offers.classList.remove("hidden");
+
+            displayListings();
           });
         } else {
           // JWT expired or invalid
@@ -162,141 +201,157 @@ addListingBtn.addEventListener("click", function () {
   window.location.href = "pages/listing.html";
 });
 
-//////////////////////////////////////////////////////////////////
-// API
-const apiUrl = "https://jsonplaceholder.org/posts/";
-const offersContainer = document.querySelector(".offers-apartments");
-const paginationNumbers = document.querySelector(".pagination-numbers");
-const prevButton = document.querySelector(".pagination-btn.prev");
-const nextButton = document.querySelector(".pagination-btn.next");
-const itemsPerPage = 10;
-let currentPage = 1;
-let totalPages = 0;
-let allApartments = [];
+///////////////////////////////////////////////////////////
+async function displayListings(option = false, filterBy = false) {
+  const offersContainer = document.querySelector(".offers-apartments");
+  const paginationNumbers = document.querySelector(".pagination-numbers");
+  const prevButton = document.querySelector(".pagination-btn.prev");
+  const nextButton = document.querySelector(".pagination-btn.next");
+  const itemsPerPage = 10;
+  let currentPage = 1;
+  let totalPages = 0;
+  let allApartments = [];
+  const jwt = localStorage.getItem("jwt");
 
-function updatePaginationState() {
-  // Update pagination numbers dynamically
-  const maxVisiblePages = 5; // Number of page numbers to show at a time
-  const halfRange = Math.floor(maxVisiblePages / 2);
-  let startPage = Math.max(1, currentPage - halfRange);
-  let endPage = Math.min(totalPages, currentPage + halfRange);
+  function updatePaginationState() {
+    // Update pagination numbers dynamically
+    const maxVisiblePages = 5; // Number of page numbers to show at a time
+    const halfRange = Math.floor(maxVisiblePages / 2);
+    let startPage = Math.max(1, currentPage - halfRange);
+    let endPage = Math.min(totalPages, currentPage + halfRange);
 
-  // Adjust start and end if we're near the beginning or end
-  if (currentPage <= halfRange) {
-    endPage = Math.min(totalPages, maxVisiblePages);
-  } else if (currentPage + halfRange > totalPages) {
-    startPage = Math.max(1, totalPages - maxVisiblePages + 1);
+    // Adjust start and end if we're near the beginning or end
+    if (currentPage <= halfRange) {
+      endPage = Math.min(totalPages, maxVisiblePages);
+    } else if (currentPage + halfRange > totalPages) {
+      startPage = Math.max(1, totalPages - maxVisiblePages + 1);
+    }
+
+    // Generate pagination buttons
+    let paginationHTML = "";
+    for (let i = startPage; i <= endPage; i++) {
+      paginationHTML += `<button class="page-number ${
+        i === currentPage ? "active" : ""
+      }" data-page="${i}">${i}</button>`;
+    }
+
+    // Add ellipsis and last page if necessary
+    if (endPage < totalPages) {
+      paginationHTML += `<span class="ellipsis">...</span>`;
+      paginationHTML += `<button class="page-number" data-page="${totalPages}">${totalPages}</button>`;
+    }
+
+    // Add first page and ellipsis if necessary
+    if (startPage > 1) {
+      paginationHTML =
+        `<button class="page-number" data-page="1">1</button>` +
+        `<span class="ellipsis">...</span>` +
+        paginationHTML;
+    }
+
+    paginationNumbers.innerHTML = paginationHTML;
+
+    // Update prev/next buttons
+    prevButton.disabled = currentPage === 1;
+    nextButton.disabled = currentPage === totalPages;
   }
 
-  // Generate pagination buttons
-  let paginationHTML = "";
-  for (let i = startPage; i <= endPage; i++) {
-    paginationHTML += `<button class="page-number ${
-      i === currentPage ? "active" : ""
-    }" data-page="${i}">${i}</button>`;
+  function displayApartments(pageNumber) {
+    const startIndex = (pageNumber - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const pageApartments = allApartments.slice(startIndex, endIndex);
+
+    let cardsHTML = "";
+    pageApartments.forEach((apartment) => {
+      cardsHTML += `<div onclick="displayCard()" class="offers-apartments-card">
+              <img class="offers-apartments-card-img" src="images/examples/image.png" alt="Property" />
+              <div class="offers-apartments-card-text">
+                  <h3 class="offers-apartments-card-text-price">${apartment.price} $</h3>
+                  <p class="offers-apartments-card-text-address">${apartment.precise_address}</p>
+                  <div class="offers-apartments-card-text-info">
+                      <div class="offers-apartments-card-text-info-item">
+                          <img src="images/main-page/icons/icon-bed.png" alt="icon-bed" />
+                          <span>${apartment.bedroom_count}</span>
+                      </div>
+                      <div class="offers-apartments-card-text-info-item">
+                          <img src="images/main-page/icons/icon-area.svg" alt="icon-area" />
+                          <span>${apartment.area} m²</span>
+                      </div>
+                      <div class="offers-apartments-card-text-info-item">
+                          <img src="images/main-page/icons/icon-number.svg" alt="icon-number" />
+                          <span>${apartment.listing_category}</span>
+                      </div>
+                  </div>
+              </div>
+          </div>`;
+    });
+
+    offersContainer.innerHTML = cardsHTML;
+    updatePaginationState();
   }
 
-  // Add ellipsis and last page if necessary
-  if (endPage < totalPages) {
-    paginationHTML += `<span class="ellipsis">...</span>`;
-    paginationHTML += `<button class="page-number" data-page="${totalPages}">${totalPages}</button>`;
-  }
-
-  // Add first page and ellipsis if necessary
-  if (startPage > 1) {
-    paginationHTML =
-      `<button class="page-number" data-page="1">1</button>` +
-      `<span class="ellipsis">...</span>` +
-      paginationHTML;
-  }
-
-  paginationNumbers.innerHTML = paginationHTML;
-
-  // Update prev/next buttons
-  prevButton.disabled = currentPage === 1;
-  nextButton.disabled = currentPage === totalPages;
-}
-
-function displayApartments(pageNumber) {
-  const startIndex = (pageNumber - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const pageApartments = allApartments.slice(startIndex, endIndex);
-
-  let cardsHTML = "";
-  pageApartments.forEach((apartment) => {
-    cardsHTML += `<div onclick="displayCard()" class="offers-apartments-card">
-            <img class="offers-apartments-card-img" src="${apartment.thumbnail}" alt="Property" />
-            <div class="offers-apartments-card-text">
-                <h3 class="offers-apartments-card-text-price">80 000 $</h3>
-                <p class="offers-apartments-card-text-address">${apartment.slug}</p>
-                <div class="offers-apartments-card-text-info">
-                    <div class="offers-apartments-card-text-info-item">
-                        <img src="images/main-page/icons/icon-bed.png" alt="icon-bed" />
-                        <span>${apartment.userId}</span>
-                    </div>
-                    <div class="offers-apartments-card-text-info-item">
-                        <img src="images/main-page/icons/icon-area.svg" alt="icon-area" />
-                        <span>${apartment.userId} m²</span>
-                    </div>
-                    <div class="offers-apartments-card-text-info-item">
-                        <img src="images/main-page/icons/icon-number.svg" alt="icon-number" />
-                        <span>${apartment.userId}</span>
-                    </div>
-                </div>
-            </div>
-        </div>`;
+  prevButton.addEventListener("click", () => {
+    if (currentPage > 1) {
+      currentPage--;
+      displayApartments(currentPage);
+    }
   });
 
-  offersContainer.innerHTML = cardsHTML;
-  updatePaginationState();
+  nextButton.addEventListener("click", () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      displayApartments(currentPage);
+    }
+  });
+
+  paginationNumbers.addEventListener("click", (e) => {
+    if (e.target.classList.contains("page-number")) {
+      const pageNumber = parseInt(e.target.dataset.page);
+      if (pageNumber !== currentPage) {
+        currentPage = pageNumber;
+        displayApartments(currentPage);
+      }
+    }
+  });
+
+  const filtrationData = option ? { [option]: filterBy } : {};
+
+  try {
+    const response = await fetch(
+      "http://94.137.160.8:13000/rpc/search_listings",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwt}`,
+        },
+        body: JSON.stringify(filtrationData),
+      }
+    );
+
+    if (response.ok) {
+      response.json().then((apartments) => {
+        if (apartments) {
+          allApartments = apartments;
+          totalPages = Math.ceil(allApartments.length / itemsPerPage);
+          displayApartments(currentPage);
+        } else {
+          offersContainer.innerHTML = `<p class="error">There are no apartments found</p>`;
+        }
+      });
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    offersContainer.innerHTML = `<p class="error">Error loading apartments: ${error.message}</p>`;
+  }
 }
 
-// After clicking card display one with more info on diffrent page
+// After clicking card display it will display that with more info on diffrent page
 function displayCard() {
   window.location.href = "pages/card.html";
 }
 
-// Event Listeners
-prevButton.addEventListener("click", () => {
-  if (currentPage > 1) {
-    currentPage--;
-    displayApartments(currentPage);
-  }
-});
-
-nextButton.addEventListener("click", () => {
-  if (currentPage < totalPages) {
-    currentPage++;
-    displayApartments(currentPage);
-  }
-});
-
-paginationNumbers.addEventListener("click", (e) => {
-  if (e.target.classList.contains("page-number")) {
-    const pageNumber = parseInt(e.target.dataset.page);
-    if (pageNumber !== currentPage) {
-      currentPage = pageNumber;
-      displayApartments(currentPage);
-    }
-  }
-});
-
-// Initial fetch
-fetch(apiUrl)
-  .then((response) => {
-    if (!response.ok) throw new Error("Network response was not ok");
-    return response.json();
-  })
-  .then((apartments) => {
-    allApartments = apartments;
-    totalPages = Math.ceil(allApartments.length / itemsPerPage);
-    displayApartments(currentPage);
-  })
-  .catch((error) => {
-    console.error("Error:", error);
-    offersContainer.innerHTML = `<p class="error">Error loading apartments: ${error.message}</p>`;
-  });
-
+//////////////////////////////////////////////////////////////////
 // CAROUSEL
 const carouselInner = document.querySelector(".carousel-inner");
 const prevButtonCar = document.querySelector(".carousel-control.prev");
