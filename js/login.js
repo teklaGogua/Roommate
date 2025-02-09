@@ -7,7 +7,7 @@ document
     const password = document.getElementById("password").value;
 
     try {
-      const response = await fetch("http://94.137.160.8:13001/rpc/login", {
+      const response = await fetch("http://94.137.160.8/rpc/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -26,8 +26,8 @@ document
       // Store JWT token
       localStorage.setItem("jwt", data.jwt);
 
-      // Redirect to index page
-      window.location.href = "../index.html";
+      // Redirect to apartments' page
+      window.location.href = "apartments.html";
     } catch (error) {
       console.error("Error:", error);
       alert("Login failed. Please check your email and password.");

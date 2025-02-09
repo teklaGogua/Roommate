@@ -22,7 +22,7 @@ async function submitForm(event) {
 
   try {
     // Send registration request
-    const response = await fetch("http://94.137.160.8:13001/rpc/add_user", {
+    const response = await fetch("http://94.137.160.8/rpc/add_user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -49,8 +49,8 @@ async function submitForm(event) {
     localStorage.removeItem("signup_user_gender");
     localStorage.removeItem("signup_user_bio");
 
-    // Redirect to index page
-    window.location.href = "../index.html";
+    // Redirect to apartments' page
+    window.location.href = "apartments.html";
   } catch (error) {
     console.error("Error:", error);
     alert("Registration failed. Please try again.");
