@@ -5,7 +5,16 @@ const filterButtons = document.querySelectorAll(
 const clickBox = document.querySelectorAll(".icon-for-marking");
 let previouslyClickedBtn = null;
 const addListingBtn = document.getElementById("add-listing");
+const filterSubmitButtons = document.querySelectorAll(
+  ".offers-filtration-box-el-dropdown-btn"
+);
 let filtrationState = {};
+const allLinks = document.querySelectorAll("a:link");
+const carouselInner = document.querySelector(".carousel-inner");
+const prevButtonCar = document.querySelector(".carousel-control.prev");
+const nextButtonCar = document.querySelector(".carousel-control.next");
+const totalItems = document.querySelectorAll(".carousel-item").length;
+let currentIndex = 0;
 
 // Filter buttons' functionality
 filterButtons.forEach((btn) => {
@@ -76,9 +85,6 @@ clickBox.forEach((btn) =>
 );
 
 // "Filter" button's functionality
-const filterSubmitButtons = document.querySelectorAll(
-  ".offers-filtration-box-el-dropdown-btn"
-);
 filterSubmitButtons.forEach((filterBtn) => {
   filterBtn.addEventListener("click", () => {
     const dropdown = filterBtn.closest(".offers-filtration-box-el-dropdown");
@@ -149,8 +155,6 @@ filterSubmitButtons.forEach((filterBtn) => {
 });
 
 // Smooth scrolling animation
-const allLinks = document.querySelectorAll("a:link");
-
 allLinks.forEach(function (link) {
   link.addEventListener("click", function (e) {
     e.preventDefault();
@@ -231,14 +235,14 @@ function checkLoginStatus() {
 
 // Run on page load
 document.addEventListener("DOMContentLoaded", checkLoginStatus);
-
 ///////////////////////////////////////////////////////////
 
+// Displays add listing page
 addListingBtn.addEventListener("click", function () {
   window.location.href = "pages/listing.html";
 });
 
-///////////////////////////////////////////////////////////
+// Displays (all or filtered) listings(cards) and pagination
 async function displayListings(filters = {}) {
   const offersContainer = document.querySelector(".offers-apartments");
   const paginationNumbers = document.querySelector(".pagination-numbers");
@@ -300,7 +304,8 @@ async function displayListings(filters = {}) {
 
     let cardsHTML = "";
     pageApartments.forEach((apartment) => {
-      cardsHTML += `<div onclick="displayCard()" class="offers-apartments-card">
+      // apartment.listing_category => city
+      cardsHTML += `<div onclick="displayCard('${apartment.listing_id}')" class="offers-apartments-card">
               <img class="offers-apartments-card-img" src="images/examples/image.png" alt="Property" />
               <div class="offers-apartments-card-text">
                   <h3 class="offers-apartments-card-text-price">${apartment.price} $</h3>
@@ -316,7 +321,7 @@ async function displayListings(filters = {}) {
                       </div>
                       <div class="offers-apartments-card-text-info-item">
                           <img src="images/main-page/icons/icon-number.svg" alt="icon-number" />
-                          <span>${apartment.listing_category}</span>
+                          <span>${apartment.listing_category}</span> 
                       </div>
                   </div>
               </div>
@@ -383,19 +388,33 @@ async function displayListings(filters = {}) {
   }
 }
 
-// After clicking card display it will display that with more info on diffrent page
-function displayCard() {
+// After clicking card, it will display listing with more info on diffrent page
+function displayCard(id) {
+  try {
+    fetch("http://94.137.160.8:13000/rpc/get_listing", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+      body: JSON.stringify({
+        listing_id: id,
+      }),
+    }).then((response) => {
+      if (response.ok) {
+        response.json().then((apartment) => {
+          sessionStorage.setItem("apartment", JSON.stringify(apartment));
+        });
+      }
+    });
+  } catch (error) {
+    console.error("Error:", error);
+  }
+
   window.location.href = "pages/card.html";
 }
 
-//////////////////////////////////////////////////////////////////
 // CAROUSEL
-const carouselInner = document.querySelector(".carousel-inner");
-const prevButtonCar = document.querySelector(".carousel-control.prev");
-const nextButtonCar = document.querySelector(".carousel-control.next");
-const totalItems = document.querySelectorAll(".carousel-item").length;
-let currentIndex = 0;
-
 // Function to update the carousel position
 function updateCarousel() {
   const offset = -currentIndex * 100;
