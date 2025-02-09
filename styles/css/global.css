@@ -248,6 +248,7 @@ body {
   overflow-x: hidden;
   color: #333;
   font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
 }
 
 .container {
@@ -286,7 +287,7 @@ body {
 .main .offers-filtration-text {
   font-size: 2.2rem;
   line-height: 3rem;
-  margin: 2rem 5rem;
+  margin: 2rem 5rem 5rem 5rem;
 }
 .main .offers-filtration .carousel {
   position: relative;
@@ -296,7 +297,7 @@ body {
   overflow: hidden;
   border: 2px solid #ccc;
   border-radius: 10px;
-  margin-bottom: 4rem;
+  margin-bottom: -3rem;
 }
 .main .offers-filtration .carousel-inner {
   display: flex;
@@ -339,7 +340,7 @@ body {
   display: inline-flex;
   gap: 4rem;
   margin-top: 2rem;
-  border: solid 2px #f3f3f3;
+  border: solid 1px #333;
   border-radius: 10px;
   padding: 1.4rem;
 }
@@ -348,7 +349,8 @@ body {
   transition: all 0.3s;
 }
 .main .offers-filtration-box-el:hover {
-  background-color: #f3f3f3;
+  background-color: rgba(51, 51, 51, 0.5);
+  color: #f5f5f5;
 }
 .main .offers-filtration-box-el-btn {
   padding: 2rem 1.4rem;
@@ -465,12 +467,13 @@ body {
 }
 .main .offers-apartments {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 2rem;
   margin-top: 3.2rem;
+  min-height: 25rem;
 }
 .main .offers-apartments-card {
-  border: 1px solid #f3f3f3;
+  border: 1px solid #dfdfdf;
   border-radius: 14px;
   overflow: hidden;
   max-width: 32rem;
@@ -554,6 +557,10 @@ body {
 .main .offers .pagination .page-number.active {
   background-color: #df3014;
   transform: scale(1.1);
+}
+.main .offers .pagination .next,
+.main .offers .pagination .prev {
+  border: 1px solid #ccc;
 }
 .main .offers .pagination .ellipsis {
   padding: 1rem;

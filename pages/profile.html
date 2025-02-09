@@ -93,7 +93,7 @@
     </style>
   </head>
   <body>
-    <button type="submit" class="button">Back</button>
+    <button type="submit" class="button backBtn">Back</button>
     <div class="form-container">
       <div class="info">
         <h1>My Profile</h1>
@@ -168,6 +168,12 @@
         localStorage.removeItem("jwt");
         window.location.href = "/index.html";
       }
+
+      // Back btn functionality
+      const backBtn = document.querySelector(".backBtn");
+      backBtn.addEventListener("click", () => {
+        window.location.href = "apartments.html";
+      });
     </script>
   </body>
 </html>

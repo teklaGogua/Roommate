@@ -118,7 +118,7 @@
     </style>
   </head>
   <body>
-    <button type="submit" class="button">Back</button>
+    <button type="submit" class="button backBtn">Back</button>
     <div class="container">
       <img
         class="img"
@@ -169,13 +169,11 @@
     </div>
 
     <script>
-      // Fetch user data from session storage
+      // Fetch user and apartment data from session storage
       const apartment = JSON.parse(sessionStorage.getItem("apartment"));
       const userData = JSON.parse(sessionStorage.getItem("userData"));
 
-      console.log(apartment);
-
-      // Populate the profile page with user data
+      // Populate the with user and apartment data
       document.getElementById("name").textContent = userData.name;
       document.getElementById("email").textContent = userData.email;
       document.getElementById("mobile").textContent = userData.telephone;
@@ -189,6 +187,12 @@
       ).textContent = `${apartment.bedroom_count} bedrooms`;
       document.getElementById("custom_description").textContent =
         apartment.custom_description;
+
+      // Back btn functionality
+      const backBtn = document.querySelector(".backBtn");
+      backBtn.addEventListener("click", () => {
+        window.location.href = "apartments.html";
+      });
     </script>
   </body>
 </html>

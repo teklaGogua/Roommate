@@ -12,10 +12,20 @@ body {
 body .container {
   margin-right: 2.7rem;
   background: #ffffff;
-  box-shadow: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   padding: 6rem;
   border-radius: 0.5rem;
   text-align: center;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 body .signup-text {
   margin-bottom: 1rem;
@@ -60,7 +70,8 @@ body .form-box input {
 
 button {
   border-radius: 0.625rem;
-  padding: 1rem;
+  padding: 1rem 4rem;
+  font-size: 1rem;
   background-color: #f93b1d;
   border: none;
   cursor: pointer;
