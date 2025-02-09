@@ -5,6 +5,7 @@ const filterButtons = document.querySelectorAll(
 const clickBox = document.querySelectorAll(".icon-for-marking");
 let previouslyClickedBtn = null;
 const addListingBtn = document.getElementById("add-listing");
+let filtrationState = {};
 
 // Filter buttons' functionality
 filterButtons.forEach((btn) => {
@@ -80,34 +81,70 @@ const filterSubmitButtons = document.querySelectorAll(
 );
 filterSubmitButtons.forEach((filterBtn) => {
   filterBtn.addEventListener("click", () => {
-    let filterArr = [];
-    let serachTxt = "";
+    const dropdown = filterBtn.closest(".offers-filtration-box-el-dropdown");
 
-    // Find all marked icons within the active dropdown
-    const markedIcons = filterBtn
-      .closest(".offers-filtration-box-el-dropdown")
-      .querySelectorAll(".marked-icon.active");
+    if (
+      dropdown.id === "region-dropdown" ||
+      dropdown.id === "bedroom-dropdown"
+    ) {
+      let filterArr = [];
+      const markedIcons = dropdown.querySelectorAll(".marked-icon.active");
 
-    // Log the <p> elements next to the marked icons
-    markedIcons.forEach((icon) => {
-      const pElement = icon
-        .closest(".offers-filtration-box-el-dropdown-list-row")
-        .querySelector("a");
+      markedIcons.forEach((icon) => {
+        const pElement = icon
+          .closest(".offers-filtration-box-el-dropdown-list-row")
+          .querySelector("a");
+        if (pElement) {
+          let el = pElement.textContent === "3+" ? -1 : pElement.textContent;
+          filterArr.push(isNaN(el) ? el : parseInt(el));
+        }
+      });
 
-      if (pElement) {
-        let el = pElement.textContent === "3+" ? -1 : pElement.textContent;
-
-        filterArr.push(!Number(el) ? el : parseInt(el));
+      // Update state only if filters are selected
+      if (filterArr.length > 0) {
+        if (dropdown.id === "region-dropdown") {
+          filtrationState.search_city = filterArr;
+        } else {
+          filtrationState.search_bedrooms = filterArr;
+        }
+      } else {
+        delete filtrationState[
+          dropdown.id === "region-dropdown" ? "search_city" : "search_bedrooms"
+        ];
       }
-    });
+    } else if (dropdown.id === "price-dropdown") {
+      const minPrice = parseInt(document.querySelector(".minPrice").value);
+      const maxPrice = parseInt(document.querySelector(".maxPrice").value);
 
-    if (typeof filterArr[0] === "number") {
-      serachTxt = "search_bedrooms";
-    } else if (typeof filterArr[0] === "string") {
-      serachTxt = "search_city";
+      if (!isNaN(minPrice)) {
+        filtrationState.search_price_min = minPrice;
+      } else {
+        delete filtrationState.search_price_min;
+      }
+
+      if (!isNaN(maxPrice)) {
+        filtrationState.search_price_max = maxPrice;
+      } else {
+        delete filtrationState.search_price_max;
+      }
+    } else if (dropdown.id === "area-dropdown") {
+      const minArea = parseInt(document.querySelector(".minArea").value);
+      const maxArea = parseInt(document.querySelector(".maxArea").value);
+
+      if (!isNaN(minArea)) {
+        filtrationState.search_area_min = minArea;
+      } else {
+        delete filtrationState.search_area_min;
+      }
+
+      if (!isNaN(maxArea)) {
+        filtrationState.search_area_max = maxArea;
+      } else {
+        delete filtrationState.search_area_max;
+      }
     }
 
-    displayListings(serachTxt, filterArr);
+    displayListings(filtrationState);
   });
 });
 
@@ -202,7 +239,7 @@ addListingBtn.addEventListener("click", function () {
 });
 
 ///////////////////////////////////////////////////////////
-async function displayListings(option = false, filterBy = false) {
+async function displayListings(filters = {}) {
   const offersContainer = document.querySelector(".offers-apartments");
   const paginationNumbers = document.querySelector(".pagination-numbers");
   const prevButton = document.querySelector(".pagination-btn.prev");
@@ -314,7 +351,7 @@ async function displayListings(option = false, filterBy = false) {
     }
   });
 
-  const filtrationData = option ? { [option]: filterBy } : {};
+  const filtrationData = { ...filters };
 
   try {
     const response = await fetch(
