@@ -191,6 +191,7 @@
       // Back btn functionality
       const backBtn = document.querySelector(".backBtn");
       backBtn.addEventListener("click", () => {
+        sessionStorage.removeItem("apartment");
         window.location.href = "apartments.html";
       });
     </script>

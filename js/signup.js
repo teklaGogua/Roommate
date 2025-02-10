@@ -1,6 +1,19 @@
 async function submitForm(event) {
   event.preventDefault();
 
+  // Function to convert Data URL to Blob
+  function dataURLtoBlob(dataURL) {
+    const arr = dataURL.split(",");
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new Blob([u8arr], { type: mime });
+  }
+
   // Get data from all forms
   const userData = {
     user_name: localStorage.getItem("signup_name"),
@@ -38,19 +51,37 @@ async function submitForm(event) {
 
     // Store JWT token
     localStorage.setItem("jwt", data.jwt);
+    const pfpId = data.pfp_id;
+    const imageData = localStorage.getItem("signup_profile-pic");
+    if (imageData) {
+      const blob = dataURLtoBlob(imageData);
+      const uploadResponse = await fetch(
+        `http://94.137.160.8/upload/pfp/${pfpId}.png`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "image/png",
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          },
+          body: blob,
+        }
+      );
+      if (!uploadResponse.ok) throw new Error("Profile picture upload failed");
+    }
 
     // Clear temporary signup data
     localStorage.removeItem("signup_name");
     localStorage.removeItem("signup_email");
     localStorage.removeItem("signup_mobile");
     localStorage.removeItem("signup_password");
+    localStorage.removeItem("signup_profile-pic");
     localStorage.removeItem("signup_user_age");
     localStorage.removeItem("signup_user_nationality");
     localStorage.removeItem("signup_user_gender");
     localStorage.removeItem("signup_user_bio");
 
     // Redirect to apartments' page
-    window.location.href = "apartments.html";
+    window.location.href = "../index.html";
   } catch (error) {
     console.error("Error:", error);
     alert("Registration failed. Please try again.");
