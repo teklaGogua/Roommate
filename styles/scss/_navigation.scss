@@ -55,13 +55,13 @@
 
         a {
           transition: all 0.3s;
+          padding: 1.5rem;
 
           &:link,
           &:visited {
             display: inline-block;
             color: #2a2a2a;
             text-decoration: none;
-            padding: 1.5rem;
           }
 
           &:hover {
@@ -75,7 +75,6 @@
             background-color: $main_color;
             color: #fff;
             border-radius: 10px;
-            padding: 1.5rem;
           }
 
           &:hover {
@@ -84,5 +83,9 @@
         }
       }
     }
+  }
+
+  .burger {
+    display: none;
   }
 }

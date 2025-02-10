@@ -1,0 +1,253 @@
+/* ******************************* */
+/* BELOW 1600px */
+/* ******************************* */
+@media (max-width: 100em) {
+  html {
+    font-size: 50%;
+  }
+}
+
+/* ******************************* */
+/* BELOW 1344px */
+/* ******************************* */
+@media (max-width: 84em) {
+  .header {
+    padding: 0 5rem;
+  }
+
+  .main {
+    padding: 0 5rem;
+
+    .about-us {
+      gap: 5rem;
+
+      &-text {
+        &-description {
+          text-align: left;
+        }
+      }
+
+      &-img {
+        width: 60rem;
+        height: 39.6em;
+      }
+    }
+
+    .offers {
+      &-filtration {
+        &-text {
+          margin: 2rem 0rem 5rem 0rem;
+        }
+
+        .carousel {
+          width: 80rem;
+          height: 36rem;
+        }
+      }
+    }
+  }
+}
+
+/* ******************************* */
+/* BELOW 930px */
+/* ******************************* */
+@media (max-width: 58.125em) {
+  %main-title-style {
+    font-size: 3rem;
+    text-align: center;
+  }
+
+  .header {
+    &-nav {
+      &-list {
+        gap: 0rem;
+      }
+    }
+  }
+
+  .main {
+    .about-us {
+      &-img {
+        width: 44rem;
+        height: 29.04em;
+      }
+    }
+
+    .offers {
+      &-filtration {
+        &-text {
+          margin: 2rem 0rem;
+        }
+      }
+    }
+
+    .registration {
+      &-box {
+        padding: 3.6rem 4.8rem 4.8rem 4.8rem;
+
+        &-heading {
+          margin-bottom: 1rem;
+          line-height: 4rem;
+        }
+
+        &-text {
+          margin-bottom: 2rem;
+          text-align: center;
+        }
+
+        &-btn {
+          flex-direction: column;
+          gap: 2rem;
+        }
+      }
+    }
+  }
+}
+
+/* ******************************* */
+/* BELOW 720px */
+/* ******************************* */
+@media (max-width: 45em) {
+  .header {
+    position: relative;
+    padding: 0 2rem;
+
+    &-logo {
+      font-size: 3rem;
+    }
+
+    &-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: $background_color;
+      z-index: 1000;
+      border-bottom: 2px solid $main_color;
+      padding: 2rem 0;
+
+      &.active {
+        display: block;
+      }
+
+      &-list {
+        flex-direction: column;
+        align-items: center;
+        gap: 2.5rem;
+        padding: 0 2rem;
+
+        &-el {
+          font-size: 2.2rem;
+        }
+      }
+    }
+
+    .burger {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background: none;
+      border: none;
+      z-index: 1001;
+      padding: 1rem;
+      font-size: 3rem;
+
+      &-close {
+        display: none;
+        font-size: 2.4rem;
+      }
+
+      &.active {
+        .burger-close {
+          display: block;
+        }
+        .burger-open {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .main {
+    gap: 5rem;
+    padding: 0 2rem;
+
+    .about-us {
+      flex-direction: column;
+      gap: 2rem;
+
+      &-img {
+        border-radius: 8px;
+      }
+    }
+
+    .offers {
+      margin-bottom: 5rem;
+      &-filtration {
+        .carousel {
+          width: 60rem;
+          height: 39.6em;
+        }
+      }
+    }
+
+    .registration {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 2fr;
+      margin: 0 5rem;
+
+      &-box {
+        grid-row: 2/3;
+      }
+    }
+  }
+
+  .footer {
+    &-main {
+      padding: 2rem 4rem;
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: 4rem;
+
+      &-col {
+        &-heading {
+          margin-bottom: 2rem;
+        }
+
+        &-list {
+          gap: 1.4rem;
+        }
+      }
+    }
+  }
+}
+
+/* ******************************* */
+/* BELOW 550px */
+/* ******************************* */
+@media (max-width: 34.375em) {
+  .main {
+    .offers {
+      &-filtration {
+        .carousel {
+          width: 44rem;
+          height: 29.04em;
+        }
+      }
+    }
+
+    .registration {
+      margin: 0 2rem;
+    }
+  }
+}
+
+/* ******************************* */
+/* BELOW 360px */
+/* ******************************* */
+@media (max-width: 22.5em) {
+  html {
+    font-size: 37.5%;
+  }
+}

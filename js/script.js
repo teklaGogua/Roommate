@@ -5,6 +5,36 @@ const prevButtonCar = document.querySelector(".carousel-control.prev");
 const nextButtonCar = document.querySelector(".carousel-control.next");
 const totalItems = document.querySelectorAll(".carousel-item").length;
 let currentIndex = 0;
+const burger = document.getElementById("burger");
+const navMenu = document.querySelector(".header-nav");
+
+// Burger Menu Functionality
+// Toggle mobile menu
+burger.addEventListener("click", function (e) {
+  e.stopPropagation();
+  this.classList.toggle("active");
+  navMenu.classList.toggle("active");
+  document.body.classList.toggle("menu-open");
+});
+
+// Close menu when clicking outside
+document.addEventListener("click", (e) => {
+  if (!navMenu.contains(e.target) && !burger.contains(e.target)) {
+    burger.classList.remove("active");
+    navMenu.classList.remove("active");
+    document.body.classList.remove("menu-open");
+  }
+});
+
+// Close menu when clicking links
+document.querySelectorAll(".header-nav-list-el a").forEach((link) => {
+  link.addEventListener("click", () => {
+    burger.classList.remove("active");
+    navMenu.classList.remove("active");
+    document.body.classList.remove("menu-open");
+  });
+});
+
 
 // Displays Apartments page, if user is loged in
 function checkLoginStatus() {
@@ -21,7 +51,7 @@ function checkLoginStatus() {
         if (response.ok) {
           response.json().then((userData) => {
             sessionStorage.setItem("userData", JSON.stringify(userData));
-            
+
             window.location.href = "pages/apartments.html";
           });
         } else {
