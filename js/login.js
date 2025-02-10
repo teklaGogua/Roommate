@@ -27,7 +27,7 @@ document
       localStorage.setItem("jwt", data.jwt);
 
       // Redirect to apartments' page
-      window.location.href = "apartments.html";
+      window.location.href = "../index.html";
     } catch (error) {
       console.error("Error:", error);
       alert("Login failed. Please check your email and password.");
