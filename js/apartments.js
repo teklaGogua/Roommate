@@ -11,13 +11,44 @@ const filterSubmitButtons = document.querySelectorAll(
 let filtrationState = {};
 const profileBtn = document.querySelector(".user-profile");
 const profileName = document.querySelector(".user-profile-name");
+const profilePic = document.querySelector(".user-profile-avatar");
 
-// ///////////////////
+
+// Setting up nav profile
 const userData = JSON.parse(sessionStorage.getItem("userData"));
-
-//
 profileName.textContent = userData.name;
 
+// Getting Pfp
+async function getImg() {
+  try {
+    const response = await fetch(
+      `http://94.137.160.8/get/pfp/${userData.pfp_id}.png`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      console.log("Image not found");
+      return;
+    }
+
+    const blob = await response.blob();
+    const imgUrl = URL.createObjectURL(blob);
+    sessionStorage.setItem("pfp", imgUrl);
+
+    // Set image source
+    profilePic.src = imgUrl;
+  } catch (error) {
+    console.error("Fetch error:", error);
+  }
+}
+
+getImg();
+
+// Displays profile page
 profileBtn.addEventListener("click", () => {
   window.location.href = "profile.html";
 });

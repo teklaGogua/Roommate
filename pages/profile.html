@@ -97,11 +97,7 @@
     <div class="form-container">
       <div class="info">
         <h1>My Profile</h1>
-        <img
-          class="profile-pic"
-          src="../images/examples/image.png"
-          alt="profile-pic"
-        />
+        <img class="profile-pic" src="" alt="profile-pic" />
       </div>
 
       <h2>Personal Information</h2>
@@ -153,8 +149,10 @@
     <script>
       // Fetch user data from session storage
       const userData = JSON.parse(sessionStorage.getItem("userData"));
+      const pfp = sessionStorage.getItem("pfp");
 
       // Populate the profile page with user data
+      document.querySelector(".profile-pic").src = pfp;
       document.getElementById("name").textContent = userData.name;
       document.getElementById("age").textContent = userData.age;
       document.getElementById("nationality").textContent = userData.nationality;
@@ -164,6 +162,7 @@
       document.getElementById("password").textContent = "********";
       document.getElementById("bio").textContent = userData.bio;
 
+      // Log out functionality
       function logout() {
         localStorage.removeItem("jwt");
         sessionStorage.removeItem("userData");
