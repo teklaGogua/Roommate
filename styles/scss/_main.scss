@@ -273,10 +273,12 @@ body {
       min-height: 25rem;
 
       &-card {
+        align-self: center;
+        justify-self: center;
         border: 1px solid #dfdfdf;
         border-radius: 14px;
         overflow: hidden;
-        max-width: 32rem;
+        max-width: 40rem;
         margin-top: 2rem;
         transition: all 0.3s;
 
@@ -287,7 +289,7 @@ body {
 
         &-img {
           width: 100%;
-          height: auto;
+          min-height: 30rem;
         }
 
         &-text {

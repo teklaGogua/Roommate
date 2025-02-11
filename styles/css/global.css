@@ -475,10 +475,12 @@ body {
   min-height: 25rem;
 }
 .main .offers-apartments-card {
+  align-self: center;
+  justify-self: center;
   border: 1px solid #dfdfdf;
   border-radius: 14px;
   overflow: hidden;
-  max-width: 32rem;
+  max-width: 40rem;
   margin-top: 2rem;
   transition: all 0.3s;
 }
@@ -488,7 +490,7 @@ body {
 }
 .main .offers-apartments-card-img {
   width: 100%;
-  height: auto;
+  min-height: 30rem;
 }
 .main .offers-apartments-card-text {
   padding: 1.6rem;
@@ -710,8 +712,26 @@ body {
     width: 44rem;
     height: 29.04em;
   }
+  .main .offers-filtration .box {
+    display: flex;
+    flex-direction: column;
+  }
   .main .offers-filtration-text {
     margin: 2rem 0rem;
+  }
+  .main .offers-filtration-box {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    border: none;
+    margin-top: 0;
+  }
+  .main .offers-filtration-box-el {
+    border: solid 1px #333;
+  }
+  .main .offers-apartments {
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
   }
   .main .registration-box {
     padding: 3.6rem 4.8rem 4.8rem 4.8rem;
@@ -798,6 +818,11 @@ body {
   .main .offers {
     margin-bottom: 5rem;
   }
+  .main .offers-filtration-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
   .main .offers-filtration .carousel {
     width: 60rem;
     height: 39.6em;
@@ -829,6 +854,9 @@ body {
   .main .offers-filtration .carousel {
     width: 44rem;
     height: 29.04em;
+  }
+  .main .offers-apartments {
+    grid-template-columns: 1fr;
   }
   .main .registration {
     margin: 0 2rem;
