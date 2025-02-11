@@ -1,5 +1,5 @@
 async function handleFormSubmission(event) {
-  event.preventDefault(); // Prevent the default form submission
+  event.preventDefault();
 
   // Gather form data
   const formData = {
@@ -21,23 +21,59 @@ async function handleFormSubmission(event) {
   };
 
   try {
-    const response = await fetch(
-      "http://94.137.160.8:13000/rpc/add_listing_temporary",
+    const response = await fetch("http://94.137.160.8:13000/rpc/add_listing", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await response.json();
+    const pngId = data.png_id;
+
+    const file = document.getElementById("file").files[0];
+    if (!file) throw new Error("No file selected");
+
+    // Convert File object to data URL
+    const imageData = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (event) => resolve(event.target.result);
+      reader.onerror = (error) => reject(error);
+      reader.readAsDataURL(file);
+    });
+
+    // Convert data URL to Blob
+    function dataURLtoBlob(dataURL) {
+      const arr = dataURL.split(",");
+      const mime = arr[0].match(/:(.*?);/)[1];
+      const bstr = atob(arr[1]);
+      let n = bstr.length;
+      const u8arr = new Uint8Array(n);
+      while (n--) u8arr[n] = bstr.charCodeAt(n);
+      return new Blob([u8arr], { type: mime });
+    }
+
+    const blob = dataURLtoBlob(imageData);
+
+    // Upload the blob
+    const uploadResponse = await fetch(
+      `http://94.137.160.8/upload/listing/${pngId}.png`,
       {
-        method: "POST",
+        method: "PUT",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "image/png",
           Authorization: `Bearer ${localStorage.getItem("jwt")}`,
         },
-        body: JSON.stringify(formData),
+        body: blob,
       }
     );
 
-    if (response.ok) {
-      console.log("Listing added successfully!");
+    if (!uploadResponse.ok) throw new Error("Profile picture upload failed");
 
-      // Redirect to index page
-      window.location.href = "../index.html";
+    if (response.ok) {
+      window.location.href = "apartments.html";
     } else {
       console.error("Error adding listing:", await response.text());
     }
