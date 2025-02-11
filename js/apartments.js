@@ -13,7 +13,6 @@ const profileBtn = document.querySelector(".user-profile");
 const profileName = document.querySelector(".user-profile-name");
 const profilePic = document.querySelector(".user-profile-avatar");
 
-
 // Setting up nav profile
 const userData = JSON.parse(sessionStorage.getItem("userData"));
 profileName.textContent = userData.name;
@@ -246,19 +245,37 @@ async function displayListings(filters = {}) {
     nextButton.disabled = currentPage === totalPages;
   }
 
-  function displayApartments(pageNumber) {
+  async function displayApartments(pageNumber) {
     const startIndex = (pageNumber - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const pageApartments = allApartments.slice(startIndex, endIndex);
 
+    // Preload all images first
+    const apartmentsWithImages = await Promise.all(
+      pageApartments.map(async (apartment) => {
+        return {
+          ...apartment,
+          imgUrl: await getListingImg(apartment),
+        };
+      })
+    );
+
     let cardsHTML = "";
-    pageApartments.forEach((apartment) => {
+    apartmentsWithImages.forEach((apartment) => {
       // apartment.listing_category => city
-      cardsHTML += `<div onclick="displayCard('${apartment.listing_id}')" class="offers-apartments-card">
-              <img class="offers-apartments-card-img" src="../images/examples/image.png" alt="Property" />
+      cardsHTML += `<div onclick="displayCard('${
+        apartment.listing_id
+      }')" class="offers-apartments-card">
+              <img class="offers-apartments-card-img" src="${
+                apartment.imgUrl || "../images/placeholder.png"
+              }" alt="Listing Image" />
               <div class="offers-apartments-card-text">
-                  <h3 class="offers-apartments-card-text-price">${apartment.price} $</h3>
-                  <p class="offers-apartments-card-text-address">${apartment.precise_address}</p>
+                  <h3 class="offers-apartments-card-text-price">${
+                    apartment.price
+                  } $</h3>
+                  <p class="offers-apartments-card-text-address">${
+                    apartment.precise_address
+                  }</p>
                   <div class="offers-apartments-card-text-info">
                       <div class="offers-apartments-card-text-info-item">
                           <img src="../images/main-page/icons/icon-bed.png" alt="icon-bed" />
@@ -279,6 +296,27 @@ async function displayListings(filters = {}) {
 
     offersContainer.innerHTML = cardsHTML;
     updatePaginationState();
+  }
+
+  async function getListingImg(apartment) {
+    try {
+      const response = await fetch(
+        `http://94.137.160.8/get/listing/${apartment.png_id}.png`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          },
+        }
+      );
+
+      if (!response.ok) return "../images/image-not-found.png";
+
+      const blob = await response.blob();
+      return URL.createObjectURL(blob);
+    } catch (error) {
+      console.error("Fetch error:", error);
+      return "../images/image-error.png";
+    }
   }
 
   prevButton.addEventListener("click", () => {

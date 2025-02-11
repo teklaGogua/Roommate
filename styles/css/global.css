@@ -835,9 +835,9 @@ body {
   }
 }
 /* ******************************* */
-/* BELOW 360px */
+/* BELOW 400px */
 /* ******************************* */
-@media (max-width: 22.5em) {
+@media (max-width: 25em) {
   html {
     font-size: 37.5%;
   }
