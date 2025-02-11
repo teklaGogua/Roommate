@@ -75,9 +75,31 @@
 
     .offers {
       &-filtration {
+        .box {
+          display: flex;
+          flex-direction: column;
+        }
+
         &-text {
           margin: 2rem 0rem;
         }
+
+        &-box {
+          display: grid;
+          width: 100%;
+          grid-template-columns: 1fr 1fr;
+          border: none;
+          margin-top: 0;
+
+          &-el {
+            border: solid 1px #333;
+          }
+        }
+      }
+
+      &-apartments {
+        width: 100%;
+        grid-template-columns: 1fr 1fr;
       }
     }
 
@@ -185,7 +207,14 @@
 
     .offers {
       margin-bottom: 5rem;
+
       &-filtration {
+        &-box {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+        }
+
         .carousel {
           width: 60rem;
           height: 39.6em;
@@ -234,6 +263,10 @@
           width: 44rem;
           height: 29.04em;
         }
+      }
+
+      &-apartments {
+        grid-template-columns: 1fr;
       }
     }
 
