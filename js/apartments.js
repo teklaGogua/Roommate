@@ -262,7 +262,6 @@ async function displayListings(filters = {}) {
 
     let cardsHTML = "";
     apartmentsWithImages.forEach((apartment) => {
-      // apartment.listing_category => city
       cardsHTML += `<div onclick="displayCard('${
         apartment.listing_id
       }')" class="offers-apartments-card">
@@ -274,7 +273,7 @@ async function displayListings(filters = {}) {
                     apartment.price
                   } $</h3>
                   <p class="offers-apartments-card-text-address">${
-                    apartment.precise_address
+                    apartment.city
                   }</p>
                   <div class="offers-apartments-card-text-info">
                       <div class="offers-apartments-card-text-info-item">
@@ -312,7 +311,9 @@ async function displayListings(filters = {}) {
       if (!response.ok) return "../images/image-not-found.png";
 
       const blob = await response.blob();
-      return URL.createObjectURL(blob);
+      const imgListing = URL.createObjectURL(blob);
+      sessionStorage.setItem("imgListing", imgListing);
+      return imgListing;
     } catch (error) {
       console.error("Fetch error:", error);
       return "../images/image-error.png";

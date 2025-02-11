@@ -120,11 +120,7 @@
   <body>
     <button type="submit" class="button backBtn">Back</button>
     <div class="container">
-      <img
-        class="img"
-        src="https://img.a.transfermarkt.technology/portrait/big/8198-1694609670.jpg?lm=1"
-        alt="flat-pic"
-      />
+      <img class="img" src="" alt="flat-pic" />
       <div class="info">
         <div class="info">
           <div class="row">
@@ -172,11 +168,14 @@
       // Fetch user and apartment data from session storage
       const apartment = JSON.parse(sessionStorage.getItem("apartment"));
       const userData = JSON.parse(sessionStorage.getItem("userData"));
+      const pfp = sessionStorage.getItem("pfp");
+      const imgListing = sessionStorage.getItem("imgListing");
 
       // Populate the with user and apartment data
       document.getElementById("name").textContent = userData.name;
       document.getElementById("email").textContent = userData.email;
       document.getElementById("mobile").textContent = userData.telephone;
+      document.querySelector(".profile-pic").src = pfp;
 
       document.getElementById("price").textContent = `$${apartment.price}`;
       document.getElementById("precise_address").textContent =
@@ -187,6 +186,7 @@
       ).textContent = `${apartment.bedroom_count} bedrooms`;
       document.getElementById("custom_description").textContent =
         apartment.custom_description;
+      document.querySelector(".img").src = imgListing;
 
       // Back btn functionality
       const backBtn = document.querySelector(".backBtn");
