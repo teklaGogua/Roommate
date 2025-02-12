@@ -21,6 +21,18 @@
         background: #fff;
         border-radius: 0.5rem;
         box-shadow: black;
+        opacity: 0;
+        animation: fadeIn 0.5s forwards;
+        transition: box-shadow 0.3s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
       }
 
       h1,
@@ -71,10 +83,12 @@
         cursor: pointer;
         margin-top: 1rem;
         font-size: 1.1rem;
+        transition: all 0.3s ease;
       }
 
       .button:hover {
         background-color: #df3014;
+        transform: scale(1.04);
       }
 
       hr {
@@ -89,6 +103,60 @@
         align-items: center;
         justify-content: center;
         gap: 2rem;
+      }
+
+      /* MODAL */
+      .modal {
+        margin: auto !important;
+        padding: 2.5rem;
+      }
+
+      .modal::backdrop {
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(0.4rem);
+      }
+
+      .form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .form .title {
+        font-size: 1.6rem;
+        font-weight: 600;
+      }
+
+      .form input {
+        font-size: 1.4rem;
+        width: 100%;
+        padding: 0.5rem 1rem;
+      }
+
+      .btn-box {
+        display: flex;
+        gap: 1rem;
+      }
+
+      /* 768px */
+      @media (max-width: 48em) {
+        h1 {
+          font-size: 3rem;
+        }
+      }
+
+      /* 500px */
+      @media (max-width: 31.25em) {
+        .button-container {
+          flex-direction: column;
+          gap: 0;
+        }
+
+        .button-container .button {
+          width: 100%;
+        }
       }
     </style>
   </head>
@@ -133,15 +201,31 @@
       </div>
       <div class="row">
         <p class="label">Password</p>
-        <p id="password"></p>
+        <p>********</p>
       </div>
       <div class="row">
         <p class="label">Bio</p>
         <p id="bio"></p>
       </div>
 
+      <dialog class="modal">
+        <form class="form">
+          <label class="title">Enter your password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+          />
+          <div class="btn-box">
+            <button type="button" class="button deny">Back</button>
+            <button type="button" class="button accept">Delete</button>
+          </div>
+        </form>
+      </dialog>
+
       <div class="button-container">
-        <button type="button" class="button">Delete</button>
+        <button type="button" class="button showModal">Delete</button>
         <button class="button" onclick="logout()">Log Out</button>
       </div>
     </div>
@@ -159,7 +243,6 @@
       document.getElementById("gender").textContent = userData.gender;
       document.getElementById("email").textContent = userData.email;
       document.getElementById("mobile").textContent = userData.telephone;
-      document.getElementById("password").textContent = "********";
       document.getElementById("bio").textContent = userData.bio;
 
       // Log out functionality
@@ -167,6 +250,7 @@
         localStorage.removeItem("jwt");
         sessionStorage.removeItem("userData");
         sessionStorage.removeItem("pfp");
+        sessionStorage.removeItem("imgListing");
         window.location.href = "/index.html";
       }
 
@@ -175,6 +259,108 @@
       backBtn.addEventListener("click", () => {
         window.location.href = "apartments.html";
       });
+
+      // Modal functionality
+      const modal = document.querySelector(".modal");
+      const btnShowModal = document.querySelector(".showModal");
+      const accept = document.querySelector(".accept");
+      const deny = document.querySelector(".deny");
+
+      // Show modal
+      btnShowModal.addEventListener("click", () => modal.showModal());
+
+      // Close with deny button
+      deny.addEventListener("click", () => modal.close());
+
+      // Close modal when clicking outside
+      modal.addEventListener("click", (event) => {
+        const dialogDimensions = modal.getBoundingClientRect();
+        if (
+          event.clientX < dialogDimensions.left ||
+          event.clientX > dialogDimensions.right ||
+          event.clientY < dialogDimensions.top ||
+          event.clientY > dialogDimensions.bottom
+        ) {
+          modal.close();
+        }
+      });
+
+      async function deleteUser() {
+        try {
+          const password = document.getElementById("password").value;
+
+          // Delete user
+          const response = await fetch("http://94.137.160.8/rpc/delete_user", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            },
+            body: JSON.stringify({ user_password: password }),
+          });
+
+          if (!response.ok) {
+            alert("Wrong password. Please try again.");
+            return;
+          }
+
+          // Delete user from MD and listing
+          const responseMd = await fetch(
+            "http://94.137.160.8/rpc/main_delete_user",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+              },
+            }
+          );
+
+          if (!responseMd.ok) {
+            alert("Wrong password. Please try again.");
+            return;
+          }
+
+          // Delete Pfp img
+          const responsePfp = await fetch(
+            `http://94.137.160.8/update/pfp/${userData.pfp_id}.png`,
+            {
+              method: "DELETE",
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+              },
+            }
+          );
+
+          if (!responsePfp.ok) {
+            console.log("Image not found");
+            return;
+          }
+
+          // Delete Listing img
+          const responsePng = await fetch(
+            `http://94.137.160.8/update/listing/${apartment.png_id}.png`,
+            {
+              method: "DELETE",
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("jwt ")}`,
+              },
+            }
+          );
+
+          if (!responsePfp.ok) {
+            console.log("Image not found");
+            return;
+          }
+
+          logout();
+        } catch (error) {
+          console.error("Error:", error);
+          alert("Delation failed. Please try again.");
+        }
+      }
+
+      accept.addEventListener("click", deleteUser);
     </script>
   </body>
 </html>

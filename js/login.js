@@ -19,7 +19,8 @@ document
       });
 
       if (!response.ok) {
-        throw new Error("Login failed");
+        alert("Login failed. Please check your email and password.");
+        return;
       }
       const data = await response.json();
 
@@ -29,7 +30,6 @@ document
       // Redirect to apartments' page
       window.location.href = "../index.html";
     } catch (error) {
-      console.error("Error:", error);
       alert("Login failed. Please check your email and password.");
     }
   });
