@@ -8,9 +8,13 @@
       :root {
         font-size: 0.625rem;
       }
+
       body {
         line-height: 1.6;
         background-image: url("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSb-XKq1C7ZsNopcJCRc_pnoy_u5cPIjSW9PlfDh5E49IO8FRq_");
+        background-size: auto;
+        background-repeat: repeat;
+        padding: 0;
       }
 
       .form-container {
@@ -19,48 +23,76 @@
         padding: 2rem;
         background: #fff;
         border-radius: 0.5rem;
-        box-shadow: black;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        animation: fadeIn 1s forwards;
       }
 
-      h1 {
-        font-size: 3rem;
-        margin-bottom: 2rem;
-        text-align: center;
-        color: #f93b1d;
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
       }
+
+      h1,
       h2 {
         color: #f93b1d;
       }
+
+      h1 {
+        text-align: center;
+        font-size: 5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      h2 {
+        margin-top: 1rem;
+        font-size: 2.5rem;
+      }
+
+      label {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        display: block;
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      input[type="number"],
+      select,
+      textarea {
+        font-size: 1rem;
+        width: 100%;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        border: 0.1rem solid #ccc;
+        border-radius: 0.5rem;
+        opacity: 0;
+        animation: fadeIn 2s forwards;
+        animation-delay: 0.3s;
+        transition: all 0.3s ease;
+      }
+
+      input[type="text"]:hover,
+      input[type="number"]:hover,
+      select:hover,
+      textarea:hover {
+        border-color: #f93b1d;
+      }
+
+      input[type="text"]:focus,
+      input[type="number"]:focus,
+      select:focus,
+      textarea:focus {
+        border-color: #f93b1d;
+        transform: scale(1.05);
+      }
+
       .flat {
         display: flex;
         gap: 1rem;
       }
-      label {
-        font-size: 1.6rem;
-        margin-bottom: 0.5rem;
-        display: block;
-      }
 
-      input[type="text"],
-      select,
-      textarea {
-        font-size: large;
-        width: 100%;
-        padding: 1rem;
-        margin-bottom: 1.5rem;
-        border: 0.1rem solid #ccc;
-        border-radius: 0.5rem;
-        font-size: 1rem;
-      }
-      input[type="number"] {
-        font-size: large;
-        width: 100%;
-        padding: 1rem;
-        margin-bottom: 1.5rem;
-        border: 0.1rem solid #ccc;
-        border-radius: 0.5rem;
-        font-size: 1rem;
-      }
       .button {
         display: inline-block;
         padding: 1rem 2rem;
@@ -71,10 +103,78 @@
         border: none;
         border-radius: 0.5rem;
         cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 8rem;
+        margin-top: 1rem;
       }
 
       .button:hover {
         background-color: #df3014;
+        transform: scale(1.04);
+      }
+
+      input[type="text"]:hover,
+      input[type="number"]:hover,
+      select:hover,
+      textarea:hover {
+        transform: scale(1.03);
+      }
+
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 3rem;
+        }
+
+        .flat {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .form-container {
+          padding: 1rem;
+          max-width: 90%;
+        }
+
+        label,
+        input,
+        select,
+        textarea {
+          font-size: 1rem;
+        }
+
+        .button {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 480px) {
+        h1 {
+          font-size: 2.5rem;
+        }
+
+        h2 {
+          font-size: 1.8rem;
+        }
+
+        .form-container {
+          padding: 1rem;
+        }
+
+        label {
+          font-size: 1rem;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+          padding: 0.8rem;
+        }
+
+        .button {
+          padding: 1rem;
+          width: 100%;
+        }
       }
     </style>
   </head>
@@ -91,7 +191,7 @@
           <option value="">Choose City</option>
           <option value="Tbilisi">Tbilisi</option>
           <option value="Batumi">Batumi</option>
-          <option value="Qutaisi">Kutaisi</option>
+          <option value="Kutaisi">Kutaisi</option>
           <option value="Rustavi">Rustavi</option>
           <option value="Gori">Gori</option>
           <option value="Poti">Poti</option>
@@ -168,7 +268,7 @@
           <option value="">Smoking</option>
           <option value="Smoker">Smoker</option>
           <option value="Non-Smoker">Non-Smoker</option>
-          <option value="No_preference">No Preference</option>
+          <option value="No preference">No Preference</option>
         </select>
 
         <!-- Pets -->
@@ -184,7 +284,7 @@
           <option value="Occasionally">Occasionally</option>
           <option value="Frequently">Frequently</option>
           <option value="Never">Never</option>
-          <option value="No_preference">No Preference</option>
+          <option value="No preference">No Preference</option>
         </select>
 
         <!-- Food Preferences -->
@@ -193,14 +293,14 @@
           <option value="Vegetarian">Vegetarian</option>
           <option value="Non-Vegetarian">Non-Vegetarian</option>
           <option value="Vegan">Vegan</option>
-          <option value="No_preference">No Preference</option>
+          <option value="No preference">No Preference</option>
         </select>
         <!-- Roommate Gender -->
         <select id="roommate_gender" name="preferences" required>
           <option value="">Roommate gender</option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
-          <option value="No_preference">No Preference</option>
+          <option value="No preference">No Preference</option>
         </select>
 
         <label for="file">Upload File*</label>

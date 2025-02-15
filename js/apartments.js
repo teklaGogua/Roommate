@@ -18,16 +18,13 @@ const userData = JSON.parse(sessionStorage.getItem("userData"));
 profileName.textContent = userData.name;
 
 // Getting Pfp
-async function getImg() {
+async function getImg(id) {
   try {
-    const response = await fetch(
-      `http://94.137.160.8/get/pfp/${userData.pfp_id}.png`,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-        },
-      }
-    );
+    const response = await fetch(`http://94.137.160.8/get/pfp/${id}.png`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    });
 
     if (!response.ok) {
       console.log("Image not found");
@@ -37,21 +34,18 @@ async function getImg() {
     const blob = await response.blob();
     const imgUrl = URL.createObjectURL(blob);
     sessionStorage.setItem("pfp", imgUrl);
-
-    // Set image source
     profilePic.src = imgUrl;
   } catch (error) {
     console.error("Fetch error:", error);
   }
 }
 
-getImg();
+getImg(userData.pfp_id);
 
 // Displays profile page
 profileBtn.addEventListener("click", () => {
   window.location.href = "profile.html";
 });
-//
 
 // Filter buttons' functionality
 filterButtons.forEach((btn) => {
@@ -61,12 +55,10 @@ filterButtons.forEach((btn) => {
     const arrowUp = btn.querySelector(".btn-up");
     const arrowDown = btn.querySelector(".btn-down");
 
-    // Opens/closes the current dropdown and toggles arrows
     dropdown.classList.toggle("active-dropdown");
     arrowUp.classList.toggle("active");
     arrowDown.classList.toggle("active");
 
-    // Closes the previously active dropdown and resets its arrows
     if (previouslyClickedBtn && previouslyClickedBtn !== btn) {
       const prevDropdownId = previouslyClickedBtn.getAttribute("data-dropdown");
       const prevDropdown = document.getElementById(
@@ -81,10 +73,8 @@ filterButtons.forEach((btn) => {
     }
     previouslyClickedBtn = btn;
 
-    // Closes the dropdown when clicking outside (except dropdown list)
     const closeOnOutsideClick = (e) => {
       e.preventDefault();
-
       const excludedElements = document.querySelectorAll(
         ".offers-filtration-box-el-dropdown"
       );
@@ -143,7 +133,6 @@ filterSubmitButtons.forEach((filterBtn) => {
         }
       });
 
-      // Update state only if filters are selected
       if (filterArr.length > 0) {
         if (dropdown.id === "region-dropdown") {
           filtrationState.search_city = filterArr;
@@ -187,114 +176,120 @@ filterSubmitButtons.forEach((filterBtn) => {
       }
     }
 
+    filtrationState.current_page = 1;
     displayListings(filtrationState);
   });
 });
 
-// Displays (all or filtered) listings(cards) and pagination
+// Pagination handlers management
+let paginationHandlers = {
+  prev: null,
+  next: null,
+  numbers: null,
+};
+
+// Displays listings with backend pagination
 async function displayListings(filters = {}) {
   const offersContainer = document.querySelector(".offers-apartments");
   const paginationNumbers = document.querySelector(".pagination-numbers");
   const prevButton = document.querySelector(".pagination-btn.prev");
   const nextButton = document.querySelector(".pagination-btn.next");
-  const itemsPerPage = 8;
-  let currentPage = 1;
+  let currentPage = filters.current_page || 1;
   let totalPages = 0;
-  let allApartments = [];
+
+  // Show loading state
+  offersContainer.innerHTML = '<div class="loading">Loading...</div>';
+
+  // Remove existing listeners
+  if (paginationHandlers.prev) {
+    prevButton.removeEventListener("click", paginationHandlers.prev);
+    nextButton.removeEventListener("click", paginationHandlers.next);
+    paginationNumbers.removeEventListener("click", paginationHandlers.numbers);
+  }
 
   function updatePaginationState() {
-    // Update pagination numbers dynamically
-    const maxVisiblePages = 5; // Number of page numbers to show at a time
+    const maxVisiblePages = 5;
     const halfRange = Math.floor(maxVisiblePages / 2);
     let startPage = Math.max(1, currentPage - halfRange);
     let endPage = Math.min(totalPages, currentPage + halfRange);
 
-    // Adjust start and end if we're near the beginning or end
     if (currentPage <= halfRange) {
       endPage = Math.min(totalPages, maxVisiblePages);
     } else if (currentPage + halfRange > totalPages) {
       startPage = Math.max(1, totalPages - maxVisiblePages + 1);
     }
 
-    // Generate pagination buttons
     let paginationHTML = "";
+    if (startPage > 1) {
+      paginationHTML += `<button class="page-number" data-page="1">1</button>`;
+      if (startPage > 2) paginationHTML += `<span class="ellipsis">...</span>`;
+    }
+
     for (let i = startPage; i <= endPage; i++) {
       paginationHTML += `<button class="page-number ${
         i === currentPage ? "active" : ""
       }" data-page="${i}">${i}</button>`;
     }
 
-    // Add ellipsis and last page if necessary
     if (endPage < totalPages) {
-      paginationHTML += `<span class="ellipsis">...</span>`;
+      if (endPage < totalPages - 1)
+        paginationHTML += `<span class="ellipsis">...</span>`;
       paginationHTML += `<button class="page-number" data-page="${totalPages}">${totalPages}</button>`;
     }
 
-    // Add first page and ellipsis if necessary
-    if (startPage > 1) {
-      paginationHTML =
-        `<button class="page-number" data-page="1">1</button>` +
-        `<span class="ellipsis">...</span>` +
-        paginationHTML;
-    }
-
     paginationNumbers.innerHTML = paginationHTML;
-
-    // Update prev/next buttons
     prevButton.disabled = currentPage === 1;
     nextButton.disabled = currentPage === totalPages;
   }
 
-  async function displayApartments(pageNumber) {
-    const startIndex = (pageNumber - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const pageApartments = allApartments.slice(startIndex, endIndex);
+  async function displayApartments(apartments) {
+    try {
+      const safeApartments = apartments || [];
 
-    // Preload all images first
-    const apartmentsWithImages = await Promise.all(
-      pageApartments.map(async (apartment) => {
-        return {
+      const apartmentsWithImages = await Promise.all(
+        safeApartments.map(async (apartment) => ({
           ...apartment,
           imgUrl: await getListingImg(apartment),
-        };
-      })
-    );
+        }))
+      );
 
-    let cardsHTML = "";
-    apartmentsWithImages.forEach((apartment) => {
-      cardsHTML += `<div onclick="displayCard('${
-        apartment.listing_id
-      }')" class="offers-apartments-card">
-              <img class="offers-apartments-card-img" src="${
-                apartment.imgUrl || "../images/placeholder.png"
-              }" alt="Listing Image" />
-              <div class="offers-apartments-card-text">
-                  <h3 class="offers-apartments-card-text-price">${
-                    apartment.price
-                  } $</h3>
-                  <p class="offers-apartments-card-text-address">${
-                    apartment.city
-                  }</p>
-                  <div class="offers-apartments-card-text-info">
-                      <div class="offers-apartments-card-text-info-item">
-                          <img src="../images/main-page/icons/icon-bed.png" alt="icon-bed" />
-                          <span>${apartment.bedroom_count}</span>
-                      </div>
-                      <div class="offers-apartments-card-text-info-item">
-                          <img src="../images/main-page/icons/icon-area.svg" alt="icon-area" />
-                          <span>${apartment.area} m²</span>
-                      </div>
-                      <div class="offers-apartments-card-text-info-item">
-                          <img src="../images/main-page/icons/icon-number.svg" alt="icon-number" />
-                          <span>${apartment.listing_category}</span> 
-                      </div>
-                  </div>
-              </div>
-          </div>`;
-    });
+      let cardsHTML = "";
+      apartmentsWithImages.forEach((apartment) => {
+        cardsHTML += `<div onclick="displayCard('${
+          apartment.listing_id
+        }')" class="offers-apartments-card">
+        <img class="offers-apartments-card-img" src="${
+          apartment.imgUrl || "../images/placeholder.png"
+        }" alt="Listing Image" />
+        <div class="offers-apartments-card-text">
+          <h3 class="offers-apartments-card-text-price">${
+            apartment.price
+          } $</h3>
+          <p class="offers-apartments-card-text-address">${apartment.city}</p>
+          <div class="offers-apartments-card-text-info">
+            <div class="offers-apartments-card-text-info-item">
+              <img src="../images/main-page/icons/icon-bed.png" alt="icon-bed" />
+              <span>${apartment.bedroom_count}</span>
+            </div>
+            <div class="offers-apartments-card-text-info-item">
+              <img src="../images/main-page/icons/icon-area.svg" alt="icon-area" />
+              <span>${apartment.area} m²</span>
+            </div>
+            <div class="offers-apartments-card-text-info-item">
+              <img src="../images/main-page/icons/icon-number.svg" alt="icon-number" />
+              <span>${apartment.listing_category}</span> 
+            </div>
+          </div>
+        </div>
+      </div>`;
+      });
 
-    offersContainer.innerHTML = cardsHTML;
-    updatePaginationState();
+      offersContainer.innerHTML = cardsHTML;
+      updatePaginationState();
+    } catch (error) {
+      console.error("Display error:", error);
+      offersContainer.innerHTML = `<p class="error">Error displaying apartments: ${error.message}</p>`;
+    }
   }
 
   async function getListingImg(apartment) {
@@ -320,32 +315,34 @@ async function displayListings(filters = {}) {
     }
   }
 
-  prevButton.addEventListener("click", () => {
+  // Add fresh listeners
+  paginationHandlers.prev = () => {
     if (currentPage > 1) {
-      currentPage--;
-      displayApartments(currentPage);
+      filtrationState.current_page = currentPage - 1;
+      displayListings(filtrationState);
     }
-  });
+  };
 
-  nextButton.addEventListener("click", () => {
+  paginationHandlers.next = () => {
     if (currentPage < totalPages) {
-      currentPage++;
-      displayApartments(currentPage);
+      filtrationState.current_page = currentPage + 1;
+      displayListings(filtrationState);
     }
-  });
+  };
 
-  paginationNumbers.addEventListener("click", (e) => {
+  paginationHandlers.numbers = (e) => {
     if (e.target.classList.contains("page-number")) {
       const pageNumber = parseInt(e.target.dataset.page);
-      if (pageNumber !== currentPage) {
-        currentPage = pageNumber;
-        displayApartments(currentPage);
-      }
+      filtrationState.current_page = pageNumber;
+      displayListings(filtrationState);
     }
-  });
+  };
 
-  const filtrationData = { ...filters };
+  prevButton.addEventListener("click", paginationHandlers.prev);
+  nextButton.addEventListener("click", paginationHandlers.next);
+  paginationNumbers.addEventListener("click", paginationHandlers.numbers);
 
+  // Fetch data with backend pagination
   try {
     const response = await fetch("http://94.137.160.8/rpc/search_listings", {
       method: "POST",
@@ -353,19 +350,23 @@ async function displayListings(filters = {}) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
-      body: JSON.stringify(filtrationData),
+      body: JSON.stringify({ ...filters, current_page: currentPage }),
     });
 
     if (response.ok) {
-      response.json().then((apartments) => {
-        if (apartments) {
-          allApartments = apartments;
-          totalPages = Math.ceil(allApartments.length / itemsPerPage);
-          displayApartments(currentPage);
-        } else {
-          offersContainer.innerHTML = `<p class="error">There are no apartments found</p>`;
-        }
-      });
+      const data = await response.json();
+      totalPages = data.meta.total_pages;
+      currentPage = data.meta.current_page;
+      filtrationState.current_page = currentPage;
+
+      if (data.listings && data.listings.length > 0) {
+        displayApartments(data.listings);
+      } else {
+        offersContainer.innerHTML = `<p class="error">No apartments found matching your criteria</p>`;
+        paginationNumbers.innerHTML = "";
+        prevButton.disabled = true;
+        nextButton.disabled = true;
+      }
     }
   } catch (error) {
     console.error("Error:", error);
@@ -377,7 +378,7 @@ document.addEventListener("DOMContentLoaded", () => {
   displayListings();
 });
 
-// After clicking card, it will display listing with more info on diffrent page
+// Card display function
 async function displayCard(id) {
   try {
     await fetch("http://94.137.160.8/rpc/get_listing", {
@@ -386,9 +387,7 @@ async function displayCard(id) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
-      body: JSON.stringify({
-        listing_id: id,
-      }),
+      body: JSON.stringify({ listing_id: id }),
     }).then((response) => {
       if (response.ok) {
         response.json().then((apartment) => {
@@ -399,11 +398,10 @@ async function displayCard(id) {
   } catch (error) {
     console.error("Error:", error);
   }
-
   window.location.href = "card.html";
 }
 
-// Displays add listing page
+// Add listing button
 addListingBtn.addEventListener("click", function () {
   window.location.href = "listing.html";
 });
