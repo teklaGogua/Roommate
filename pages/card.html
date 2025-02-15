@@ -175,6 +175,15 @@
         transform: scale(1.04);
         background-color: #df3014;
       }
+
+      a {
+        color: #333;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+
       /*responsive*/
       @media (max-width: 768px) {
         .container {
@@ -302,11 +311,13 @@
             </div>
             <div class="row">
               <p class="label">Email</p>
-              <p id="email"></p>
+              <a id="email" href="mailto:contactus@demo.com"
+                >contactus@demo.com</a
+              >
             </div>
             <div class="row">
               <p class="label">Phone</p>
-              <p id="mobile"></p>
+              <a id="mobile" href="tel:+1234567890"> +1234567890</a>
             </div>
           </div>
         </div>
@@ -366,7 +377,7 @@
           } catch (error) {
             console.error("Error fetching profile picture:", error);
             document.querySelector(".profile-pic").src =
-              "../images/placeholder.png"; 
+              "../images/placeholder.png";
           }
 
           // Populate creator information
