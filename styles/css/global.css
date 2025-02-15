@@ -469,7 +469,7 @@ body {
 }
 .main .offers-apartments {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
   margin-top: 3.2rem;
   min-height: 25rem;
@@ -480,7 +480,7 @@ body {
   border: 1px solid #dfdfdf;
   border-radius: 14px;
   overflow: hidden;
-  max-width: 40rem;
+  max-width: 35rem;
   margin-top: 2rem;
   transition: all 0.3s;
 }
@@ -489,7 +489,7 @@ body {
   box-shadow: 0 3.2rem 6.4rem rgba(0, 0, 0, 0.06);
 }
 .main .offers-apartments-card-img {
-  width: 37rem;
+  width: 35rem;
   height: 30rem;
 }
 .main .offers-apartments-card-text {
@@ -509,6 +509,7 @@ body {
 .main .offers-apartments-card-text-info {
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
 }
 .main .offers-apartments-card-text-info-item {
   display: flex;
@@ -662,11 +663,33 @@ body {
 }
 
 /* ******************************* */
+/* BELOW 1780px */
+/* ******************************* */
+@media (max-width: 111.25em) {
+  .main .offers-apartments-card {
+    width: 28rem;
+  }
+  .main .offers-apartments-card-img {
+    width: 28rem;
+    height: 24rem;
+  }
+}
+/* ******************************* */
 /* BELOW 1600px */
 /* ******************************* */
 @media (max-width: 100em) {
   html {
     font-size: 50%;
+  }
+  .main .offers-apartments {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .main .offers-apartments-card {
+    width: 35rem;
+  }
+  .main .offers-apartments-card-img {
+    width: 35rem;
+    height: 30rem;
   }
 }
 /* ******************************* */
