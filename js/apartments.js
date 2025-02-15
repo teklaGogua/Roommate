@@ -259,7 +259,7 @@ async function displayListings(filters = {}) {
           apartment.listing_id
         }')" class="offers-apartments-card">
         <img class="offers-apartments-card-img" src="${
-          apartment.imgUrl || "../images/placeholder.png"
+          apartment.imgUrl || "../images/errors/default-apartment.jpg"
         }" alt="Listing Image" />
         <div class="offers-apartments-card-text">
           <h3 class="offers-apartments-card-text-price">${
@@ -303,7 +303,7 @@ async function displayListings(filters = {}) {
         }
       );
 
-      if (!response.ok) return "../images/image-not-found.png";
+      if (!response.ok) return "../images/errors/default-apartment.jpg";
 
       const blob = await response.blob();
       const imgListing = URL.createObjectURL(blob);
@@ -311,7 +311,7 @@ async function displayListings(filters = {}) {
       return imgListing;
     } catch (error) {
       console.error("Fetch error:", error);
-      return "../images/image-error.png";
+      return "../images/errors/default-apartment.jpg";
     }
   }
 

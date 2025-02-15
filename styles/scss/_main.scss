@@ -39,8 +39,8 @@ body {
     }
 
     &-img {
-      width: 75rem;
-      height: 49.5rem;
+      width: 70.4rem;
+      height: 46.4rem;
     }
   }
 
@@ -421,7 +421,7 @@ body {
 
         a {
           background-color: $secondary_gray;
-          color: $main_color;
+          color: darken($darker_main_color, 5%);
           font-size: 1.8rem;
           padding: 1.5rem 10rem;
           border: none;
