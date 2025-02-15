@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up</title>
     <style>
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
       body {
         display: flex;
         justify-content: center;
@@ -28,10 +36,9 @@
         background-color: #fff;
         box-shadow: black;
         gap: 1rem;
+        animation: fadeIn 1s ease;
       }
-      #info {
-        max-width: 30.5rem;
-      }
+
       .button-container {
         display: flex;
         justify-content: center;
@@ -47,6 +54,13 @@
         border: 0.1rem solid #ccc;
         border-radius: 0.5rem;
         font-size: 1rem;
+        transition: transform 1s ease;
+      }
+      input[type="text"]:hover,
+      select:hover,
+      textarea:hover {
+        transform: scale(1.05);
+        border-color: #f93b1d;
       }
       .button {
         padding: 1rem 2rem;
@@ -58,10 +72,17 @@
         border-radius: 0.5rem;
         cursor: pointer;
         margin-top: 1rem;
+        transition: transform 1s ease;
       }
 
       .button:hover {
+        transform: scale(1.05);
         background-color: #df3014;
+      }
+      @media (max-width: 22em) {
+        body {
+          font-size: 2.5rem;
+        }
       }
     </style>
   </head>
