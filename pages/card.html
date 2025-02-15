@@ -325,33 +325,61 @@
       const imgListing = sessionStorage.getItem("imgListing");
 
       async function getCreatorData() {
-        const res = await fetch("http://94.137.160.8/rpc/get_user_info", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-          },
-          body: JSON.stringify({
-            user_id: apartment.owner_id,
-          }),
-        });
+        try {
+          const res = await fetch("http://94.137.160.8/rpc/get_user_info", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            },
+            body: JSON.stringify({
+              user_id: apartment.owner_id,
+            }),
+          });
 
-        if (!res) {
-          console.log("Error:", res.error);
+          if (!res.ok) {
+            throw new Error("Failed to fetch creator data");
+          }
+
+          const creatorData = await res.json();
+
+          // Fetch profile picture
+          try {
+            const response = await fetch(
+              `http://94.137.160.8/get/pfp/${creatorData.pfp_id}.png`,
+              {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+                },
+              }
+            );
+
+            if (response.ok) {
+              const blob = await response.blob();
+              const imgUrl = URL.createObjectURL(blob);
+              document.querySelector(".profile-pic").src = imgUrl;
+            } else {
+              console.log("Profile picture not found, using placeholder");
+              document.querySelector(".profile-pic").src =
+                "../images/placeholder.png";
+            }
+          } catch (error) {
+            console.error("Error fetching profile picture:", error);
+            document.querySelector(".profile-pic").src =
+              "../images/placeholder.png"; 
+          }
+
+          // Populate creator information
+          document.getElementById("name").textContent = creatorData.name;
+          document.getElementById("email").textContent = creatorData.email;
+          document.getElementById("mobile").textContent = creatorData.telephone;
+        } catch (error) {
+          console.error("Error in getCreatorData:", error);
         }
-
-        const creatorData = await res.json();
-
-        document.getElementById("name").textContent = creatorData.name;
-        document.getElementById("email").textContent = creatorData.email;
-        document.getElementById("mobile").textContent = creatorData.telephone;
       }
-
       getCreatorData();
 
-      // Populate with user and apartment data
-      document.querySelector(".profile-pic").src = pfp;
-
+      // Populate with apartment data
       document.getElementById("price").textContent = `$${apartment.price}`;
       document.getElementById("precise_address").textContent =
         apartment.precise_address;
@@ -368,13 +396,10 @@
         document.getElementById(preference).textContent = apartment[preference];
 
         if (apartment.preference === "No preference") {
-          console.log(apartment[preference], userData[preference]);
           return;
         } else if (apartment[preference] === userData[preference]) {
-          console.log(apartment[preference], userData[preference]);
           document.getElementById(preference).classList.add("green");
         } else if (apartment[preference] !== userData[preference]) {
-          console.log(apartment[preference], userData[preference]);
           document.getElementById(preference).classList.add("red");
         }
       }
