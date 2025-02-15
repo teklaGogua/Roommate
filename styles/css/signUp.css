@@ -81,6 +81,7 @@ textarea {
   font-size: 1.4rem;
   box-sizing: border-box;
   transition: all 0.3s ease;
+  animation: fadeIn 2s forwards;
 }
 
 input:focus,
@@ -143,7 +144,12 @@ select {
   background-color: white;
 }
 
-/* Shadow on hover */
 .form-container:hover {
   box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 3rem;
+  }
 }/*# sourceMappingURL=signup.css.map */

@@ -489,8 +489,8 @@ body {
   box-shadow: 0 3.2rem 6.4rem rgba(0, 0, 0, 0.06);
 }
 .main .offers-apartments-card-img {
-  width: 100%;
-  min-height: 30rem;
+  width: 37rem;
+  height: 30rem;
 }
 .main .offers-apartments-card-text {
   padding: 1.6rem;
