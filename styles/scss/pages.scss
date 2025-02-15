@@ -1,0 +1,585 @@
+@import "./variables";
+
+// Reset Styles
+html,
+body {
+  height: 100%;
+}
+
+body {
+  line-height: 1.6;
+  font-family: Arial, sans-serif;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+// Your Original Styles Below
+:root {
+  font-size: 0.9rem;
+}
+
+.card {
+  // Base Styles
+  margin: 0;
+  padding: 2rem;
+  background-color: $background_color;
+  font-family: Arial, sans-serif;
+
+  a {
+    color: $secondary_color;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  // Container
+  .container {
+    max-width: 1200px;
+    margin: 4rem auto 1rem;
+    padding: 2rem;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 3rem;
+    animation: fadeIn 1s ease; // Using keyframes from _variables.scss
+    flex-wrap: wrap;
+
+    // Nested Elements
+    .img {
+      flex: 1;
+      max-width: 500px;
+      height: auto;
+      border-radius: 1rem;
+      object-fit: cover;
+    }
+
+    .info {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  }
+
+  // Preferences
+  .preferences {
+    max-width: 50rem;
+    padding: 1rem;
+    background: $secondary_gray;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+    flex-basis: 100%;
+    font-weight: bold;
+    color: $subtext_color;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .flx {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      width: 100%;
+
+      p {
+        margin: 0;
+        font-size: 1rem;
+        color: $subtitle_color;
+        width: 45%;
+      }
+    }
+  }
+
+  // Typography
+  h2 {
+    font-size: 1.8rem;
+    color: $main_color;
+    min-width: 120px;
+    margin: 0;
+  }
+
+  .row {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+
+    p {
+      margin: 0;
+      font-size: 1.1rem;
+      color: $subtitle_color;
+      line-height: 1.6;
+    }
+  }
+
+  // Author Section
+  .author {
+    padding: 1.5rem;
+    background: $secondary_gray;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 0;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+
+    .profile-pic {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid $main_color;
+    }
+
+    .author_info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+
+  // Buttons
+  .button {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    background-color: $main_color;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    @include transition; // Using mixin from _variables.scss
+    z-index: 1000;
+
+    &:hover {
+      transform: scale(1.04);
+      background-color: $darker_main_color;
+    }
+  }
+
+  .deleteBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .delete {
+      display: none;
+      padding: 1rem 10rem;
+      font-size: 1rem;
+      background-color: $main_color;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      @include transition; // Using mixin from _variables.scss
+
+      &:hover {
+        transform: scale(1.04);
+        background-color: $darker_main_color;
+      }
+    }
+  }
+
+  // Utility Classes
+  .label {
+    font-weight: bold;
+    color: $main_color;
+    min-width: 80px;
+  }
+
+  .red {
+    color: $main_color !important;
+  }
+  .green {
+    color: $success_color !important;
+  }
+
+  // Responsive Design
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      gap: 2rem;
+      padding: 1.5rem;
+
+      .img {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+
+    .button,
+    .backBtn {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9rem;
+      top: 1rem;
+      left: 1rem;
+    }
+
+    .delete {
+      padding: 1rem 4rem !important;
+      font-size: 0.9rem !important;
+    }
+
+    .author {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .profile-pic {
+        width: 60px;
+        height: 60px;
+      }
+
+      .author_info {
+        margin-top: 1rem;
+      }
+    }
+
+    .info {
+      flex-direction: column;
+    }
+
+    .row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  // Helper Classes
+  .active {
+    @extend %active;
+  }
+}
+
+.listing {
+  // Base Styles
+  line-height: 1.6;
+  background-image: url("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSb-XKq1C7ZsNopcJCRc_pnoy_u5cPIjSW9PlfDh5E49IO8FRq_");
+  background-size: auto;
+  background-repeat: repeat;
+  padding: 0;
+
+  // Form Container
+  .form-container {
+    max-width: 60rem;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: $background_color;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    @include fadeInAnimation; // Using mixin from _variables.scss
+
+    h1,
+    h2 {
+      color: $main_color;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      margin-top: 1rem;
+      font-size: 2.5rem;
+    }
+
+    label {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      display: block;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select,
+    textarea {
+      font-size: 1rem;
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border: 0.1rem solid $border-color;
+      border-radius: 0.5rem;
+      @include fadeInAnimation(0.3s); // Using mixin from _variables.scss
+      @include transition; // Using mixin from _variables.scss
+
+      &:hover {
+        border-color: $main_color;
+        transform: scale(1.03);
+      }
+
+      &:focus {
+        border-color: $main_color;
+        transform: scale(1.05);
+      }
+    }
+
+    .flat {
+      display: flex;
+      gap: 1rem;
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+
+    .button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      background-color: $main_color;
+      color: #fff;
+      text-align: center;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      @include transition; // Using mixin from _variables.scss
+      width: 8rem;
+      margin-top: 1rem;
+
+      &:hover {
+        background-color: $darker_main_color;
+        transform: scale(1.04);
+      }
+
+      @media (max-width: 768px) {
+        width: 100%;
+      }
+    }
+  }
+
+  // Media Queries
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 3rem;
+    }
+
+    .form-container {
+      padding: 1rem;
+      max-width: 90%;
+    }
+
+    label,
+    input,
+    select,
+    textarea {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+    }
+
+    .form-container {
+      padding: 1rem;
+    }
+
+    label {
+      font-size: 1rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select,
+    textarea {
+      padding: 0.8rem;
+    }
+
+    .button {
+      padding: 1rem;
+      width: 100%;
+    }
+  }
+}
+
+.profile {
+  // Base Styles
+  line-height: 1.6;
+  background-image: url("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSb-XKq1C7ZsNopcJCRc_pnoy_u5cPIjSW9PlfDh5E49IO8FRq_");
+
+  .backBtn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    background-color: $main_color;
+    color: #fff;
+    text-align: center;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    @include transition; // Using mixin from _variables.scss
+
+    &:hover {
+      background-color: $darker_main_color;
+      transform: scale(1.04);
+    }
+  }
+
+  // Form Container
+  .form-container {
+    max-width: 60rem;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: $background_color;
+    border-radius: 0.5rem;
+    box-shadow: black;
+    @include fadeInAnimation; // Using mixin from _variables.scss
+    @include transition(box-shadow); // Using mixin from _variables.scss
+
+    h1,
+    h2 {
+      color: $main_color;
+    }
+
+    .info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .row {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+
+      .label {
+        min-width: 8rem;
+        color: $main_color;
+        font-weight: bold;
+      }
+
+      p {
+        margin: 0;
+        color: $text-color;
+      }
+    }
+
+    .profile-pic {
+      width: 7rem;
+      height: 7rem;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 0.2rem solid $border-color;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 1rem 5rem;
+      font-size: 1rem;
+      background-color: $main_color;
+      color: #fff;
+      text-align: center;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      @include transition; // Using mixin from _variables.scss
+
+      &:hover {
+        background-color: $darker_main_color;
+        transform: scale(1.04);
+      }
+    }
+
+    hr {
+      margin: 1rem 0;
+      border: none;
+      height: 0.1rem;
+      background-color: $border-color;
+    }
+
+    .button-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+
+      @media (max-width: 31.25em) {
+        flex-direction: column;
+        gap: 0;
+
+        .button {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  // Modal
+  .modal {
+    margin: auto !important;
+    padding: 2.5rem;
+
+    &::backdrop {
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(0.4rem);
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+
+      .title {
+        font-size: 1.6rem;
+        font-weight: 600;
+      }
+
+      input {
+        font-size: 1.4rem;
+        width: 100%;
+        padding: 0.5rem 1rem;
+      }
+    }
+
+    .btn-box {
+      display: flex;
+      gap: 1rem;
+    }
+  }
+
+  // Media Queries
+  @media (max-width: 48em) {
+    h1 {
+      font-size: 3rem;
+    }
+  }
+}
