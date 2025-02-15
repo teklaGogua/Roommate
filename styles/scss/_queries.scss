@@ -1,9 +1,40 @@
 /* ******************************* */
+/* BELOW 1780px */
+/* ******************************* */
+@media (max-width: 111.25em) {
+  .main .offers-apartments-card {
+    width: 28rem;
+
+    &-img {
+      width: 28rem;
+      height: 24rem;
+    }
+  }
+}
+
+/* ******************************* */
 /* BELOW 1600px */
 /* ******************************* */
 @media (max-width: 100em) {
   html {
     font-size: 50%;
+  }
+
+  .main {
+    .offers {
+      &-apartments {
+        grid-template-columns: repeat(3, 1fr);
+
+        &-card {
+          width: 35rem;
+
+          &-img {
+            width: 35rem;
+            height: 30rem;
+          }
+        }
+      }
+    }
   }
 }
 

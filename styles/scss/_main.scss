@@ -267,7 +267,7 @@ body {
 
     &-apartments {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: repeat(4, 1fr);
       gap: 2rem;
       margin-top: 3.2rem;
       min-height: 25rem;
@@ -278,7 +278,7 @@ body {
         border: 1px solid #dfdfdf;
         border-radius: 14px;
         overflow: hidden;
-        max-width: 40rem;
+        max-width: 35rem;
         margin-top: 2rem;
         transition: all 0.3s;
 
@@ -288,7 +288,7 @@ body {
         }
 
         &-img {
-          width: 37rem;
+          width: 35rem;
           height: 30rem;
         }
 
@@ -311,6 +311,7 @@ body {
           &-info {
             display: flex;
             justify-content: space-between;
+            gap: 1rem;
 
             &-item {
               display: flex;
