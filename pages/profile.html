@@ -317,13 +317,13 @@
           );
 
           if (!responseMd.ok) {
-            alert("Wrong password. Please try again.");
+            alert("Delation failed please try again");
             return;
           }
 
           // Delete Pfp img
           const responsePfp = await fetch(
-            `http://94.137.160.8/update/pfp/${userData.pfp_id}.png`,
+            `http://94.137.160.8/upload/pfp/${userData.pfp_id}.png`,
             {
               method: "DELETE",
               headers: {
@@ -338,20 +338,20 @@
           }
 
           // Delete Listing img
-          const responsePng = await fetch(
-            `http://94.137.160.8/update/listing/${apartment.png_id}.png`,
-            {
-              method: "DELETE",
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("jwt ")}`,
-              },
-            }
-          );
+          // const responsePng = await fetch(
+          //   `http://94.137.160.8/update/listing/${apartment.png_id}.png`,
+          //   {
+          //     method: "DELETE",
+          //     headers: {
+          //       Authorization: `Bearer ${localStorage.getItem("jwt ")}`,
+          //     },
+          //   }
+          // );
 
-          if (!responsePfp.ok) {
-            console.log("Image not found");
-            return;
-          }
+          // if (!responsePfp.ok) {
+          //   console.log("Image not found");
+          //   return;
+          // }
 
           logout();
         } catch (error) {
