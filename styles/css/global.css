@@ -286,8 +286,8 @@ body {
   text-align: center;
 }
 .main .about-us-img {
-  width: 75rem;
-  height: 49.5rem;
+  width: 70.4rem;
+  height: 46.4rem;
 }
 .main .offers-filtration .box {
   display: flex;
@@ -607,7 +607,7 @@ body {
 }
 .main .registration-box-btn a {
   background-color: #f3f3f3;
-  color: #f93b1d;
+  color: #c82b12;
   font-size: 1.8rem;
   padding: 1.5rem 10rem;
   border: none;

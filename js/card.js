@@ -1,7 +1,6 @@
 // Fetch user and apartment data from session storage
 const apartment = JSON.parse(sessionStorage.getItem("apartment"));
 const userData = JSON.parse(sessionStorage.getItem("userData"));
-const pfp = sessionStorage.getItem("pfp");
 const imgListing = sessionStorage.getItem("imgListing");
 
 async function getCreatorData() {
@@ -41,12 +40,12 @@ async function getCreatorData() {
       } else {
         console.log("Profile picture not found, using placeholder");
         document.querySelector(".profile-pic").src =
-          "../images/placeholder.png";
+          "../images/errors/default-pfp.png";
       }
     } catch (error) {
       console.error("Error fetching profile picture:", error);
       document.querySelector(".profile-pic").src =
-        "../images/placeholder.png";
+        "../images/errors/default-pfp.png";
     }
 
     // Populate creator information
@@ -73,7 +72,8 @@ document.querySelector(".img").src = imgListing;
 
 // Preferences
 function displayPreferences(preference) {
-  document.getElementById(preference).textContent = apartment[preference];
+  document.getElementById(preference).textContent =
+    apartment[preference] || apartment[`roommate_${preference}`];
 
   if (apartment.preference === "No preference") {
     return;
@@ -88,6 +88,7 @@ displayPreferences("smoking");
 displayPreferences("pets");
 displayPreferences("party_habits");
 displayPreferences("food_preference");
+displayPreferences("gender");
 
 // Back btn functionality
 const backBtn = document.querySelector(".backBtn");
