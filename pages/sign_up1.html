@@ -12,7 +12,7 @@
         <h2>Create an Account - Step 1</h2>
 
         <!-- Name -->
-        <label for="name">Name</label>
+        <label for="name">Name*</label>
         <input
           type="text"
           id="name"
@@ -22,7 +22,7 @@
         />
 
         <!-- Email -->
-        <label for="email">Email</label>
+        <label for="email">Email*</label>
         <input
           type="email"
           id="email"
@@ -32,7 +32,7 @@
         />
 
         <!-- Mobile -->
-        <label for="mobile">Mobile</label>
+        <label for="mobile">Mobile*</label>
         <input
           type="tel"
           id="mobile"
@@ -42,17 +42,20 @@
         />
 
         <!-- Password -->
-        <label for="password">Password</label>
+        <label for="password">Password*</label>
         <input
           type="password"
           id="password"
           name="password"
           placeholder="Enter your password"
+          equired
+          pattern="^(?=.*[A-Z])(?=.*\d).{8,}$"
+          title="Password must be at least 8 characters long, include at least one uppercase letter, and one number."
           required
         />
 
         <!-- Submit Button -->
-        <button type="submit">Go to Another Page</button>
+        <button type="submit">Next</button>
       </form>
 
       <script src="../js/signup1.js"></script>
