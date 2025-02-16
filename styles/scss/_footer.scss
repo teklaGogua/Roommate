@@ -52,4 +52,13 @@
       color: $secondary_gray;
     }
   }
+
+  .follow-us {
+    img {
+      width: 4rem;
+      height: 3rem;
+      transition: transform 0.3s ease;
+      margin-bottom: 0.5rem;
+    }
+  }
 }
