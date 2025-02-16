@@ -198,7 +198,7 @@ async function displayListings(filters = {}) {
   let totalPages = 0;
 
   // Show loading state
-  offersContainer.innerHTML = '<div class="loading">Loading...</div>';
+  offersContainer.innerHTML = '<div class="error">Loading...</div>';
 
   // Remove existing listeners
   if (paginationHandlers.prev) {
@@ -307,7 +307,6 @@ async function displayListings(filters = {}) {
 
       const blob = await response.blob();
       const imgListing = URL.createObjectURL(blob);
-      sessionStorage.setItem("imgListing", imgListing);
       return imgListing;
     } catch (error) {
       console.error("Fetch error:", error);

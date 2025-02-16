@@ -7,7 +7,7 @@ document.querySelector(".profile-pic").src = pfp;
 document.getElementById("name").textContent = userData.name;
 document.getElementById("age").textContent = userData.age;
 document.getElementById("nationality").textContent = userData.nationality;
-document.getElementById("gender").textContent = userData.gender;
+document.getElementById("gender").textContent = userData.roommate_gender;
 document.getElementById("email").textContent = userData.email;
 document.getElementById("mobile").textContent = userData.telephone;
 document.getElementById("bio").textContent = userData.bio;
@@ -71,20 +71,6 @@ async function deleteUser() {
       return;
     }
 
-    // Delete user from MD and listing
-    const responseMd = await fetch("http://94.137.160.8/rpc/main_delete_user", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      },
-    });
-
-    if (!responseMd.ok) {
-      alert("Delation failed please try again");
-      return;
-    }
-
     // Delete Pfp img
     const responsePfp = await fetch(
       `http://94.137.160.8/upload/pfp/${userData.pfp_id}.png`,
@@ -101,21 +87,51 @@ async function deleteUser() {
       return;
     }
 
-    // Delete Listing img
-    // const responsePng = await fetch(
-    //   `http://94.137.160.8/update/listing/${apartment.png_id}.png`,
-    //   {
-    //     method: "DELETE",
-    //     headers: {
-    //       Authorization: `Bearer ${localStorage.getItem("jwt ")}`,
-    //     },
-    //   }
-    // );
+    // Fetch Listing if it exists
+    const listingRes = await fetch("http://94.137.160.8/rpc/get_listing", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+      body: JSON.stringify({ user_id: userData.user_id }),
+    });
 
-    // if (!responsePfp.ok) {
-    //   console.log("Image not found");
-    //   return;
-    // }
+    if (listingRes.ok) {
+      const apartment = await listingRes.json();
+      console.log(apartment);
+
+      // Delete user from MD and listing
+      const responseMd = await fetch(
+        "http://94.137.160.8/rpc/main_delete_user",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          },
+        }
+      );
+
+      if (!responseMd.ok) {
+        throw new Error("Failed to delete listing");
+      }
+
+      // Delete Listing img
+      const responsePng = await fetch(
+        `http://94.137.160.8/upload/listing/${apartment.png_id}.png`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          },
+        }
+      );
+
+      if (!responsePng.ok) {
+        throw new Error("Failed to delete image");
+      }
+    }
 
     logout();
   } catch (error) {

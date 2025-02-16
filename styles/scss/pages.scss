@@ -4,11 +4,11 @@
 html,
 body {
   height: 100%;
-}
-
-body {
+  margin: 0;
+  padding: 0;
   line-height: 1.6;
   font-family: Arial, sans-serif;
+  font-size: 0.9rem;
 }
 
 img {
@@ -32,13 +32,8 @@ ol {
   list-style: none;
 }
 
-// Your Original Styles Below
-:root {
-  font-size: 0.9rem;
-}
-
+// Card Page Styles
 .card {
-  // Base Styles
   margin: 0;
   padding: 2rem;
   background-color: $background_color;
@@ -53,7 +48,6 @@ ol {
     }
   }
 
-  // Container
   .container {
     max-width: 1200px;
     margin: 4rem auto 1rem;
@@ -63,10 +57,9 @@ ol {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     gap: 3rem;
-    animation: fadeIn 1s ease; // Using keyframes from _variables.scss
+    animation: fadeIn 1s ease;
     flex-wrap: wrap;
 
-    // Nested Elements
     .img {
       flex: 1;
       max-width: 500px;
@@ -83,7 +76,6 @@ ol {
     }
   }
 
-  // Preferences
   .preferences {
     max-width: 50rem;
     padding: 1rem;
@@ -114,7 +106,6 @@ ol {
     }
   }
 
-  // Typography
   h2 {
     font-size: 1.8rem;
     color: $main_color;
@@ -136,7 +127,6 @@ ol {
     }
   }
 
-  // Author Section
   .author {
     padding: 1.5rem;
     background: $secondary_gray;
@@ -162,7 +152,6 @@ ol {
     }
   }
 
-  // Buttons
   .button {
     position: fixed;
     top: 2rem;
@@ -174,7 +163,7 @@ ol {
     border: none;
     border-radius: 0.5rem;
     cursor: pointer;
-    @include transition; // Using mixin from _variables.scss
+    @include transition;
     z-index: 1000;
 
     &:hover {
@@ -197,7 +186,7 @@ ol {
       border: none;
       border-radius: 0.5rem;
       cursor: pointer;
-      @include transition; // Using mixin from _variables.scss
+      @include transition;
 
       &:hover {
         transform: scale(1.04);
@@ -206,7 +195,6 @@ ol {
     }
   }
 
-  // Utility Classes
   .label {
     font-weight: bold;
     color: $main_color;
@@ -216,11 +204,11 @@ ol {
   .red {
     color: $main_color !important;
   }
+
   .green {
-    color: $success_color !important;
+    color: #3cb371 !important;
   }
 
-  // Responsive Design
   @media (max-width: 768px) {
     .container {
       flex-direction: column;
@@ -269,22 +257,16 @@ ol {
       align-items: flex-start;
     }
   }
-
-  // Helper Classes
-  .active {
-    @extend %active;
-  }
 }
 
+// Listing Page Styles
 .listing {
-  // Base Styles
   line-height: 1.6;
   background-image: url("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSb-XKq1C7ZsNopcJCRc_pnoy_u5cPIjSW9PlfDh5E49IO8FRq_");
   background-size: auto;
   background-repeat: repeat;
   padding: 0;
 
-  // Form Container
   .form-container {
     max-width: 60rem;
     margin: 2rem auto;
@@ -292,7 +274,7 @@ ol {
     background: $background_color;
     border-radius: 0.5rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    @include fadeInAnimation; // Using mixin from _variables.scss
+    @include fadeInAnimation;
 
     h1,
     h2 {
@@ -327,8 +309,8 @@ ol {
       margin-bottom: 1.5rem;
       border: 0.1rem solid $border-color;
       border-radius: 0.5rem;
-      @include fadeInAnimation(0.3s); // Using mixin from _variables.scss
-      @include transition; // Using mixin from _variables.scss
+      @include fadeInAnimation(0.3s);
+      @include transition;
 
       &:hover {
         border-color: $main_color;
@@ -361,7 +343,7 @@ ol {
       border: none;
       border-radius: 0.5rem;
       cursor: pointer;
-      @include transition; // Using mixin from _variables.scss
+      @include transition;
       width: 8rem;
       margin-top: 1rem;
 
@@ -376,7 +358,6 @@ ol {
     }
   }
 
-  // Media Queries
   @media (max-width: 768px) {
     h1 {
       font-size: 3rem;
@@ -426,160 +407,91 @@ ol {
   }
 }
 
+// Profile Page Styles
 .profile {
-  // Base Styles
-  line-height: 1.6;
-  background-image: url("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSb-XKq1C7ZsNopcJCRc_pnoy_u5cPIjSW9PlfDh5E49IO8FRq_");
-
-  .backBtn {
-    display: inline-block;
-    padding: 1rem 2rem;
-    font-size: 1rem;
-    background-color: $main_color;
-    color: #fff;
-    text-align: center;
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    margin-top: 1rem;
-    @include transition; // Using mixin from _variables.scss
-
-    &:hover {
-      background-color: $darker_main_color;
-      transform: scale(1.04);
-    }
-  }
-
-  // Form Container
   .form-container {
-    max-width: 60rem;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: $background_color;
-    border-radius: 0.5rem;
-    box-shadow: black;
-    @include fadeInAnimation; // Using mixin from _variables.scss
-    @include transition(box-shadow); // Using mixin from _variables.scss
+    h1 {
+      font-size: 3.5rem; // Increased from 3rem
+      margin-bottom: 3rem;
+      position: relative;
+      padding-bottom: 1rem;
 
-    h1,
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 0.2rem;
+        background: $main_color;
+      }
+    }
+
     h2 {
-      color: $main_color;
-    }
-
-    .info {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .row {
-      display: flex;
-      align-items: baseline;
-      gap: 1rem;
-
-      .label {
-        min-width: 8rem;
-        color: $main_color;
-        font-weight: bold;
-      }
-
-      p {
-        margin: 0;
-        color: $text-color;
-      }
-    }
-
-    .profile-pic {
-      width: 7rem;
-      height: 7rem;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 0.2rem solid $border-color;
-    }
-
-    .button {
-      display: inline-block;
-      padding: 1rem 5rem;
-      font-size: 1rem;
-      background-color: $main_color;
-      color: #fff;
-      text-align: center;
-      border: none;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      margin-top: 1rem;
-      font-size: 1.1rem;
-      @include transition; // Using mixin from _variables.scss
-
-      &:hover {
-        background-color: $darker_main_color;
-        transform: scale(1.04);
-      }
+      font-size: 2.2rem;
+      margin-top: 2.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 0.2rem solid $border-color;
+      width: 100%;
     }
 
     hr {
-      margin: 1rem 0;
-      border: none;
-      height: 0.1rem;
-      background-color: $border-color;
+      margin: 2rem 0;
+      height: 0.3rem;
+      background: $main_color;
+      opacity: 0.2;
+    }
+
+    .row {
+      margin-bottom: 1.2rem;
+      padding: 0.8rem 0;
+      border-bottom: 0.1rem solid rgba($border-color, 0.3);
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .label {
+        font-size: 1.1rem;
+        min-width: 10rem;
+      }
+
+      p {
+        font-size: 1.2rem;
+        color: $subtitle_color;
+      }
     }
 
     .button-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
+      margin-top: 3rem;
+    }
+  }
 
-      @media (max-width: 31.25em) {
+  @media (max-width: 768px) {
+    .form-container {
+      h1 {
+        font-size: 2.8rem;
+        margin-bottom: 2rem;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+      }
+
+      .row {
         flex-direction: column;
-        gap: 0;
+        gap: 0.5rem;
 
-        .button {
-          width: 100%;
+        .label {
+          min-width: auto;
+          font-size: 1rem;
+        }
+
+        p {
+          font-size: 1.1rem;
         }
       }
-    }
-  }
-
-  // Modal
-  .modal {
-    margin: auto !important;
-    padding: 2.5rem;
-
-    &::backdrop {
-      background-color: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(0.4rem);
-    }
-
-    .form {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
-
-      .title {
-        font-size: 1.6rem;
-        font-weight: 600;
-      }
-
-      input {
-        font-size: 1.4rem;
-        width: 100%;
-        padding: 0.5rem 1rem;
-      }
-    }
-
-    .btn-box {
-      display: flex;
-      gap: 1rem;
-    }
-  }
-
-  // Media Queries
-  @media (max-width: 48em) {
-    h1 {
-      font-size: 3rem;
     }
   }
 }
