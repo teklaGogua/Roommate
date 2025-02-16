@@ -1,7 +1,6 @@
 // Fetch user and apartment data from session storage
 const apartment = JSON.parse(sessionStorage.getItem("apartment"));
 const userData = JSON.parse(sessionStorage.getItem("userData"));
-const imgListing = sessionStorage.getItem("imgListing");
 
 async function getCreatorData() {
   try {
@@ -51,12 +50,41 @@ async function getCreatorData() {
     // Populate creator information
     document.getElementById("name").textContent = creatorData.name;
     document.getElementById("email").textContent = creatorData.email;
+    document.getElementById("email").href = `mailto:${creatorData.email}`;
     document.getElementById("mobile").textContent = creatorData.telephone;
+    document.getElementById("mobile").href = `tel:${creatorData.telephone}`;
   } catch (error) {
     console.error("Error in getCreatorData:", error);
   }
 }
 getCreatorData();
+
+async function getListingImg() {
+  try {
+    const response = await fetch(
+      `http://94.137.160.8/get/listing/${apartment.png_id}.png`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      }
+    );
+
+    if (response.ok) {
+      const blob = await response.blob();
+      const imgUrl = URL.createObjectURL(blob);
+      document.querySelector(".img").src = imgUrl;
+    } else {
+      console.log("Profile picture not found, using placeholder");
+      document.querySelector(".img").src =
+        "../images/errors/default-apartment.jpg";
+    }
+  } catch (error) {
+    console.error("Fetch error:", error);
+    return "../images/errors/default-apartment.jpg";
+  }
+}
+getListingImg();
 
 // Populate with apartment data
 document.getElementById("price").textContent = `$${apartment.price}`;
@@ -68,14 +96,12 @@ document.getElementById(
 ).textContent = `${apartment.bedroom_count} bedrooms`;
 document.getElementById("custom_description").textContent =
   apartment.custom_description;
-document.querySelector(".img").src = imgListing;
 
 // Preferences
 function displayPreferences(preference) {
-  document.getElementById(preference).textContent =
-    apartment[preference] || apartment[`roommate_${preference}`];
+  document.getElementById(preference).textContent = apartment[preference];
 
-  if (apartment.preference === "No preference") {
+  if (apartment[preference] === "No preference") {
     return;
   } else if (apartment[preference] === userData[preference]) {
     document.getElementById(preference).classList.add("green");
@@ -88,13 +114,14 @@ displayPreferences("smoking");
 displayPreferences("pets");
 displayPreferences("party_habits");
 displayPreferences("food_preference");
-displayPreferences("gender");
+displayPreferences("roommate_gender");
 
 // Back btn functionality
 const backBtn = document.querySelector(".backBtn");
 
 function backBtnFunc() {
   sessionStorage.removeItem("apartment");
+  sessionStorage.removeItem("imgListing");
   window.location.href = "apartments.html";
 }
 backBtn.addEventListener("click", backBtnFunc);
@@ -102,22 +129,41 @@ backBtn.addEventListener("click", backBtnFunc);
 // Delete btn functionality
 const deleteBtn = document.querySelector(".delete");
 if (apartment.owner_id === userData.user_id) {
-  deleteBtn.classList.add("active");
+  deleteBtn.style.display = "inline-block";
 }
 
 async function deleteListing() {
-  const response = await fetch("http://94.137.160.8/rpc/delete_listing", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-    },
-  });
+  try {
+    const response = await fetch("http://94.137.160.8/rpc/delete_listing", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    });
 
-  backBtnFunc();
+    if (!response.ok) {
+      throw new Error("Failed to delete listing");
+    }
 
-  if (!response.ok) {
-    alert("U can't delete listing");
-    return;
+    // Delete Listing img
+    const responsePng = await fetch(
+      `http://94.137.160.8/upload/listing/${apartment.png_id}.png`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      }
+    );
+
+    if (!responsePng.ok) {
+      throw new Error("Failed to delete image");
+    }
+
+    backBtnFunc();
+  } catch (error) {
+    console.error("Error in deleteListing:", error);
+    alert("Failed to delete listing. Please try again.");
   }
 }
 
