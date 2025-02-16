@@ -26,17 +26,20 @@ async function getImg(id) {
       },
     });
 
-    if (!response.ok) {
-      console.log("Image not found");
-      return;
+    if (response.ok) {
+      const blob = await response.blob();
+      const imgUrl = URL.createObjectURL(blob);
+      sessionStorage.setItem("pfp", imgUrl);
+      profilePic.src = imgUrl;
+    } else {
+      console.log("Profile picture not found, using placeholder");
+      document.querySelector(".profile-pic").src =
+        "../images/errors/default-pfp.png";
     }
-
-    const blob = await response.blob();
-    const imgUrl = URL.createObjectURL(blob);
-    sessionStorage.setItem("pfp", imgUrl);
-    profilePic.src = imgUrl;
   } catch (error) {
-    console.error("Fetch error:", error);
+    console.error("Error fetching profile picture:", error);
+    document.querySelector(".profile-pic").src =
+      "../images/errors/default-pfp.png";
   }
 }
 
@@ -303,11 +306,15 @@ async function displayListings(filters = {}) {
         }
       );
 
-      if (!response.ok) return "../images/errors/default-apartment.jpg";
-
-      const blob = await response.blob();
-      const imgListing = URL.createObjectURL(blob);
-      return imgListing;
+      if (response.ok) {
+        const blob = await response.blob();
+        const imgListing = URL.createObjectURL(blob);
+        return imgListing;
+      } else {
+        console.log("Profile picture not found, using placeholder");
+        document.querySelector(".img").src =
+          "../images/errors/default-apartment.jpg";
+      }
     } catch (error) {
       console.error("Fetch error:", error);
       return "../images/errors/default-apartment.jpg";
