@@ -20,7 +20,7 @@ profileName.textContent = userData.name;
 // Getting Pfp
 async function getImg(id) {
   try {
-    const response = await fetch(`http://94.137.160.8/get/pfp/${id}.png`, {
+    const response = await fetch(`https://roommates.kikvadze.com/get/pfp/${id}.png`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
@@ -298,7 +298,7 @@ async function displayListings(filters = {}) {
   async function getListingImg(apartment) {
     try {
       const response = await fetch(
-        `http://94.137.160.8/get/listing/${apartment.png_id}.png`,
+        `https://roommates.kikvadze.com/get/listing/${apartment.png_id}.png`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -350,7 +350,7 @@ async function displayListings(filters = {}) {
 
   // Fetch data with backend pagination
   try {
-    const response = await fetch("http://94.137.160.8/rpc/search_listings", {
+    const response = await fetch("https://roommates.kikvadze.com/rpc/search_listings", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -387,7 +387,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // Card display function
 async function displayCard(id) {
   try {
-    await fetch("http://94.137.160.8/rpc/get_listing", {
+    await fetch("https://roommates.kikvadze.com/rpc/get_listing", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

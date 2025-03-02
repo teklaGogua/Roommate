@@ -57,7 +57,7 @@ async function deleteUser() {
     const password = document.getElementById("password").value;
 
     // Delete user
-    const response = await fetch("http://94.137.160.8/rpc/delete_user", {
+    const response = await fetch("https://roommates.kikvadze.com/rpc/delete_user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -73,7 +73,7 @@ async function deleteUser() {
 
     // Delete Pfp img
     const responsePfp = await fetch(
-      `http://94.137.160.8/upload/pfp/${userData.pfp_id}.png`,
+      `https://roommates.kikvadze.com/upload/pfp/${userData.pfp_id}.png`,
       {
         method: "DELETE",
         headers: {
@@ -88,7 +88,7 @@ async function deleteUser() {
     }
 
     // Fetch Listing if it exists
-    const listingRes = await fetch("http://94.137.160.8/rpc/get_listing", {
+    const listingRes = await fetch("https://roommates.kikvadze.com/rpc/get_listing", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -103,7 +103,7 @@ async function deleteUser() {
 
       // Delete user from MD and listing
       const responseMd = await fetch(
-        "http://94.137.160.8/rpc/main_delete_user",
+        "https://roommates.kikvadze.com/rpc/main_delete_user",
         {
           method: "POST",
           headers: {
@@ -119,7 +119,7 @@ async function deleteUser() {
 
       // Delete Listing img
       const responsePng = await fetch(
-        `http://94.137.160.8/upload/listing/${apartment.png_id}.png`,
+        `https://roommates.kikvadze.com/upload/listing/${apartment.png_id}.png`,
         {
           method: "DELETE",
           headers: {

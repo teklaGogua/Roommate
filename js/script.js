@@ -42,7 +42,7 @@ function checkLoginStatus() {
 
   if (jwt) {
     // Verify JWT is still valid
-    fetch("http://94.137.160.8/rpc/get_user_info", {
+    fetch("https://roommates.kikvadze.com/rpc/get_user_info", {
       headers: {
         Authorization: `Bearer ${jwt}`,
       },
