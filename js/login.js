@@ -7,7 +7,7 @@ document
     const password = document.getElementById("password").value;
 
     try {
-      const response = await fetch("http://94.137.160.8/rpc/login", {
+      const response = await fetch("https://roommates.kikvadze.com/rpc/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

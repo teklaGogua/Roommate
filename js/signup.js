@@ -35,7 +35,7 @@ async function submitForm(event) {
 
   try {
     // Send registration request
-    const response = await fetch("http://94.137.160.8/rpc/add_user", {
+    const response = await fetch("https://roommates.kikvadze.com/rpc/add_user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +56,7 @@ async function submitForm(event) {
     if (imageData) {
       const blob = dataURLtoBlob(imageData);
       const uploadResponse = await fetch(
-        `http://94.137.160.8/upload/pfp/${pfpId}.png`,
+        `https://roommates.kikvadze.com/upload/pfp/${pfpId}.png`,
         {
           method: "PUT",
           headers: {

@@ -4,7 +4,7 @@ const userData = JSON.parse(sessionStorage.getItem("userData"));
 
 async function getCreatorData() {
   try {
-    const res = await fetch("http://94.137.160.8/rpc/get_user_info", {
+    const res = await fetch("https://roommates.kikvadze.com/rpc/get_user_info", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -62,7 +62,7 @@ getCreatorData();
 async function getListingImg() {
   try {
     const response = await fetch(
-      `http://94.137.160.8/get/listing/${apartment.png_id}.png`,
+      `https://roommates.kikvadze.com/get/listing/${apartment.png_id}.png`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -134,7 +134,7 @@ if (apartment.owner_id === userData.user_id) {
 
 async function deleteListing() {
   try {
-    const response = await fetch("http://94.137.160.8/rpc/delete_listing", {
+    const response = await fetch("https://roommates.kikvadze.com/rpc/delete_listing", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -147,7 +147,7 @@ async function deleteListing() {
 
     // Delete Listing img
     const responsePng = await fetch(
-      `http://94.137.160.8/upload/listing/${apartment.png_id}.png`,
+      `https://roommates.kikvadze.com/upload/listing/${apartment.png_id}.png`,
       {
         method: "DELETE",
         headers: {

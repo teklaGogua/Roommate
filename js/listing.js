@@ -21,7 +21,7 @@ async function handleFormSubmission(event) {
   };
 
   try {
-    const response = await fetch("http://94.137.160.8:13000/rpc/add_listing", {
+    const response = await fetch("https://roommates.kikvadze.com/rpc/add_listing", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -59,7 +59,7 @@ async function handleFormSubmission(event) {
 
     // Upload the blob
     const uploadResponse = await fetch(
-      `http://94.137.160.8/upload/listing/${pngId}.png`,
+      `https://roommates.kikvadze.com/upload/listing/${pngId}.png`,
       {
         method: "PUT",
         headers: {
