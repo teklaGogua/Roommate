@@ -4,61 +4,132 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Listing</title>
-
     <link rel="stylesheet" href="../styles/css/pages.css" />
   </head>
   <body class="card">
     <button type="submit" class="button backBtn">Back</button>
     <div class="container">
       <img class="img" src="" alt="flat-pic" />
+      <button type="button" class="button editBtn creatorBtn">✎</button>
       <div class="info">
         <div class="row">
           <h2>Price</h2>
           <p id="price"></p>
+          <input
+            type="text"
+            id="price_change"
+            class="editable-input creatorInput"
+          />
         </div>
 
         <div class="row">
           <h2>Address</h2>
           <p id="precise_address"></p>
+          <input
+            type="text"
+            id="precise_address_change"
+            class="editable-input creatorInput"
+          />
         </div>
 
         <div class="row">
           <h2>Area</h2>
           <p id="area"></p>
+          <input
+            type="text"
+            id="area_change"
+            class="editable-input creatorInput"
+          />
         </div>
 
         <div class="row">
           <h2>Bedroom</h2>
           <p id="bedroom_count"></p>
+          <input
+            type="text"
+            id="bedroom_count_change"
+            class="editable-input creatorInput"
+          />
         </div>
 
         <p id="custom_description"></p>
+        <textarea
+          id="custom_description_change"
+          class="editable-textarea creatorInput"
+        ></textarea>
 
         <div class="preferences">
           <div class="flx">
             <h2>Preferences</h2>
           </div>
+
+          <!-- Smoking Preference -->
           <div class="flx">
             <p>Smoking</p>
-            <p id="smoking"></p>
+            <p id="smoking" class="preference-text"></p>
+            <select id="smoking_change" class="editable-select creatorInput">
+              <option value="Smoker">Smoker</option>
+              <option value="Non-Smoker">Non-Smoker</option>
+              <option value="No preference">No Preference</option>
+            </select>
           </div>
+
+          <!-- Pets Preference -->
           <div class="flx">
             <p>Pets</p>
-            <p id="pets"></p>
+            <p id="pets" class="preference-text"></p>
+            <select id="pets_change" class="editable-select creatorInput">
+              <option value="Yes">Allow Pets</option>
+              <option value="No">No Pets</option>
+            </select>
           </div>
+
+          <!-- Party Habits -->
           <div class="flx">
             <p>Party</p>
-            <p id="party_habits"></p>
+            <p id="party_habits" class="preference-text"></p>
+            <select
+              id="party_habits_change"
+              class="editable-select creatorInput"
+            >
+              <option value="Parties Allowed">Allow Parties</option>
+              <option value="Occasionally">Occasionally</option>
+              <option value="Frequently">Frequently</option>
+              <option value="Never">Never</option>
+              <option value="No preference">No Preference</option>
+            </select>
           </div>
+
+          <!-- Food Preferences -->
           <div class="flx">
             <p>Food preferences</p>
-            <p id="food_preference"></p>
+            <p id="food_preference" class="preference-text"></p>
+            <select
+              id="food_preference_change"
+              class="editable-select creatorInput"
+            >
+              <option value="Vegetarian">Vegetarian</option>
+              <option value="Non-Vegetarian">Non-Vegetarian</option>
+              <option value="Vegan">Vegan</option>
+              <option value="No preference">No Preference</option>
+            </select>
           </div>
+
+          <!-- Gender Preference -->
           <div class="flx">
             <p>Gender</p>
-            <p id="roommate_gender"></p>
+            <p id="roommate_gender" class="preference-text"></p>
+            <select
+              id="roommate_gender_change"
+              class="editable-select creatorInput"
+            >
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="No preference">No Preference</option>
+            </select>
           </div>
         </div>
+
         <div class="author">
           <img class="profile-pic" src="" alt="profile-pic" />
           <div class="author_info">
@@ -68,9 +139,7 @@
             </div>
             <div class="row">
               <p class="label">Email</p>
-              <a id="email" href=""
-                ></a
-              >
+              <a id="email" href=""></a>
             </div>
             <div class="row">
               <p class="label">Phone</p>
@@ -82,7 +151,8 @@
     </div>
 
     <div class="deleteBox">
-      <button class="delete">Delete</button>
+      <button class="delete creatorBtn">Delete</button>
+      <button class="change creatorInput">Change</button>
     </div>
 
     <script src="../js/card.js"></script>
