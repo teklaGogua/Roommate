@@ -4,16 +4,19 @@ const userData = JSON.parse(sessionStorage.getItem("userData"));
 
 async function getCreatorData() {
   try {
-    const res = await fetch("https://roommates.kikvadze.com/rpc/get_user_info", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      },
-      body: JSON.stringify({
-        user_id: apartment.owner_id,
-      }),
-    });
+    const res = await fetch(
+      "https://roommates.kikvadze.com/rpc/get_user_info",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+        body: JSON.stringify({
+          user_id: apartment.owner_id,
+        }),
+      }
+    );
 
     if (!res.ok) {
       throw new Error("Failed to fetch creator data");
@@ -24,7 +27,7 @@ async function getCreatorData() {
     // Fetch profile picture
     try {
       const response = await fetch(
-        `http://94.137.160.8/get/pfp/${creatorData.pfp_id}.png`,
+        `https://roommates.kikvadze.com/get/pfp/${creatorData.pfp_id}.png`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -86,6 +89,14 @@ async function getListingImg() {
 }
 getListingImg();
 
+const preferenceSelects = {
+  smoking: document.getElementById("smoking_change"),
+  pets: document.getElementById("pets_change"),
+  party_habits: document.getElementById("party_habits_change"),
+  food_preference: document.getElementById("food_preference_change"),
+  roommate_gender: document.getElementById("roommate_gender_change"),
+};
+
 // Populate with apartment data
 document.getElementById("price").textContent = `$${apartment.price}`;
 document.getElementById("precise_address").textContent =
@@ -96,18 +107,30 @@ document.getElementById(
 ).textContent = `${apartment.bedroom_count} bedrooms`;
 document.getElementById("custom_description").textContent =
   apartment.custom_description;
+for (const [pref, select] of Object.entries(preferenceSelects)) {
+  select.value = apartment[pref];
+}
 
 // Preferences
 function displayPreferences(preference) {
-  document.getElementById(preference).textContent = apartment[preference];
+  const textElement = document.getElementById(preference);
+  const selectElement = preferenceSelects[preference];
+
+  textElement.textContent = apartment[preference];
+  selectElement.value = apartment[preference];
 
   if (apartment[preference] === "No preference") {
     return;
-  } else if (apartment[preference] === userData[preference]) {
-    document.getElementById(preference).classList.add("green");
-  } else if (apartment[preference] !== userData[preference]) {
-    document.getElementById(preference).classList.add("red");
   }
+
+  textElement.classList.toggle(
+    "green",
+    apartment[preference] === userData[preference]
+  );
+  textElement.classList.toggle(
+    "red",
+    apartment[preference] !== userData[preference]
+  );
 }
 
 displayPreferences("smoking");
@@ -127,19 +150,17 @@ function backBtnFunc() {
 backBtn.addEventListener("click", backBtnFunc);
 
 // Delete btn functionality
-const deleteBtn = document.querySelector(".delete");
-if (apartment.owner_id === userData.user_id) {
-  deleteBtn.style.display = "inline-block";
-}
-
 async function deleteListing() {
   try {
-    const response = await fetch("https://roommates.kikvadze.com/rpc/delete_listing", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      },
-    });
+    const response = await fetch(
+      "https://roommates.kikvadze.com/rpc/delete_listing",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      }
+    );
 
     if (!response.ok) {
       throw new Error("Failed to delete listing");
@@ -167,4 +188,72 @@ async function deleteListing() {
   }
 }
 
+const deleteBtn = document.querySelector(".delete");
 deleteBtn.addEventListener("click", deleteListing);
+
+// Creator btninputs, inputs, selects
+const creatorBtns = document.querySelectorAll(".creatorBtn");
+if (apartment.owner_id === userData.user_id) {
+  creatorBtns.forEach((btn) => {
+    btn.style.setProperty("display", "inline-block", "important");
+  });
+}
+
+const creatorInputs = document.querySelectorAll(".creatorInput");
+creatorBtns[0].addEventListener("click", () => {
+  const currentDisplay = window.getComputedStyle(creatorInputs[0]).display;
+  const newDisplay = currentDisplay === "block" ? "none" : "inline-block";
+
+  creatorInputs.forEach((input) => {
+    input.style.setProperty("display", newDisplay, "important");
+  });
+});
+
+// Changing btn functionality
+const changeBtn = document.querySelector(".change");
+async function changeListingData() {
+  const data = {};
+
+  // Get all editable fields (both inputs and selects)
+  const editableFields = document.querySelectorAll(`
+    .creatorInput:not(.change):not(.delete),
+    .editable-select
+  `);
+
+  editableFields.forEach((element) => {
+    const currentValue = element.value.trim();
+
+    // Get field identifier from ID
+    const fieldKey = element.id.replace(/_change|_select/, "");
+
+    // Get original value from apartment data
+    const originalValue = apartment[fieldKey]?.toString() || "";
+
+    // Check if value changed and not empty
+    if (currentValue && currentValue !== originalValue) {
+      // Convert numeric fields back to numbers
+      const finalValue = ["price", "area", "bedroom_count"].includes(fieldKey)
+        ? Number(currentValue)
+        : currentValue;
+
+      data[element.id] = finalValue;
+    }
+  });
+
+  console.log("Modified Data:", data);
+
+  try {
+    await fetch("https://roommates.kikvadze.com/rpc/update_listing", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+      body: JSON.stringify(data),
+    });
+  } catch {
+    console.error("Error changing listing data:", error);
+  }
+}
+
+changeBtn.addEventListener("click", changeListingData);
