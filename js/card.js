@@ -243,7 +243,7 @@ async function changeListingData() {
   console.log("Modified Data:", data);
 
   try {
-    await fetch("https://roommates.kikvadze.com/rpc/update_listing", {
+    const res = await fetch("https://roommates.kikvadze.com/rpc/update_listing", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -251,6 +251,10 @@ async function changeListingData() {
       },
       body: JSON.stringify(data),
     });
+
+    if (res.ok) {
+      window.location.href = "apartments.html";
+    }
   } catch {
     console.error("Error changing listing data:", error);
   }
