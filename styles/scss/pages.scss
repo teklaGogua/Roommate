@@ -102,8 +102,8 @@ ol {
 
     .editBtn {
       position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
+      top: -1.7rem;
+      left: -1.7rem;
       padding: 0.8rem;
       width: 80px;
       height: 80px;
@@ -536,6 +536,29 @@ ol {
   line-height: 1.6;
   background-image: url("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSb-XKq1C7ZsNopcJCRc_pnoy_u5cPIjSW9PlfDh5E49IO8FRq_");
 
+  #editBtn {
+    display: inline-block !important;
+    position: absolute;
+    bottom: 6rem;
+    left: -3rem;
+    padding: 0.8rem;
+    width: 70px;
+    height: 70px;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    background-color: $main_color;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include transition;
+
+    &:hover {
+      background-color: $darker_main_color;
+      transform: scale(1.1);
+    }
+  }
+
   .backBtn {
     display: inline-block;
     padding: 1rem 2rem;
@@ -584,11 +607,12 @@ ol {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: relative;
     }
 
     .row {
-      display: flex;
-      align-items: baseline;
+      display: grid;
+      grid-template-columns: 1fr 18rem 1fr;
       gap: 1rem;
       margin-bottom: 0.5rem;
 
@@ -601,6 +625,9 @@ ol {
       p {
         margin: 0;
         color: #333;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
       }
     }
 
@@ -624,7 +651,7 @@ ol {
       cursor: pointer;
       margin-top: 1rem;
       font-size: 1.1rem;
-      @include transition; // Using mixin from _variables.scss
+      @include transition;
 
       &:hover {
         background-color: $darker_main_color;
@@ -688,6 +715,79 @@ ol {
     .btn-box {
       display: flex;
       gap: 1rem;
+    }
+  }
+
+  // Editing functionality styles
+  .creatorBtn {
+    display: none !important;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 0.8rem;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    background-color: $main_color;
+    color: white;
+    @include transition;
+
+    &:hover {
+      background-color: $darker_main_color;
+      transform: scale(1.1);
+    }
+  }
+
+  .profile-pic-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  .creatorInput {
+    display: none !important;
+    font-size: 1rem;
+    border: 2px solid $secondary_gray;
+    border-radius: 0.8rem;
+    margin-top: 0.5rem;
+  }
+
+  .editable-select {
+    @extend .creatorInput;
+    padding: 0.8rem 1.2rem !important;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23007bff'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 12px;
+    appearance: none;
+  }
+
+  .editable-input {
+    padding: 0.8rem 1.2rem !important;
+  }
+
+  .editable-textarea {
+    @extend .creatorInput;
+    min-height: 100px;
+    resize: vertical;
+    padding: 0.8rem 1.2rem !important;
+  }
+
+  .change {
+    display: none !important;
+    background-color: $main_color !important;
+
+    &:hover {
+      background-color: $darker_main_color !important;
+    }
+  }
+
+  .row {
+    position: relative;
+
+    p:not(.label) {
+      margin: 0;
+      padding: 0.8rem 0;
     }
   }
 }
