@@ -70,7 +70,7 @@ ol {
 .card .creatorBtn {
   display: none !important;
 }
-.card .creatorInput {
+.card .creatorInput, .card .profile .editable-textarea, .profile .card .editable-textarea, .card .profile .editable-select, .profile .card .editable-select {
   display: none !important;
 }
 .card a {
@@ -123,8 +123,8 @@ ol {
 }
 .card .container .editBtn {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
+  top: -1.7rem;
+  left: -1.7rem;
   padding: 0.8rem;
   width: 80px;
   height: 80px;
@@ -511,6 +511,27 @@ ol {
   line-height: 1.6;
   background-image: url("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSb-XKq1C7ZsNopcJCRc_pnoy_u5cPIjSW9PlfDh5E49IO8FRq_");
 }
+.profile #editBtn {
+  display: inline-block !important;
+  position: absolute;
+  bottom: 6rem;
+  left: -3rem;
+  padding: 0.8rem;
+  width: 70px;
+  height: 70px;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  background-color: #f93b1d;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+.profile #editBtn:hover {
+  background-color: #df3014;
+  transform: scale(1.1);
+}
 .profile .backBtn {
   display: inline-block;
   padding: 1rem 2rem;
@@ -555,10 +576,11 @@ ol {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 .profile .form-container .row {
-  display: flex;
-  align-items: baseline;
+  display: grid;
+  grid-template-columns: 1fr 18rem 1fr;
   gap: 1rem;
   margin-bottom: 0.5rem;
 }
@@ -570,6 +592,9 @@ ol {
 .profile .form-container .row p {
   margin: 0;
   color: #333;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 .profile .form-container .profile-pic {
   width: 7rem;
@@ -646,4 +671,65 @@ ol {
 .profile .modal .btn-box {
   display: flex;
   gap: 1rem;
+}
+.profile .creatorBtn {
+  display: none !important;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 0.8rem;
+  width: 50px;
+  height: 50px;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  background-color: #f93b1d;
+  color: white;
+  transition: all 0.3s ease;
+}
+.profile .creatorBtn:hover {
+  background-color: #df3014;
+  transform: scale(1.1);
+}
+.profile .profile-pic-container {
+  position: relative;
+  display: inline-block;
+}
+.profile .creatorInput, .profile .editable-textarea, .profile .editable-select {
+  display: none !important;
+  font-size: 1rem;
+  border: 2px solid #f3f3f3;
+  border-radius: 0.8rem;
+  margin-top: 0.5rem;
+}
+.profile .editable-select {
+  padding: 0.8rem 1.2rem !important;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23007bff'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 12px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+.profile .editable-input, .profile .card .editable-select, .card .profile .editable-select {
+  padding: 0.8rem 1.2rem !important;
+}
+.profile .editable-textarea {
+  min-height: 100px;
+  resize: vertical;
+  padding: 0.8rem 1.2rem !important;
+}
+.profile .change {
+  display: none !important;
+  background-color: #f93b1d !important;
+}
+.profile .change:hover {
+  background-color: #df3014 !important;
+}
+.profile .row {
+  position: relative;
+}
+.profile .row p:not(.label) {
+  margin: 0;
+  padding: 0.8rem 0;
 }/*# sourceMappingURL=pages.css.map */

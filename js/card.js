@@ -240,8 +240,6 @@ async function changeListingData() {
     }
   });
 
-  console.log("Modified Data:", data);
-
   try {
     const res = await fetch("https://roommates.kikvadze.com/rpc/update_listing", {
       method: "POST",

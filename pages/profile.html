@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>User Page</title>
-
     <link rel="stylesheet" href="../styles/css/pages.css" />
   </head>
   <body class="profile">
@@ -12,7 +11,12 @@
     <div class="form-container">
       <div class="info">
         <h1>My Profile</h1>
-        <img class="profile-pic" src="" alt="profile-pic" />
+        <div class="profile-pic-container">
+          <img class="profile-pic" src="" alt="profile-pic" />
+        </div>
+        <button type="button" class="button editBtn creatorBtn" id="editBtn">
+          ✎
+        </button>
       </div>
 
       <h2>Personal Information</h2>
@@ -21,18 +25,38 @@
       <div class="row">
         <p class="label">Name</p>
         <p id="name"></p>
+        <input
+          type="text"
+          id="user_name_change"
+          class="editable-input creatorInput"
+        />
       </div>
       <div class="row">
         <p class="label">Age</p>
         <p id="age"></p>
+        <input
+          type="number"
+          id="user_age_change"
+          class="editable-input creatorInput"
+        />
       </div>
       <div class="row">
         <p class="label">Nationality</p>
         <p id="nationality"></p>
+        <input
+          type="text"
+          id="user_nationality_change"
+          class="editable-input creatorInput"
+        />
       </div>
       <div class="row">
         <p class="label">Gender</p>
         <p id="gender"></p>
+        <select id="user_gender_change" class="editable-select creatorInput">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
       </div>
 
       <h2>Account Information</h2>
@@ -41,18 +65,28 @@
       <div class="row">
         <p class="label">Email</p>
         <p id="email"></p>
+        <input
+          type="email"
+          id="user_email_change"
+          class="editable-input creatorInput"
+        />
       </div>
       <div class="row">
         <p class="label">Mobile</p>
         <p id="mobile"></p>
-      </div>
-      <div class="row">
-        <p class="label">Password</p>
-        <p>********</p>
+        <input
+          type="tel"
+          id="user_mobile_change"
+          class="editable-input creatorInput"
+        />
       </div>
       <div class="row">
         <p class="label">Bio</p>
         <p id="bio"></p>
+        <textarea
+          id="user_bio_change"
+          class="editable-textarea creatorInput"
+        ></textarea>
       </div>
 
       <dialog class="modal">
@@ -73,6 +107,7 @@
 
       <div class="button-container">
         <button type="button" class="button showModal">Delete</button>
+        <button class="button change creatorInput">Change</button>
         <button class="button" onclick="logout()">Log Out</button>
       </div>
     </div>
