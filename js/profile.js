@@ -135,8 +135,6 @@ async function updateUserData() {
     return;
   }
 
-  console.log("Changed data:", changedData);
-
   try {
     // Send update request with only changed data
     const response = await fetch(

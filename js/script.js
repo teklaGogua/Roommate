@@ -35,7 +35,6 @@ document.querySelectorAll(".header-nav-list-el a").forEach((link) => {
   });
 });
 
-
 // Displays Apartments page, if user is loged in
 function checkLoginStatus() {
   const jwt = localStorage.getItem("jwt");
@@ -71,20 +70,28 @@ document.addEventListener("DOMContentLoaded", checkLoginStatus);
 // Smooth scrolling animation
 allLinks.forEach(function (link) {
   link.addEventListener("click", function (e) {
-    e.preventDefault();
     const href = link.getAttribute("href");
 
-    // Scroll back to top
-    if (href === "#")
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
+    // Only handle local anchor links
+    if (href.startsWith("#")) {
+      e.preventDefault();
 
-    // Scroll to other links
-    if (href !== "#" && href.startsWith("#")) {
-      const selectedEl = document.querySelector(href);
-      selectedEl.scrollIntoView({ behavior: "smooth" });
+      // Scroll to top
+      if (href === "#") {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      } else {
+        // Scroll to target element
+        const selectedEl = document.querySelector(href);
+        if (selectedEl) {
+          selectedEl.scrollIntoView({ behavior: "smooth" });
+        } else {
+          // If target doesn't exist, allow default jump
+          window.location.hash = href;
+        }
+      }
     }
   });
 });
